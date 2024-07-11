@@ -6,20 +6,29 @@
 position = Vector2(-7, 36)
 script = ExtResource("1_y8lo1")
 
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 108.0
+offset_top = 256.0
+offset_right = 646.0
+offset_bottom = 534.0
+
 [node name="Input" type="TextEdit" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 278.0
-offset_right = 1154.0
-offset_bottom = 611.0
+offset_left = 728.0
+offset_top = 256.0
+offset_right = 1128.0
+offset_bottom = 589.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="output" type="TextEdit" parent="."]
-offset_right = 712.0
-offset_bottom = 208.0
+offset_left = 63.0
+offset_top = -7.0
+offset_right = 1093.0
+offset_bottom = 223.0
 
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="text_changed" from="Input" to="." method="_on_input_text_changed"]
