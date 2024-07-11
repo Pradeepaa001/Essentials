@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwsqlli5p3aga"]
+
+[ext_resource type="Script" path="res://terminal.gd" id="1_y8lo1"]
+
+[node name="Terminal" type="Node2D"]
+position = Vector2(-7, 36)
+script = ExtResource("1_y8lo1")
+
+[node name="Input" type="TextEdit" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 278.0
+offset_right = 1154.0
+offset_bottom = 611.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="output" type="TextEdit" parent="."]
+offset_right = 712.0
+offset_bottom = 208.0
+
+[connection signal="text_changed" from="Input" to="." method="_on_input_text_changed"]
