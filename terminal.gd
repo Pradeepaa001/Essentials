@@ -14,10 +14,11 @@ func processCommand(cmd: String) -> String:
 				response += "File1.txt\nFile2.txt"
 	else:
 		var output = []
+		var command = cmd.split(" ")
 		var output_buffer = PackedStringArray()
 		var error_buffer = PackedStringArray()
 		#var error_code = helpers.exec(cmd)
-		var error_code = OS.execute("wsl.exe", [cmd, "cd %TEMP% && dir"], output, true)
+		var error_code = OS.execute("wsl.exe",command, output, true)
 		#var error_code = helpers.exec()
 		print(output)
 		if error_code == 0:
