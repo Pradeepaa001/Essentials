@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwf57mmusyske"]
+
+[ext_resource type="Script" path="res://LEVEL1.gd" id="1_uoadb"]
+
+[node name="LEVEL1" type="Node2D"]
+position = Vector2(299, 213)
+script = ExtResource("1_uoadb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_right = 67.0625
+offset_bottom = 31.0
+
+[connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

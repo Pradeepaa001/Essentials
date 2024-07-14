@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciystawi7ornc"]
-
-[ext_resource type="Script" path="res://LEVEL1.gd" id="1_uoadb"]
-
-[node name="LEVEL1" type="Node2D"]
-position = Vector2(299, 213)
-script = ExtResource("1_uoadb")
