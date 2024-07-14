@@ -1,0 +1,55 @@
+extends Node2D
+var pwd = "/user"
+
+func _ready():
+	pass
+
+func processCommand(cmd: String) -> String:
+	var response: String = "$"+ cmd + "\n"
+	var grey_list_commands = ["cd", "pwd", "mkdir"]
+	var grey_list_processing = [process_cd, process_pwd, process_mkdir]
+	var command = cmd.split(" ")
+
+	for idx in grey_list_commands.size():
+		if grey_list_commands[idx] == command[0]:
+			return response + grey_list_processing[idx].call(command) + "\n"
+			
+	return response + execute(command)
+	
+func execute(cmd):
+	var output = []
+	var error_code = OS.execute("wsl.exe",cmd, output, true)
+	print(output)
+	return String(output[-1])
+	
+func _on_line_edit_text_submitted(cmd: String):
+
+	var response = processCommand(cmd)
+	var output = $output
+	output.text += response
+	
+func process_cd(cmd):
+	print(cmd)
+	if cmd.size() > 2:
+		return "-bash: cd: too many arguments"
+	elif cmd.size() == 1:
+		pwd = "/user"
+		return ""
+	elif cmd[1] == "--help":
+		return execute(cmd)
+	elif "-" in cmd[1]:
+		return "Not supported"
+	else:
+		var path = "res:/" + pwd
+		var dir = DirAccess.open(path)
+		if dir.dir_exists(cmd[-1]):
+			dir.change_dir(cmd[-1])
+			pwd += "/" + cmd[-1]
+			return ""
+		return "-bash: cd: " + cmd[-1] + ": No such file or directory"
+
+func process_pwd(cmd):
+	return pwd
+
+func process_mkdir(cmd):
+	pass
