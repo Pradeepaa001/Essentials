@@ -6,11 +6,19 @@
 script = ExtResource("1_m6g06")
 metadata/_edit_vertical_guides_ = [-1058.0]
 
-[node name="Button" type="Button" parent="."]
-offset_left = 440.0
-offset_top = 100.0
-offset_right = 705.0
-offset_bottom = 242.0
+[node name="LEVELS" type="Button" parent="."]
+offset_left = 449.0
+offset_top = 129.0
+offset_right = 714.0
+offset_bottom = 271.0
 text = "LEVELS"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="QUIT" type="Button" parent="."]
+offset_left = 449.0
+offset_top = 385.0
+offset_right = 717.0
+offset_bottom = 527.0
+text = "QUIT"
+
+[connection signal="pressed" from="LEVELS" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="QUIT" to="." method="_on_quit_pressed"]

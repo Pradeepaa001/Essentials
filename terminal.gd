@@ -30,11 +30,14 @@ func processCommand(cmd: String) -> String:
 	return response
 
 func _on_line_edit_text_submitted(cmd: String):
-	get_node("Input")
+	var input = get_node("Input")
 	var response = processCommand(cmd) + "\n"
 	var output = $output
 	output.text += response
+	input.text = clear(input.text)
 	entered = false
 
 
-
+func clear(input):
+	input = ""
+	return input
