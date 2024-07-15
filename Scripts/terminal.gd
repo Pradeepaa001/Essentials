@@ -1,37 +1,81 @@
 extends Node2D
+var pwd = "user"
 
-var entered: bool = false
-
+func _ready():
+	pass
 
 func processCommand(cmd: String) -> String:
-	var response: String = "\n"
-	
-	if cmd.strip_edges() in ["help", "ls"]:
-		match cmd.strip_edges():
-			"help":
-				response += "Available commands: help - Display available commands, ls - List files"
-			"ls":
-				response += "File1.txt\nFile2.txt"
-	else:
-		var output = []
-		var command = cmd.split(" ")
-		var output_buffer = PackedStringArray()
-		var error_buffer = PackedStringArray()
-		#var error_code = helpers.exec(cmd)
-		var error_code = OS.execute("wsl.exe",command, output, true)
-		#var error_code = helpers.exec()
-		print(output)
-		if error_code == 0:
-			response += String(output[-1])
-		else:
-			response += "Command failed with error code: " + str(error_code) + "\n" + String(output[-1])
+	var response: String = "$"+ cmd + "\n"
+	var grey_list_commands = ["cd", "pwd", "mkdir", "ls", "touch"]
+	var grey_list_processing = [process_cd, process_pwd, process_mkdir, process_ls, process_touch]
+	var command = cmd.split(" ")
 
+	for idx in grey_list_commands.size():
+		if grey_list_commands[idx] == command[0]:
+			return response + grey_list_processing[idx].call(command) + "\n"
+			
+	return response + execute(command)
 	
-	return response
-
+func execute(cmd):
+	var output = []
+	var error_code = OS.execute("wsl.exe",cmd, output, true)
+	print(output)
+	return String(output[-1])
+	
 func _on_line_edit_text_submitted(cmd: String):
-	get_node("Input")
-	var response = processCommand(cmd) + "\n"
+
+	var response = processCommand(cmd)
 	var output = $output
 	output.text += response
-	entered = false
+	
+func process_cd(cmd):
+	print(cmd)
+	if cmd.size() > 2:
+		return "-bash: cd: too many arguments"
+	elif cmd.size() == 1:
+		pwd = "/user"
+		return ""
+	elif cmd[1] == "--help":
+		return execute(cmd)
+	elif "-" in cmd[1]:
+		return "Not supported"
+	else:
+		var path = "res://" + pwd
+		var dir = DirAccess.open(path)
+		if dir.dir_exists(cmd[-1]):
+			dir.change_dir(cmd[-1])
+			pwd += "/" + cmd[-1]
+			return ""
+		return "-bash: cd: " + cmd[-1] + ": No such file or directory"
+
+func process_pwd(cmd):
+	return "/" + pwd
+
+func process_mkdir(cmd):
+	if cmd.size() == 1:
+		execute(cmd)
+	elif "-" in cmd[1]:
+		return "Not supported"
+	else:
+		var path = "res://" + pwd
+		var dir = DirAccess.open(path)
+		var response =""
+		for command in cmd.slice(1,cmd.size()):
+			if dir.dir_exists(command):
+				response += "mkdir: cannot create directory ‘" + command + "’: File exists\n"
+			else:
+				dir.make_dir(command)
+		return response
+		
+func process_ls(cmd):
+	cmd.append(pwd)
+	return execute(cmd)
+
+func process_touch(cmd):
+	if "-" in cmd[1]:
+		return "Command not supported"
+	var path = "res://" + pwd
+	for command in cmd.slice(1,cmd.size()):
+		var file = FileAccess.open(path + "/" + command,FileAccess.WRITE)
+		return ""
+	
