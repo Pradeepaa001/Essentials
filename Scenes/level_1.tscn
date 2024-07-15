@@ -7,16 +7,27 @@ position = Vector2(299, 213)
 script = ExtResource("1_uoadb")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 354.0
+offset_top = -210.0
+offset_right = 854.0
+offset_bottom = 240.0
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -299.0
+offset_top = -209.0
+offset_right = 290.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LineEdit" type="LineEdit" parent="."]
-offset_right = 67.0625
-offset_bottom = 31.0
+offset_left = -300.0
+offset_top = 307.0
+offset_right = 1381.0
+offset_bottom = 469.0
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
