@@ -1,5 +1,6 @@
 extends Node2D
 class_name Terminal
+#signal command_executed(String command, String response)
 
 var pwd = "user"
 
@@ -14,8 +15,9 @@ func processCommand(cmd: String) -> String:
 
 	for idx in grey_list_commands.size():
 		if grey_list_commands[idx] == command[0]:
+			#emit_signal("command_executed", command[0], response)
 			return response + grey_list_processing[idx].call(command) + "\n"
-			
+	#emit_signal("command_executed", command[0], response)		
 	return response + execute(command)
 	
 func execute(cmd):
@@ -25,10 +27,11 @@ func execute(cmd):
 	return String(output[-1])
 	
 func _on_line_edit_text_submitted(cmd: String):
-
 	var response = processCommand(cmd)
+	$input.text = ""
 	var output = $output
 	output.text += response
+	
 	
 func process_cd(cmd):
 	print(cmd)
@@ -81,4 +84,5 @@ func process_touch(cmd):
 	for command in cmd.slice(1,cmd.size()):
 		var file = FileAccess.open(path + "/" + command,FileAccess.WRITE)
 	return ""
+	
 	

@@ -5,6 +5,7 @@ var level_description = "Welcome to the command line! Imagine you're a space exp
 var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resource2 resource3"]
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
 const Terminal = preload("res://Scripts/terminal.gd")
+
 var terminal = Terminal.new()
 
 func _ready():
@@ -14,6 +15,7 @@ func _ready():
 	for element in level_setup_commands:
 		commands += str(element) + "\n"
 	output.text += level_description + "\nSetup commands:\n" + commands
+	update_icons()
 
 func task1_status() -> bool:
 	print("4")
@@ -38,13 +40,46 @@ func task3_status() -> bool:
 		if file not in files_in_planet:
 			return false
 	return true
+	
+func update_icons():
+	if task1_status():
+		$ColorRect1.color  = Color(0,1,0)
+		print("task1:", task1_status())
 
-func _on_button_pressed():
-	Color.ALICE_BLUE
-	print("yesss")
+	else:
+
+		$ColorRect1.color  = Color(1,0,0)
+		print("task1:", task1_status())
+
+		
+
+	if task2_status():
+		print("task2:", task2_status())
+		$ColorRect2.color  = Color(0,1,0)
+
+	else:
+
+		$ColorRect2.color  = Color(1,0,0)
+		print("task2:", task2_status())
+
+	
+	if task3_status():
+		print("task3:", task3_status())
+		$ColorRect3.color  = Color(0,1,0)
+
+	else:
+		print("task3:", task3_status())
+		$ColorRect3.color  = Color(1,0,0)
+
+
+
+
+
+func _on_check_pressed():
 	var output = $TextEdit
+	update_icons()
 	if task1_status() and task2_status() and task3_status():
 		output.text += "\ntasks completed\n"
 	else:
 		output.text += "\ntasks are not completed\n"
-		Color.RED
+
