@@ -78,4 +78,3 @@ func process_touch(cmd):
 	for command in cmd.slice(1,cmd.size()):
 		var file = FileAccess.open(path + "/" + command,FileAccess.WRITE)
 		return ""
-	
