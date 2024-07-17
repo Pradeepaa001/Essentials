@@ -1,6 +1,4 @@
 extends Node2D
-class_name Terminal
-
 var pwd = "user"
 
 func _ready():
@@ -77,8 +75,7 @@ func process_touch(cmd):
 	if "-" in cmd[1]:
 		return "Command not supported"
 	var path = "res://" + pwd
-	print(cmd)
 	for command in cmd.slice(1,cmd.size()):
 		var file = FileAccess.open(path + "/" + command,FileAccess.WRITE)
-	return ""
+		return ""
 	
