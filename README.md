@@ -25,9 +25,6 @@ Not yet deployed. Still in developing phase. Will update Installation later.
 ## Game Engine
 We are using Godot 4.0 with GDScript to develop this game.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
 ## Roadmap
 Update Later.
 
