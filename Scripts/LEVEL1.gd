@@ -4,9 +4,6 @@ var level_title = "The Journey Begins"
 var level_description = "Welcome to the command line! Imagine you're a space explorer navigating through different directories (planets). Learn the basic commands to get around."
 var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resource2 resource3"]
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
-const Terminal = preload("res://Scripts/terminal.gd")
-
-var terminal = Terminal.new()
 
 func _ready():
 	var output = $RichTextLabel
@@ -31,12 +28,11 @@ func task2_status():
 	return commandline.pwd == "user/planet"
 	
 func task3_status() -> bool:
-	print("h m")
+	var commandline = $Terminal
 	var required_files = ["resource1", "resource2", "resource3"]
-	var files_in_planet = terminal.execute(["ls", "\\user/planet"]).split("\n")
+	var files_in_planet = commandline.execute("ls").split("\n")
 	print(files_in_planet)
 	for file in required_files:
-		print(file)
 		if file not in files_in_planet:
 			return false
 	return true
@@ -76,7 +72,7 @@ func update_icons():
 
 
 func _on_check_pressed():
-	var output = $TextEdit
+	var output = $RichTextLabel
 	update_icons()
 	if task1_status() and task2_status() and task3_status():
 		output.text += "\ntasks completed\n"

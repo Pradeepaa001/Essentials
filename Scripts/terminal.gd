@@ -4,16 +4,13 @@ var pwd = "user"
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
-	var file = FileAccess.open("res://script.sh",FileAccess.WRITE)
-	var content = "cd "+ pwd 
-	print(content)
-	file.store_string(content)
 	var grey_list_commands = ["cd", "pwd"]
 	var grey_list_processing = [self.process_cd, self.process_pwd]
 	
 	for idx in range(grey_list_commands.size()):
 		if grey_list_commands[idx] in cmd:
 			return response + grey_list_processing[idx].call(cmd) + "\n"
+	
 	return response + execute(cmd) + "\n"
 
 func execute(cmd):
@@ -52,31 +49,3 @@ func process_cd(command):
 
 func process_pwd(_cmd):
 	return "/" + pwd
-#
-#func process_mkdir(cmd):
-	#if cmd.size() == 1:
-		#execute(cmd)
-	#elif "-" in cmd[1]:
-		#return "Not supported"
-	#else:
-		#var path = "res://" + pwd
-		#var dir = DirAccess.open(path)
-		#var response = ""
-		#for command in cmd.slice(1, cmd.size()):
-			#if dir.dir_exists(command):
-				#response += "mkdir: cannot create directory ‘" + command + "’: File exists\n"
-			#else:
-				#dir.make_dir(command)
-		#return response
-#
-#func process_ls(cmd):
-	#cmd.append(pwd)
-	#return execute(cmd)
-#
-#func process_touch(cmd):
-	#if "-" in cmd[1]:
-		#return "Command not supported"
-	#var path = "res://" + pwd
-	#for command in cmd.slice(1, cmd.size()):
-		#var file = FileAccess.open(path + "/" + command, FileAccess.WRITE)
-	#return ""
