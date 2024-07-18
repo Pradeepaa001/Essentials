@@ -6,97 +6,79 @@ var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resour
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
 const Terminal = preload("res://Scripts/terminal.gd")
 
-var filesystem = {"/": {}}
-var current_path = "/"
+var terminal = Terminal.new()
 
 func _ready():
+	var output = $RichTextLabel
+	output.text += level_title + "\n"
 	var commands = ""
 	for element in level_setup_commands:
 		commands += str(element) + "\n"
-	$RichTextLabel.bbcode_text = level_description + "\nSetup commands:\n" + commands
+	output.text += level_description + "\nSetup commands:\n" + commands
 
-func check_win_condition() -> bool:
-	return "planet" in filesystem["/"] and "resource1" in filesystem["/"]["planet"] and "resource2" in filesystem["/"]["planet"] and "resource3" in filesystem["/"]["planet"]
 
-func show_congrats_message():
+func task1_status() -> bool:
+	print("4")
+	var dir = DirAccess.open("res://user")
+	print("heh")
+	if dir.dir_exists("planet"):
+		return true
+	else:
+		return false
+
+func task2_status():
+	var commandline = $Terminal
+	return commandline.pwd == "user/planet"
+	
+func task3_status() -> bool:
+	print("h m")
+	var required_files = ["resource1", "resource2", "resource3"]
+	var files_in_planet = terminal.execute(["ls", "\\user/planet"]).split("\n")
+	print(files_in_planet)
+	for file in required_files:
+		print(file)
+		if file not in files_in_planet:
+			return false
+	return true
+	
+func update_icons():
+	if task1_status():
+		$ColorRect1.color  = Color(0,1,0)
+		print("task1:", task1_status())
+
+	else:
+
+		$ColorRect1.color  = Color(1,0,0)
+		print("task1:", task1_status())
+
+		
+
+	if task2_status():
+		print("task2:", task2_status())
+		$ColorRect2.color  = Color(0,1,0)
+
+	else:
+
+		$ColorRect2.color  = Color(1,0,0)
+		print("task2:", task2_status())
+
+	
+	if task3_status():
+		print("task3:", task3_status())
+		$ColorRect3.color  = Color(0,1,0)
+
+	else:
+		print("task3:", task3_status())
+		$ColorRect3.color  = Color(1,0,0)
+
+
+
+
+
+func _on_check_pressed():
 	var output = $TextEdit
-	output.text = "\n" + level_congrats_message + "\n"
-
-func _on_line_edit_text_submitted(cmd: String):
-	var response = processCommand(cmd) + "\n"
-	$TextEdit.text += response + '\n'
-	$LineEdit.text = ""
-	if check_win_condition():
-		show_congrats_message()
-
-func get_current_dir() -> Dictionary:
-	var dirs = current_path.strip_edges().split("/")
-	var dir_ref = filesystem["/"]
-	for dir in dirs:
-		if dir != "":
-			dir_ref = dir_ref[dir]
-	return dir_ref
-
-func processCommand(cmd: String) -> String:
-	var response: String = "\n"
-	var parts = cmd.strip_edges().split(" ")
-
-	match parts[0]:
-		"mkdir":
-			if parts.size() > 1:
-				var dir_name = parts[1]
-				var dir_ref = get_current_dir()
-				if not dir_name in dir_ref:
-					dir_ref[dir_name] = {}
-					response += "Directory created: " + dir_name
-				else:
-					response += "Directory already exists: " + dir_name
-			else:
-				response += "mkdir: missing operand"
-		"cd":
-			if parts.size() > 1:
-				var dir_name = parts[1]
-				if dir_name == "..":
-					var path_parts = current_path.strip_edges().split("/")
-					if path_parts.size() > 1:
-						current_path = "/" + "/".join(path_parts.slice(0, path_parts.size() - 1))
-					else:
-						current_path = "/"
-					response += "Moved to parent directory"
-				else:
-					var dir_ref = get_current_dir()
-					if dir_name in dir_ref:
-						current_path = (current_path + "/" + dir_name).replace("//", "/")
-						response += "Changed directory to: " + dir_name
-					else:
-						response += "cd: no such file or directory: " + dir_name
-			else:
-				response += "cd: missing operand"
-		"touch":
-			if parts.size() > 1:
-				var dir_ref = get_current_dir()
-				for i in range(1, parts.size()):
-					dir_ref[parts[i]] = ""
-				response += "Files created: " + ", ".join(parts.slice(1))
-			else:
-				response += "touch: missing file operand"
-		"help":
-			response += "Available commands: help - Display available commands, ls - List files, mkdir - Create directory, cd - Change directory, touch - Create file, pwd - Print working directory"
-		"ls":
-			var dir_ref = get_current_dir()
-			if dir_ref:
-				response += "\n".join(dir_ref.keys())
-			else:
-				response += "No files found"
-		"pwd":
-			response += current_path
-		_:
-			response += "Unknown command: " + parts[0]
-
-	return response
-
-
-
-
-
-
+	update_icons()
+	if task1_status() and task2_status() and task3_status():
+		output.text += "\ntasks completed\n"
+	else:
+		output.text += "\ntasks are not completed\n"
