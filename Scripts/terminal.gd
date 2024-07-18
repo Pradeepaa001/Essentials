@@ -4,23 +4,31 @@ var pwd = "user"
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
-	var grey_list_commands = ["cd", "pwd", "mkdir", "ls", "touch"]
-	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_mkdir, self.process_ls, self.process_touch]
-	var command = cmd.split(" ")
-
+	var file = FileAccess.open("res://script.sh",FileAccess.WRITE)
+	var content = "cd "+ pwd 
+	print(content)
+	file.store_string(content)
+	var grey_list_commands = ["cd", "pwd"]
+	var grey_list_processing = [self.process_cd, self.process_pwd]
+	
 	for idx in range(grey_list_commands.size()):
-		if grey_list_commands[idx] == command[0]:
-			return response + grey_list_processing[idx].call(command) + "\n"
-
-	return response + execute(command)
+		if grey_list_commands[idx] in cmd:
+			return response + grey_list_processing[idx].call(cmd) + "\n"
+	return response + execute(cmd) + "\n"
 
 func execute(cmd):
 	var output = []
-	var error_code = OS.execute("wsl.exe", cmd, output, true)
-	print(output)
+	var error_code = OS.execute("wsl.exe", ["sh", "-c", "cd " + pwd + "&& " +cmd], output, true)
 	return String(output[-1])
+	
+func _on_line_edit_text_submitted(cmd: String):
+	var response = process_command(cmd)
+	var output = $output
+	output.text += response
 
-func process_cd(cmd):
+
+func process_cd(command):
+	var cmd = command.split(" ")
 	print(cmd)
 	if cmd.size() > 2:
 		return "-bash: cd: too many arguments"
@@ -31,6 +39,8 @@ func process_cd(cmd):
 		return execute(cmd)
 	elif "-" in cmd[1]:
 		return "Not supported"
+	elif command[-1] == "..":
+		pwd = "/".join(pwd.split("/").slice(0, cmd.size() - 1))
 	else:
 		var path = "res://" + pwd
 		var dir = DirAccess.open(path)
@@ -40,33 +50,33 @@ func process_cd(cmd):
 			return ""
 		return "-bash: cd: " + cmd[-1] + ": No such file or directory"
 
-func process_pwd(cmd):
+func process_pwd(_cmd):
 	return "/" + pwd
-
-func process_mkdir(cmd):
-	if cmd.size() == 1:
-		execute(cmd)
-	elif "-" in cmd[1]:
-		return "Not supported"
-	else:
-		var path = "res://" + pwd
-		var dir = DirAccess.open(path)
-		var response = ""
-		for command in cmd.slice(1, cmd.size()):
-			if dir.dir_exists(command):
-				response += "mkdir: cannot create directory ‘" + command + "’: File exists\n"
-			else:
-				dir.make_dir(command)
-		return response
-
-func process_ls(cmd):
-	cmd.append(pwd)
-	return execute(cmd)
-
-func process_touch(cmd):
-	if "-" in cmd[1]:
-		return "Command not supported"
-	var path = "res://" + pwd
-	for command in cmd.slice(1, cmd.size()):
-		var file = FileAccess.open(path + "/" + command, FileAccess.WRITE)
-	return ""
+#
+#func process_mkdir(cmd):
+	#if cmd.size() == 1:
+		#execute(cmd)
+	#elif "-" in cmd[1]:
+		#return "Not supported"
+	#else:
+		#var path = "res://" + pwd
+		#var dir = DirAccess.open(path)
+		#var response = ""
+		#for command in cmd.slice(1, cmd.size()):
+			#if dir.dir_exists(command):
+				#response += "mkdir: cannot create directory ‘" + command + "’: File exists\n"
+			#else:
+				#dir.make_dir(command)
+		#return response
+#
+#func process_ls(cmd):
+	#cmd.append(pwd)
+	#return execute(cmd)
+#
+#func process_touch(cmd):
+	#if "-" in cmd[1]:
+		#return "Command not supported"
+	#var path = "res://" + pwd
+	#for command in cmd.slice(1, cmd.size()):
+		#var file = FileAccess.open(path + "/" + command, FileAccess.WRITE)
+	#return ""
