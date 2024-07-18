@@ -1,33 +1,25 @@
-extends Node2D
+extends Node
+
 var pwd = "user"
 
-func _ready():
-	pass
-
-func processCommand(cmd: String) -> String:
-	var response: String = "$"+ cmd + "\n"
+func process_command(cmd: String) -> String:
+	var response: String = "$" + cmd + "\n"
 	var grey_list_commands = ["cd", "pwd", "mkdir", "ls", "touch"]
-	var grey_list_processing = [process_cd, process_pwd, process_mkdir, process_ls, process_touch]
+	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_mkdir, self.process_ls, self.process_touch]
 	var command = cmd.split(" ")
 
-	for idx in grey_list_commands.size():
+	for idx in range(grey_list_commands.size()):
 		if grey_list_commands[idx] == command[0]:
 			return response + grey_list_processing[idx].call(command) + "\n"
-			
+
 	return response + execute(command)
-	
+
 func execute(cmd):
 	var output = []
-	var error_code = OS.execute("wsl.exe",cmd, output, true)
+	var error_code = OS.execute("wsl.exe", cmd, output, true)
 	print(output)
 	return String(output[-1])
-	
-func _on_line_edit_text_submitted(cmd: String):
 
-	var response = processCommand(cmd)
-	var output = $output
-	output.text += response
-	
 func process_cd(cmd):
 	print(cmd)
 	if cmd.size() > 2:
@@ -59,14 +51,14 @@ func process_mkdir(cmd):
 	else:
 		var path = "res://" + pwd
 		var dir = DirAccess.open(path)
-		var response =""
-		for command in cmd.slice(1,cmd.size()):
+		var response = ""
+		for command in cmd.slice(1, cmd.size()):
 			if dir.dir_exists(command):
 				response += "mkdir: cannot create directory ‘" + command + "’: File exists\n"
 			else:
 				dir.make_dir(command)
 		return response
-		
+
 func process_ls(cmd):
 	cmd.append(pwd)
 	return execute(cmd)
@@ -75,6 +67,6 @@ func process_touch(cmd):
 	if "-" in cmd[1]:
 		return "Command not supported"
 	var path = "res://" + pwd
-	for command in cmd.slice(1,cmd.size()):
-		var file = FileAccess.open(path + "/" + command,FileAccess.WRITE)
-		return ""
+	for command in cmd.slice(1, cmd.size()):
+		var file = FileAccess.open(path + "/" + command, FileAccess.WRITE)
+	return ""

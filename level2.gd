@@ -8,20 +8,26 @@ const Terminal = preload("res://Scripts/terminal.gd")
 var filesystem = {"/": {}}
 var current_path = "/"
 
+@onready var output_textedit = $TextEdit
+@onready var input_lineedit = $LineEdit
+
 func _ready():
 	$RichTextLabel.bbcode_text = level_description
+	input_lineedit.connect("text_submitted", Callable(self, "_on_line_edit_text_submitted"))
+	input_lineedit.grab_focus()  # Ensure the LineEdit is focused
 
 func check_win_condition() -> bool:
 	return "advanced_script.sh" in filesystem["/"]
 
 func show_congrats_message():
-	var output = $TextEdit
-	output.text += "\n" + level_congrats_message + "\n"
+	output_textedit.text += "\n" + level_congrats_message + "\n"
 
-func _on_LineEdit_text_submitted(cmd: String):
-	var response = processCommand(cmd) + "\n"
-	$TextEdit.text += response
-	$LineEdit.text = ""
+func _on_line_edit_text_submitted(cmd: String):
+	var terminal = Terminal.new()
+	var response = terminal.process_command(cmd)
+	output_textedit.text += response + "\n"
+	input_lineedit.text = ""
+	input_lineedit.grab_focus()  # Ensure the LineEdit remains focused
 	if check_win_condition():
 		show_congrats_message()
 
@@ -67,6 +73,8 @@ func processCommand(cmd: String) -> String:
 					response += "cat: " + file_name + ": No such file or directory"
 			else:
 				response += "cat: missing file operand"
+		"help":
+			response += "Available commands: help - Display available commands, ls - List files, touch - Create file, echo - Print text, cat - Display file content"
 		_:
 			response += "Unknown command: " + parts[0]
 
