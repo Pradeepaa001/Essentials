@@ -40,3 +40,5 @@ offset_left = 744.0
 offset_top = 232.0
 offset_right = 791.0
 offset_bottom = 277.0
+
+[connection signal="pressed" from="check" to="." method="_on_check_pressed"]
