@@ -1,30 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgdv5o1ke6liu"]
+[gd_scene load_steps=6 format=3 uid="uid://bgdv5o1ke6liu"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_lhlfh"]
 [ext_resource type="StyleBox" uid="uid://bnqmvk2g2y7xk" path="res://Scenes/main.tres" id="2_jenx2"]
-[ext_resource type="StyleBox" uid="uid://dv3cy4lmk8m2n" path="res://Scenes/new_style_box_flat.tres" id="2_oc2l2"]
 [ext_resource type="Texture2D" uid="uid://da0o1jimwjniq" path="res://images/space.jpg" id="2_vbwsi"]
 [ext_resource type="FontFile" uid="uid://6bjhwd0ys5rc" path="res://LoveDays-2v7Oe.ttf" id="5_rjiiq"]
-
-[sub_resource type="FontFile" id="FontFile_tmbvq"]
-cache/0/40/0/ascent = 0.0
-cache/0/40/0/descent = 0.0
-cache/0/40/0/underline_position = 0.0
-cache/0/40/0/underline_thickness = 0.0
-cache/0/40/0/scale = 1.0
-cache/0/40/0/kerning_overrides/40/0 = Vector2(0, 0)
-cache/0/40/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/40/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
-[sub_resource type="Theme" id="Theme_16e4c"]
-Button/fonts/font = SubResource("FontFile_tmbvq")
-Button/styles/normal = ExtResource("2_oc2l2")
 
 [sub_resource type="Theme" id="Theme_6qsgc"]
 Button/styles/normal = ExtResource("2_jenx2")
@@ -41,17 +20,6 @@ texture = ExtResource("2_vbwsi")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="LEVELS" type="Button" parent="."]
-offset_left = 400.0
-offset_top = 385.0
-offset_right = 600.0
-offset_bottom = 465.0
-theme = SubResource("Theme_16e4c")
-theme_override_colors/font_color = Color(0.312156, 0.811213, 0.889245, 1)
-theme_override_font_sizes/font_size = 40
-text = "LEVELS"
-text_overrun_behavior = 4
-
 [node name="QUIT" type="Button" parent="."]
 custom_minimum_size = Vector2(200, 80)
 offset_left = 650.0
@@ -62,6 +30,17 @@ theme = SubResource("Theme_6qsgc")
 theme_override_colors/font_color = Color(0.313726, 0.811765, 0.890196, 1)
 theme_override_font_sizes/font_size = 40
 text = "QUIT"
+
+[node name="LEVELS" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 80)
+offset_left = 386.0
+offset_top = 382.0
+offset_right = 586.0
+offset_bottom = 462.0
+theme = SubResource("Theme_6qsgc")
+theme_override_colors/font_color = Color(0.313726, 0.811765, 0.890196, 1)
+theme_override_font_sizes/font_size = 40
+text = "LEVELS"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 400.0
@@ -76,5 +55,5 @@ text = "Essentials
 justification_flags = 131
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="LEVELS" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="QUIT" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="LEVELS" to="." method="_on_levels_pressed"]
