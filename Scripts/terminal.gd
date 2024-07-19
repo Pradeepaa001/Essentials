@@ -15,6 +15,7 @@ func process_command(cmd: String) -> String:
 
 func execute(cmd):
 	var output = []
+	print(cmd)
 	var error_code = OS.execute("wsl.exe", ["sh", "-c", "cd " + pwd + "&& " +cmd], output, true)
 	return String(output[-1])
 	
@@ -25,27 +26,10 @@ func _on_line_edit_text_submitted(cmd: String):
 
 
 func process_cd(command):
-	var cmd = command.split(" ")
-	print(cmd)
-	if cmd.size() > 2:
-		return "-bash: cd: too many arguments"
-	elif cmd.size() == 1:
-		pwd = "/user"
-		return ""
-	elif cmd[1] == "--help":
-		return execute(cmd)
-	elif "-" in cmd[1]:
-		return "Not supported"
-	elif command[-1] == "..":
-		pwd = "/".join(pwd.split("/").slice(0, cmd.size() - 1))
-	else:
-		var path = "res://" + pwd
-		var dir = DirAccess.open(path)
-		if dir.dir_exists(cmd[-1]):
-			dir.change_dir(cmd[-1])
-			pwd += "/" + cmd[-1]
-			return ""
-		return "-bash: cd: " + cmd[-1] + ": No such file or directory"
-
+	var path = execute(command + "&& echo break && pwd ").split("break")
+	pwd = path[1].substr(path[1].find("user") ,-1) if "user" in path[1] else pwd
+	pwd = pwd.strip_edges()
+	return path[0]
+	
 func process_pwd(_cmd):
 	return "/" + pwd
