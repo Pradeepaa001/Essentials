@@ -67,10 +67,6 @@ func update_icons():
 		print("task3:", task3_status())
 		$ColorRect3.color  = Color(1,0,0)
 
-
-
-
-
 func _on_check_pressed():
 	var output = $RichTextLabel
 	update_icons()
