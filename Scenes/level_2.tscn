@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://vca4n4xych04"]
+
+[ext_resource type="Script" path="res://Scripts/LEVEL2.gd" id="1_rryu7"]
+[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_rbk36"]
+
+[node name="Level2" type="Node2D"]
+position = Vector2(299, 213)
+script = ExtResource("1_rryu7")
+
+[node name="Terminal" parent="." instance=ExtResource("2_rbk36")]
+position = Vector2(-173, -39)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 520.0
+offset_top = -181.0
+offset_right = 819.0
+offset_bottom = 130.0
+
+[node name="check" type="Button" parent="."]
+offset_left = 610.0
+offset_top = 171.0
+offset_right = 732.0
+offset_bottom = 202.0
+text = "CHECK STATUS"
+
+[node name="ColorRect1" type="ColorRect" parent="."]
+offset_left = 549.0
+offset_top = 231.0
+offset_right = 596.0
+offset_bottom = 276.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 645.0
+offset_top = 229.0
+offset_right = 692.0
+offset_bottom = 274.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 744.0
+offset_top = 232.0
+offset_right = 791.0
+offset_bottom = 277.0
