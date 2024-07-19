@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4klruco3hf2g"]
+
+[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="1_sx8js"]
+
+[node name="BaseScene" type="Node2D"]
+position = Vector2(299, 213)
+
+[node name="Terminal2" parent="." instance=ExtResource("1_sx8js")]
+position = Vector2(-173, -39)
+
+[node name="Check_Status" type="Button" parent="."]
+offset_left = 610.0
+offset_top = 171.0
+offset_right = 732.0
+offset_bottom = 202.0
+text = "CHECK STATUS
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 520.0
+offset_top = -181.0
+offset_right = 819.0
+offset_bottom = 130.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 549.0
+offset_top = 231.0
+offset_right = 596.0
+offset_bottom = 276.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 645.0
+offset_top = 229.0
+offset_right = 692.0
+offset_bottom = 274.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 744.0
+offset_top = 232.0
+offset_right = 791.0
+offset_bottom = 277.0
