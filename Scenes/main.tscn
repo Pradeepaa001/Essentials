@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_lhlfh"]
 [ext_resource type="StyleBox" uid="uid://bnqmvk2g2y7xk" path="res://Scenes/main.tres" id="2_jenx2"]
 [ext_resource type="StyleBox" uid="uid://dv3cy4lmk8m2n" path="res://Scenes/new_style_box_flat.tres" id="2_oc2l2"]
-[ext_resource type="Texture2D" uid="uid://da0o1jimwjniq" path="res://space.jpg" id="2_vbwsi"]
+[ext_resource type="Texture2D" uid="uid://da0o1jimwjniq" path="res://images/space.jpg" id="2_vbwsi"]
 [ext_resource type="FontFile" uid="uid://6bjhwd0ys5rc" path="res://LoveDays-2v7Oe.ttf" id="5_rjiiq"]
 
 [sub_resource type="FontFile" id="FontFile_tmbvq"]
