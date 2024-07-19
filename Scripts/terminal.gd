@@ -19,7 +19,9 @@ func execute(cmd):
 	return String(output[-1])
 	
 func _on_line_edit_text_submitted(cmd: String):
+	var input = $input
 	var response = process_command(cmd)
+	input.text = ""
 	var output = $output
 	output.text += response
 
