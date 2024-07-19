@@ -16,7 +16,7 @@ func process_command(cmd: String) -> String:
 func execute(cmd):
 	var output = []
 	print(cmd)
-	var error_code = OS.execute("wsl.exe", ["sh", "-c", "cd " + pwd + "&& " +cmd], output, true)
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "cd " + pwd + "&& " +cmd], output, true)
 	return String(output[-1])
 	
 func _on_line_edit_text_submitted(cmd: String):
@@ -27,8 +27,11 @@ func _on_line_edit_text_submitted(cmd: String):
 
 func process_cd(command):
 	var path = execute(command + "&& echo break && pwd ").split("break")
-	pwd = path[1].substr(path[1].find("user") ,-1) if "user" in path[1] else pwd
-	pwd = pwd.strip_edges()
+	print(path)
+	if path.size() > 1:
+		pwd = path[1].substr(path[1].find("user") ,-1) if "user" in path[1] else pwd
+		pwd = pwd.strip_edges()
+		print(path, pwd)
 	return path[0]
 	
 func process_pwd(_cmd):
