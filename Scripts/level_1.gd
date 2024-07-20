@@ -6,6 +6,9 @@ var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resour
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
 var task_scene = load("res://Scenes/task.tscn")
 
+var SaveSystem = preload("res://SaveSystem.gd")
+var Save = SaveSystem.new()
+
 func _ready():
 	var output = $RichTextLabel
 	output.text += level_title + "\n"
@@ -61,6 +64,7 @@ func update_status():
 
 func _on_check_pressed():
 	update_status()
+	level_completed()
 	
 #CHECKING COMPLETION AND SAVING IN DICTIONARY
 	
@@ -70,7 +74,7 @@ func is_level_completed() -> bool:
 func level_completed():
 	if is_level_completed():
 		var current_level = get_current_level()
-		SaveSystem.save_progress(current_level)
+		Save.save_progress(current_level)
 		get_tree().change_scene_to_file("res://Scenes/level_selector.tscn")
 
 func get_current_level() -> int:

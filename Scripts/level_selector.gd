@@ -1,5 +1,7 @@
 extends Node2D
 
+var SaveSystem = preload("res://SaveSystem.gd")
+
 func _ready():
 	update_level_buttons()
 	print('3')
@@ -41,8 +43,9 @@ func _on_button_8_pressed():
 #TO MAKE LEVEL BUTTON TURN GREEN IF COMPLETED
 
 func update_level_buttons():
-	var progress = SaveSystem.load_progress()
+	var Save = SaveSystem.new()
+	var progress = Save.load_progress()
 	for button in $LevelButtons.get_children():
-		var level = int(button.name.replace("Button", ""))
+		var level = int(button.name.replace("Button", "")) + 1
 		if level in progress["levels_completed"]:
 			button.modulate = Color(0, 1, 0)

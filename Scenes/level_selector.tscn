@@ -12,6 +12,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 81.0
 offset_top = 46.0
 offset_right = 1111.0
@@ -19,6 +20,7 @@ offset_bottom = 124.0
 text = "The Journey Begins"
 
 [node name="Button2" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 84.0
 offset_top = 125.0
 offset_right = 1109.0
@@ -26,6 +28,7 @@ offset_bottom = 193.0
 text = "Master of Files"
 
 [node name="Button3" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 86.0
 offset_top = 196.0
 offset_right = 1110.0
@@ -33,6 +36,7 @@ offset_bottom = 267.0
 text = "Data Detective"
 
 [node name="Button4" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 85.0
 offset_top = 269.0
 offset_right = 1109.0
@@ -40,6 +44,7 @@ offset_bottom = 339.0
 text = "The Scripting Wizard"
 
 [node name="Button5" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 87.0
 offset_top = 341.0
 offset_right = 1108.0
@@ -47,6 +52,7 @@ offset_bottom = 421.0
 text = "The Time Traveler"
 
 [node name="Button6" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 87.0
 offset_top = 424.0
 offset_right = 1110.0
@@ -54,6 +60,7 @@ offset_bottom = 490.0
 text = "The Archivist"
 
 [node name="Button7" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 88.0
 offset_top = 493.0
 offset_right = 1110.0
@@ -61,6 +68,7 @@ offset_bottom = 564.0
 text = "The Network Navigator"
 
 [node name="Button8" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 86.0
 offset_top = 566.0
 offset_right = 1109.0
