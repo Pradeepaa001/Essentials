@@ -28,4 +28,22 @@ offset_right = 101.0
 offset_bottom = 49.0
 text = "<-"
 
+[node name="Button2" type="Button" parent="."]
+offset_left = 152.0
+offset_top = 16.0
+offset_right = 232.0
+offset_bottom = 56.0
+text = "QUIT"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "QUITTING?"
+position = Vector2i(0, 36)
+size = Vector2i(255, 100)
+ok_button_text = "EXIT GAME"
+dialog_text = "Do you want to exit the game ?"
+cancel_button_text = "CANCEL"
+
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
