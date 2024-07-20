@@ -1,59 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkcg5ars62hr2"]
 
 [ext_resource type="Script" path="res://Scripts/level3.gd" id="1_o5301"]
-[ext_resource type="Script" path="res://Scripts/terminal.gd" id="2_dls68"]
+[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_uu2ww"]
 
 [node name="level3" type="Node2D"]
 script = ExtResource("1_o5301")
-
-[node name="terminal3" type="Node2D" parent="."]
-script = ExtResource("2_dls68")
-
-[node name="LineEdit" type="LineEdit" parent="terminal3"]
-offset_top = 548.0
-offset_right = 600.0
-offset_bottom = 648.0
-
-[node name="TextEdit" type="TextEdit" parent="terminal3"]
-offset_right = 600.0
-offset_bottom = 548.0
-
-[node name="colorrectcontainer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 750.0
-offset_top = 400.0
-offset_right = 1050.0
-offset_bottom = 510.0
-
-[node name="ColorRect" type="ColorRect" parent="colorrectcontainer"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 50.0
-
-[node name="ColorRect2" type="ColorRect" parent="colorrectcontainer"]
-layout_mode = 0
-offset_left = 60.0
-offset_right = 110.0
-offset_bottom = 50.0
-
-[node name="ColorRect3" type="ColorRect" parent="colorrectcontainer"]
-layout_mode = 0
-offset_left = 120.0
-offset_right = 170.0
-offset_bottom = 50.0
-
-[node name="ColorRect4" type="ColorRect" parent="colorrectcontainer"]
-layout_mode = 0
-offset_left = 180.0
-offset_right = 230.0
-offset_bottom = 50.0
-
-[node name="ColorRect5" type="ColorRect" parent="colorrectcontainer"]
-layout_mode = 0
-offset_left = 240.0
-offset_right = 290.0
-offset_bottom = 50.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 650.0
@@ -61,11 +12,49 @@ offset_right = 1150.0
 offset_bottom = 348.0
 
 [node name="checkButton" type="Button" parent="."]
-offset_left = 850.0
-offset_top = 500.0
-offset_right = 950.0
-offset_bottom = 550.0
+offset_left = 807.0
+offset_top = 489.0
+offset_right = 1004.0
+offset_bottom = 568.0
+text = "CHECK STATUS"
 
-[connection signal="text_submitted" from="terminal3/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[node name="Terminal" parent="." instance=ExtResource("3_uu2ww")]
+
+[node name="ColorRect1" type="ColorRect" parent="."]
+offset_left = 750.0
+offset_top = 400.0
+offset_right = 800.0
+offset_bottom = 450.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 810.0
+offset_top = 400.0
+offset_right = 860.0
+offset_bottom = 450.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 870.0
+offset_top = 400.0
+offset_right = 920.0
+offset_bottom = 450.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = 930.0
+offset_top = 400.0
+offset_right = 980.0
+offset_bottom = 450.0
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+offset_left = 990.0
+offset_top = 400.0
+offset_right = 1040.0
+offset_bottom = 450.0
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+offset_left = 1057.0
+offset_top = 396.0
+offset_right = 1109.0
+offset_bottom = 447.0
+
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="checkButton" to="." method="_on_check_button_pressed"]

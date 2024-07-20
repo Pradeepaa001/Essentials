@@ -31,6 +31,7 @@ func _ready():
 func task1_status() -> bool:
 	var dir = DirAccess.open("res://user")
 	if dir.dir_exists("data") and dir.dir_exists("backup"):
+		print('yes')
 		return true
 	else:
 		return false
@@ -94,12 +95,14 @@ func update_icons():
 	else:
 		$ColorRect6.color = Color(1, 0, 0)
 
-func _on_check_pressed():
+func _on_check_button_pressed():
 	var output = $RichTextLabel
+	print('1')
 	update_icons()
+	print('2')
 	if task1_status() and task2_status() and task3_status() and task4_status() and task5_status() and task6_status():
 		output.text += "\nAll tasks completed\n" + level_congrats_message
-		$CheckButton.text = "All Tasks Completed"
+		output.text += "All Tasks Completed"
 	else:
 		output.text += "\nTasks are not completed\n"
-		$CheckButton.text = "Check Status"
+		output.text += "Check Status"

@@ -21,8 +21,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_gqs4t")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = -119.0
-offset_top = -157.0
-offset_right = 480.0
+offset_top = -36.0
+offset_right = 521.0
 offset_bottom = 397.0
 theme = SubResource("Theme_kpvcq")
 
