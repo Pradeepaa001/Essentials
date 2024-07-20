@@ -40,7 +40,8 @@ title = "QUITTING?"
 position = Vector2i(0, 36)
 size = Vector2i(255, 100)
 ok_button_text = "EXIT GAME"
-dialog_text = "Do you want to exit the game ?"
+dialog_text = "Do you want to exit the game ?
+Tip: Remember to delete files and folders created in this session to save space!"
 cancel_button_text = "CANCEL"
 
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]

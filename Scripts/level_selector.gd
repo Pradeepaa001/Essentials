@@ -31,8 +31,6 @@ func _on_button_4_pressed():
 		popup_msg.popup_centered()
 	print("done")
 
-
-
 func _on_button_5_pressed():
 	if access_level(5):
 		get_tree().change_scene_to_file("res://terminal.gd")
