@@ -6,8 +6,8 @@ var curr = -1
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
-	var grey_list_commands = ["cd", "pwd"]
-	var grey_list_processing = [self.process_cd, self.process_pwd]
+	var grey_list_commands = ["cd", "pwd", "clear"]
+	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear]
 	
 	
 	for idx in range(grey_list_commands.size()):
@@ -43,6 +43,14 @@ func process_cd(command):
 	
 func process_pwd(_cmd):
 	return "/" + pwd
+	
+func process_clear(_cmd):
+	var output = $RichTextLabel
+	output.text = ""
+	return ""
+	
+
+
 func get_input_list() -> Array:
 	return input_list
 
