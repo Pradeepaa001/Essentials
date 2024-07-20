@@ -7,6 +7,7 @@ func process_command(cmd: String) -> String:
 	var grey_list_commands = ["cd", "pwd"]
 	var grey_list_processing = [self.process_cd, self.process_pwd]
 	
+	
 	for idx in range(grey_list_commands.size()):
 		if grey_list_commands[idx] in cmd:
 			return response + grey_list_processing[idx].call(cmd) + "\n"

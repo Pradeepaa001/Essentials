@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkcg5ars62hr2"]
+
+[ext_resource type="Script" path="res://Scripts/level3.gd" id="1_o5301"]
+[ext_resource type="Script" path="res://Scripts/terminal.gd" id="2_dls68"]
+
+[node name="level3" type="Node2D"]
+script = ExtResource("1_o5301")
+
+[node name="terminal3" type="Node2D" parent="."]
+script = ExtResource("2_dls68")
+
+[node name="LineEdit" type="LineEdit" parent="terminal3"]
+offset_top = 548.0
+offset_right = 600.0
+offset_bottom = 648.0
+
+[node name="TextEdit" type="TextEdit" parent="terminal3"]
+offset_right = 600.0
+offset_bottom = 548.0
+
+[node name="colorrectcontainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 750.0
+offset_top = 400.0
+offset_right = 1050.0
+offset_bottom = 510.0
+
+[node name="ColorRect" type="ColorRect" parent="colorrectcontainer"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="ColorRect2" type="ColorRect" parent="colorrectcontainer"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 110.0
+offset_bottom = 50.0
+
+[node name="ColorRect3" type="ColorRect" parent="colorrectcontainer"]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 170.0
+offset_bottom = 50.0
+
+[node name="ColorRect4" type="ColorRect" parent="colorrectcontainer"]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 230.0
+offset_bottom = 50.0
+
+[node name="ColorRect5" type="ColorRect" parent="colorrectcontainer"]
+layout_mode = 0
+offset_left = 240.0
+offset_right = 290.0
+offset_bottom = 50.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 650.0
+offset_right = 1150.0
+offset_bottom = 348.0
+
+[node name="checkButton" type="Button" parent="."]
+offset_left = 850.0
+offset_top = 500.0
+offset_right = 950.0
+offset_bottom = 550.0
+
+[connection signal="text_submitted" from="terminal3/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
+[connection signal="pressed" from="checkButton" to="." method="_on_check_button_pressed"]

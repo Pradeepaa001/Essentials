@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://j78w24dwo5e7"]
+
+[ext_resource type="Script" path="res://Scripts/Toolbar.gd" id="1_nffqv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cgw2"]
+bg_color = Color(0.207194, 0.277287, 0.381782, 1)
+
+[node name="Toolbar" type="Node2D"]
+script = ExtResource("1_nffqv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 1153.0
+offset_bottom = 68.0
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.37
+theme_override_styles/panel = SubResource("StyleBoxFlat_5cgw2")
+
+[node name="Button" type="Button" parent="HBoxContainer/Panel"]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 10.0
+offset_right = 101.0
+offset_bottom = 49.0
+text = "<-"
+
+[connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
