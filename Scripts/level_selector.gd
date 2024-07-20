@@ -22,7 +22,7 @@ func _on_button_4_pressed():
 
 
 func _on_button_5_pressed():
-	get_tree().change_scene_to_file("res://terminal.gd")
+	get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
 
 
 func _on_button_6_pressed():
