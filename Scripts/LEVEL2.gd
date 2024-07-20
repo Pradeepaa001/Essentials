@@ -4,9 +4,13 @@ var level_title = "The Master of files"
 var level_description = "Welcome to the new planet captain! Now you are on a mission to fix the things here in order to help the aliens live a peaceful life.See around (ls), ask for help(ls --help) and find the hidden problems(ls -a). Dive in!"
 var level_setup_commands = ["ls", "ls --help", "ls -a"]
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
+@onready var termi = $Terminal
+var all_inputs = []
+
 
 func _ready():
 	var output = $RichTextLabel
+	print("started")
 	output.text += level_title + "\n"
 	var commands = ""
 	for element in level_setup_commands:
@@ -15,28 +19,17 @@ func _ready():
 
 
 func task1_status() -> bool:
-	#print("4")
-	var task1 = $Terminal
-	var dir = DirAccess.open("res://user")
-	#print("heh")
-	if dir.dir_exists("planet"):
-		return true
-	else:
-		return false
+	all_inputs = termi.get_input_list()
+	return "ls" in all_inputs
 
 func task2_status():
-	var commandline = $Terminal
-	return commandline.pwd == "user/planet"
+	all_inputs = termi.get_input_list()
+	return "ls --help" in all_inputs
+
 	
 func task3_status() -> bool:
-	var commandline = $Terminal
-	var required_files = ["resource1", "resource2", "resource3"]
-	var files_in_planet = commandline.execute("ls").split("\n")
-	print(files_in_planet)
-	for file in required_files:
-		if file not in files_in_planet:
-			return false
-	return true
+	all_inputs = termi.get_input_list()
+	return "ls -a" in all_inputs
 	
 func update_icons():
 	if task1_status():
@@ -70,6 +63,7 @@ func update_icons():
 
 func _on_check_pressed():
 	var output = $RichTextLabel
+	print("check is pressed")
 	update_icons()
 	if task1_status() and task2_status() and task3_status():
 		output.text += "\ntasks completed\n"

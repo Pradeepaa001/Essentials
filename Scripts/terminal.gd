@@ -1,6 +1,7 @@
 extends Node
 
 var pwd = "user"
+var input_list = []
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
@@ -22,6 +23,8 @@ func execute(cmd):
 	
 func _on_line_edit_text_submitted(cmd: String):
 	var input = $input
+	input_list.append(cmd)
+	print(input_list)
 	var response = process_command(cmd)
 	input.text = ""
 	var output = $output
@@ -39,3 +42,5 @@ func process_cd(command):
 	
 func process_pwd(_cmd):
 	return "/" + pwd
+func get_input_list() -> Array:
+	return input_list
