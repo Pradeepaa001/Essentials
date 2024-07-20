@@ -74,3 +74,31 @@ func _on_check_pressed():
 		output.text += "\ntasks completed\n"
 	else:
 		output.text += "\ntasks are not completed\n"
+
+
+
+
+
+
+
+#CHECKING COMPLETION AND SAVING IN DICTIONARY
+
+
+func is_level_completed() -> bool:
+	if task1_status() and task2_status() and task3_status():
+		return true
+	else:
+		return false
+
+
+func level_completed():
+	if is_level_completed():
+		var current_level = get_current_level()
+		SaveSystem.save_progress(current_level)
+		get_tree().change_scene("res://LevelSelector.tscn") 
+
+
+func get_current_level() -> int:
+	var scene_name = get_tree().current_scene.name
+	return int(scene_name.replace("level_", "").replace(".tscn", ""))
+
