@@ -5,10 +5,10 @@ var level_description = """
 Learn advanced file commands on your spaceship. Master the usage of du, ln, ln -s, locate, and echo commands.
 
 Instructions:
-1. Use `du` to check the disk usage of a directory. Example: `du -sh data`
-2. Use `ln` to create a hard link. Example: `ln file1 hardlink1`
-3. Use `ln -s` to create a symbolic link. Example: `ln -s file2 symlink2`
-4. Use `locate` to find a file by name. Example: `locate file3`
+1. Use `tail` to display the last part of a file. Example: `tail file1`
+2. Use `head` to display the first part of a file. Example: `head file2`
+3. Use `more` to view the contents of a file page by page. Example: `more file3`
+4. Use `du` to check the disk usage of a directory. Example: `du -sh data`
 5. Use `echo` to print text to the terminal. Example: `echo "Hello, World!"`
 """
 
