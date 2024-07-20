@@ -2,6 +2,7 @@ extends Node
 
 var pwd = "user"
 var input_list = []
+var curr = -1
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
@@ -44,3 +45,36 @@ func process_pwd(_cmd):
 	return "/" + pwd
 func get_input_list() -> Array:
 	return input_list
+
+func _input(event):
+	if event.is_action_pressed("ui_up"):
+		print("Up arrow is pressed")
+		if curr == -1:
+			curr = len(input_list) -1
+		else:
+			curr -= 1
+			if curr < 0:
+				curr = 0
+		print("prvs cmd: ", input_list[curr])
+		update_temp_ip()
+	elif event.is_action_pressed("ui_down"):
+		print("Down arrow is pressed")
+		if curr == -1:
+			curr = len(input_list) -1
+		else:
+			curr += 1
+			if curr > len(input_list) -1:
+				curr = len(input_list) -1
+		print("prvs cmd: ", input_list[curr])
+		update_temp_ip()
+	elif event.is_action_pressed("ui_accept") and input_list != []:
+		print("Enter key is pressed")
+		curr = -1
+		print("prvs cmd: ", input_list[curr])
+		
+			 
+func update_temp_ip():	
+	var temp_inp = $input
+	if temp_inp:
+		temp_inp.text = input_list[curr]
+		
