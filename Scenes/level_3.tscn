@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkcg5ars62hr2"]
 
-[ext_resource type="Script" path="res://Scripts/level3.gd" id="1_o5301"]
-[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_uu2ww"]
+[ext_resource type="Script" path="res://Scripts/level_3.gd" id="1_ran7x"]
+[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_ku6ee"]
 
 [node name="level3" type="Node2D"]
-script = ExtResource("1_o5301")
+script = ExtResource("1_ran7x")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 650.0
@@ -18,7 +18,7 @@ offset_right = 1004.0
 offset_bottom = 568.0
 text = "CHECK STATUS"
 
-[node name="Terminal" parent="." instance=ExtResource("3_uu2ww")]
+[node name="Terminal" parent="." instance=ExtResource("2_ku6ee")]
 
 [node name="ColorRect1" type="ColorRect" parent="."]
 offset_left = 750.0

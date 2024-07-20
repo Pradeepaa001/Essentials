@@ -4,8 +4,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 
 func _ready():
 	update_level_buttons()
-	print('3')
-	
+
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
 
@@ -14,7 +13,7 @@ func _on_button_2_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
 
 func _on_button_3_pressed():
-	get_tree().change_scene_to_file("res://Scenes/level3.tscn")
+	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
 
 
 func _on_button_4_pressed():

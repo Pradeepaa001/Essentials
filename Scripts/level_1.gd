@@ -75,7 +75,6 @@ func level_completed():
 	if is_level_completed():
 		var current_level = get_current_level()
 		Save.save_progress(current_level)
-		get_tree().change_scene_to_file("res://Scenes/level_selector.tscn")
 
 func get_current_level() -> int:
 	var scene_name = get_tree().current_scene.name
