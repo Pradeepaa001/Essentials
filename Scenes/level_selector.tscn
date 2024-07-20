@@ -75,6 +75,27 @@ offset_right = 1109.0
 offset_bottom = 633.0
 text = "The Guardian of Permissions"
 
+[node name="Popup" type="Popup" parent="."]
+editor_description = "You don't have permission to access this level. Complete prior!
+"
+title = "Locked Level"
+position = Vector2i(0, 36)
+size = Vector2i(400, 100)
+borderless = false
+
+[node name="Label" type="Label" parent="Popup"]
+offset_right = 400.0
+offset_bottom = 100.0
+text = "This level is currently locked! To unlock complete prior levels!"
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Popup"]
+offset_left = 175.0
+offset_top = 50.0
+offset_right = 226.0
+offset_bottom = 81.0
+text = "OKAY"
+
 [connection signal="pressed" from="LevelButtons/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="LevelButtons/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="LevelButtons/Button3" to="." method="_on_button_3_pressed"]
@@ -83,3 +104,4 @@ text = "The Guardian of Permissions"
 [connection signal="pressed" from="LevelButtons/Button6" to="." method="_on_button_6_pressed"]
 [connection signal="pressed" from="LevelButtons/Button7" to="." method="_on_button_7_pressed"]
 [connection signal="pressed" from="LevelButtons/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="Popup/Button" to="." method="_on_okay_pressed"]
