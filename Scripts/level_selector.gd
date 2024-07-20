@@ -1,7 +1,9 @@
 extends Node2D
 
 func _ready():
+	update_level_buttons()
 	print('3')
+	
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
 
@@ -31,3 +33,16 @@ func _on_button_7_pressed():
 
 func _on_button_8_pressed():
 	get_tree().change_scene_to_file("res://terminal.gd")
+
+
+
+
+
+#TO MAKE LEVEL BUTTON TURN GREEN IF COMPLETED
+
+func update_level_buttons():
+	var progress = SaveSystem.load_progress()
+	for button in $LevelButtons.get_children():
+		var level = int(button.name.replace("Button", ""))
+		if level in progress["levels_completed"]:
+			button.modulate = Color(0, 1, 0)
