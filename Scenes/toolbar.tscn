@@ -44,7 +44,44 @@ dialog_text = "Do you want to exit the game ?
 Tip: Remember to delete files and folders created in this session to save space!"
 cancel_button_text = "CANCEL"
 
+[node name="HelpButton" type="Button" parent="."]
+offset_left = 1066.0
+offset_top = 16.0
+offset_right = 1141.0
+offset_bottom = 55.0
+text = "Help"
+
+[node name="WindowDialog" type="Window" parent="."]
+title = "Help Manual"
+position = Vector2i(400, 70)
+size = Vector2i(400, 500)
+
+[node name="InfoLabel" type="Label" parent="WindowDialog"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "mkdir - make directories
+Create the directory, if they do not already exist.
+                       mkdir <DIRECTORY_NAME>
+
+cd - change directory
+Navigate to a specific directory by specifying its
+path or the name of the directory
+                       cd <DIRECTORY_NAME>
+
+touch - change file timestamps
+Used to create a new empty file and to change the
+timestamps of existing files.
+                       touch <FILE_NAME>
+
+
+Press 'q' to exit the manual!
+
+use rm - rf to delete the files after task completion
+to keep your directory clean"
+
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="close_requested" from="WindowDialog" to="." method="_on_window_dialog_close_requested"]
