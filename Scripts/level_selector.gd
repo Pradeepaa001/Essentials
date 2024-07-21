@@ -25,11 +25,12 @@ func _on_button_3_pressed():
 	print("done")
 
 func _on_button_4_pressed():
-	if access_level(4):
+	'''if access_level(4):
 		get_tree().change_scene_to_file("res://terminal.gd")
 	else:
 		popup_msg.popup_centered()
-	print("done")
+	print("done")'''
+	get_tree().change_scene_to_file("res://LEVEL_4.tscn")
 
 func _on_button_5_pressed():
 
