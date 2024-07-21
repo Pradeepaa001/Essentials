@@ -1,28 +1,46 @@
 extends Node2D
+var level_intro = "\t\t\tThe Journey Begins\n\nWelcome to GRID, Agent 101!\nWe are exited to have you with us.
+Your first set of tasks will help you get familiar with the system.
+Refer to the task manager to find your tasks.
+Find your level manual in the help section of your toolbar.
+You can use the Level Manual to finish your tasks"
 
-var level_title = "\tThe Journey Begins\n"
-var level_description = "Welcome to the command line! Imagine you're a space explorer navigating through different directories (planets). Learn the basic commands to get around."
-var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resource2 resource3"]
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
-var level_manual = "mkdir - make directories
+
+var level_manual = "\t\t\tLevel Commands
+
+mkdir - make directories
 Create the directory, if they do not already exist.
 					   mkdir <DIRECTORY_NAME>
 
 cd - change directory
-Navigate to a specific directory by specifying its
-path or the name of the directory
+Navigate to a specific directory by specifying its path or the name of the directory
 					   cd <DIRECTORY_NAME>
+The command 'cd ..' can be used to return to the previous working directory
 
 touch - change file timestamps
 Used to create a new empty file and to change the
 timestamps of existing files.
 					   touch <FILE_NAME>
+					
+rm - remove
+Remove files or directories
+					   rm <FILE_NAME>
+					   rm -rf <DIRECTORY_NAME>
+
+man - Manual
+An interface to the system reference manuals
+					   man <COMMAND>
+Note - use 'man level' to access our level manual
 
 
 Press 'q' to exit the manual!
 
 use rm - rf to delete the files after task completion
 to keep your directory clean"
+
+var task_count = 3
+var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1.txt, file2.txt, and file3.txt for practice."]
 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
@@ -32,38 +50,33 @@ func _ready():
 	var man_level = $Toolbar/WindowDialog/InfoLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
-	output.text += level_title + "\n"
-	var commands = ""
-	for element in level_setup_commands:
-		commands += str(element) + "\n"
-	output.text += level_description + "\nSetup commands:\n" + commands
+	output.text += level_intro
 	add_tasks()
 	
 func add_tasks():
-	var task_count = 3; var task
-	var instructions = ["Create planet", "Enter plant", "Create resources:\nresource1\nresource2\nresource3"]
+	var task
 	var task_manager = $Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer
 	for idx in task_count:
 		task = task_scene.instantiate().duplicate()
 		var instruction = task.get_node("HBoxContainer/Panel/RichTextLabel")
 		instruction.text = instructions[idx]
 		task_manager.add_child(task)
-		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 75)
+		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
 	var dir = DirAccess.open("res://user")
-	if dir.dir_exists("planet"):
+	if dir.dir_exists("Day1"):
 		return true
 	else:
 		return false
 
 func task2_status():
 	var commandline = $Terminal
-	return commandline.pwd == "user/planet"
+	return commandline.pwd == "user/Day1"
 	
 func task3_status() -> bool:
 	var commandline = $Terminal
-	var required_files = ["resource1", "resource2", "resource3"]
+	var required_files = ["file1.txt", "file2.txt", "file3.txt"]
 	var files_in_planet = commandline.execute("ls").split("\n")
 	print(files_in_planet)
 	for file in required_files:
