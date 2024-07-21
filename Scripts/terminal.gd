@@ -39,3 +39,10 @@ func process_cd(command):
 	
 func process_pwd(_cmd):
 	return "/" + pwd
+
+
+
+
+
+
+
