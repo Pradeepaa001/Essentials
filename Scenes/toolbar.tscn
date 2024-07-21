@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://j78w24dwo5e7"]
+[gd_scene load_steps=4 format=3 uid="uid://j78w24dwo5e7"]
 
 [ext_resource type="Script" path="res://Scripts/Toolbar.gd" id="1_nffqv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cgw2"]
 bg_color = Color(0.207194, 0.277287, 0.381782, 1)
+
+[sub_resource type="Theme" id="Theme_bgney"]
 
 [node name="Toolbar" type="Node2D"]
 script = ExtResource("1_nffqv")
@@ -53,12 +55,23 @@ text = "Help"
 
 [node name="WindowDialog" type="Window" parent="."]
 title = "Level Manual"
-position = Vector2i(400, 70)
+position = Vector2i(400, 36)
 size = Vector2i(400, 500)
+theme = SubResource("Theme_bgney")
 
-[node name="InfoLabel" type="Label" parent="WindowDialog"]
-offset_right = 389.0
-offset_bottom = 491.0
+[node name="Panel" type="Panel" parent="WindowDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

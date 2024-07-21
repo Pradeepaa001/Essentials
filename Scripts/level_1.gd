@@ -7,9 +7,7 @@ You can use the Level Manual to finish your tasks"
 
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
 
-var level_manual = "\t\t\tLevel Commands
-
-mkdir - make directories
+var level_manual = "\nmkdir - make directories
 Create the directory, if they do not already exist.
 					   mkdir <DIRECTORY_NAME>
 
@@ -47,7 +45,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
-	var man_level = $Toolbar/WindowDialog/InfoLabel
+	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
 	output.text += level_intro
