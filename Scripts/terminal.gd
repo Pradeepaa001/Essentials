@@ -3,12 +3,12 @@ extends Node
 var pwd = "user"
 var input_list = []
 var curr = -1
+signal man_level
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
-	var grey_list_commands = ["cd", "pwd", "clear"]
-	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear]
-	
+	var grey_list_commands = ["cd", "pwd", "clear", "man level"]
+	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel]
 	
 	for idx in range(grey_list_commands.size()):
 		if grey_list_commands[idx] in cmd:
@@ -49,7 +49,12 @@ func process_clear(_cmd):
 	output.text = ""
 	return ""
 	
-
+func process_manlevel(cmd):
+	if cmd == "man level":
+		emit_signal("man_level")
+		return ""
+	else:
+		return execute(cmd) + "\n"
 
 func get_input_list() -> Array:
 	return input_list

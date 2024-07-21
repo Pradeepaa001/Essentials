@@ -4,12 +4,33 @@ var level_title = "\tThe Journey Begins\n"
 var level_description = "Welcome to the command line! Imagine you're a space explorer navigating through different directories (planets). Learn the basic commands to get around."
 var level_setup_commands = ["mkdir planet", "cd planet", "touch resource1 resource2 resource3"]
 var level_congrats_message = "Well done, Explorer! You've gathered your first resources."
-var task_scene = load("res://Scenes/task.tscn")
+var level_manual = "mkdir - make directories
+Create the directory, if they do not already exist.
+					   mkdir <DIRECTORY_NAME>
 
+cd - change directory
+Navigate to a specific directory by specifying its
+path or the name of the directory
+					   cd <DIRECTORY_NAME>
+
+touch - change file timestamps
+Used to create a new empty file and to change the
+timestamps of existing files.
+					   touch <FILE_NAME>
+
+
+Press 'q' to exit the manual!
+
+use rm - rf to delete the files after task completion
+to keep your directory clean"
+
+var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	var man_level = $Toolbar/WindowDialog/InfoLabel
+	man_level.text = level_manual
 	var output = $RichTextLabel
 	output.text += level_title + "\n"
 	var commands = ""
