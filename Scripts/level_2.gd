@@ -12,6 +12,42 @@ Instructions:
 	note: This lists nothings if there are no contents starting with the character 
 5. Use `pwd` to see the path of current working directory. Example: `rmdir data`
 """
+
+var level_manual = "\nls - list directory contents
+Lists all the files and directories under a specified directory. 
+By default, ls uses the current directory and lists files and directories in alphabetical order by name.
+					   ls <OPTION> <FILE_NAME>
+
+OPTIONS:
+	
+	--help: display this help and exit
+	
+	-a:  do not ignore entries starting with .
+	Hidden Files are prefixed with a period . and are called dot files.
+	To include these hidden files, -a is used
+	
+ls *<char> - Lists files and sub-directories that start with specified character.
+Note - Lists nothing if there are no contents starting with the character
+
+
+rm - remove
+Remove files or directories
+					   rm <FILE_NAME>
+					   rm -rf <DIRECTORY_NAME>
+
+man - Manual
+An interface to the system reference manuals
+					   man <COMMAND>
+Note - Use 'man level' to access our level manual
+
+
+Press 'q' to exit the manual!
+
+use rm - rf to delete the files after task completion
+to keep your directory clean"
+
+
+
 var level_setup_commands = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
 var level_congrats_message = "Well done, Explorer! You've completed the first level"
 @onready var termi = $Terminal
@@ -19,6 +55,8 @@ var all_inputs = []
 
 
 func _ready():
+	var man_level = $Toolbar/WindowDialog/RichTextLabel
+	man_level.text = level_manual
 	var output = $RichTextLabel
 	print("started")
 	output.text += level_title + "\n"
