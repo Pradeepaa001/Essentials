@@ -87,21 +87,23 @@ func add_content_to_file():
 	file.close()
 func task1_status() -> bool:
 	var commandline = $Terminal
-	return commandline.execute("grep 'pattern' user://file1.txt")
-	
+	var search_result = commandline.execute("grep 'pattern' file.txt")
+	return search_result != ""
 
 func task2_status() -> bool:
 	var commandline = $Terminal
-	return commandline.execute("sort user://file1.txt")
-
+	var sort_result = commandline.execute("sort file.txt")
+	return sort_result != ""
 
 func task3_status() -> bool:
 	var commandline = $Terminal
-	return commandline.execute("wc user://file1.txt")
+	var wc_result = commandline.execute("wc file.txt")
+	return wc_result != ""
 
 func task4_status() -> bool:
 	var commandline = $Terminal
-	return commandline.execute("cut -f1 user://file1.txt")
+	var cut_result = commandline.execute("cut -f1 file.txt")
+	return cut_result != ""
 
 
 func update_status():

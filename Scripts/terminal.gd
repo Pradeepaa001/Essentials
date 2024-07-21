@@ -26,7 +26,9 @@ func _on_line_edit_text_submitted(cmd: String):
 	var input = $input
 	input_list.append(cmd)
 	print(input_list)
-	var response = process_command(cmd)
+	var response =""
+	if cmd == input.text:
+		response = process_command(cmd)
 	input.text = ""
 	var output = $RichTextLabel
 	output.text += response
