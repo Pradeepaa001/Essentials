@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://j78w24dwo5e7"]
+[gd_scene load_steps=4 format=3 uid="uid://j78w24dwo5e7"]
 
 [ext_resource type="Script" path="res://Scripts/Toolbar.gd" id="1_nffqv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cgw2"]
 bg_color = Color(0.207194, 0.277287, 0.381782, 1)
+
+[sub_resource type="Theme" id="Theme_bgney"]
 
 [node name="Toolbar" type="Node2D"]
 script = ExtResource("1_nffqv")
@@ -28,4 +30,52 @@ offset_right = 101.0
 offset_bottom = 49.0
 text = "<-"
 
+[node name="Button2" type="Button" parent="."]
+offset_left = 152.0
+offset_top = 16.0
+offset_right = 232.0
+offset_bottom = 56.0
+text = "QUIT"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "QUITTING?"
+position = Vector2i(0, 36)
+size = Vector2i(255, 100)
+ok_button_text = "EXIT GAME"
+dialog_text = "Do you want to exit the game ?
+Tip: Remember to delete files and folders created in this session to save space!"
+cancel_button_text = "CANCEL"
+
+[node name="HelpButton" type="Button" parent="."]
+offset_left = 1066.0
+offset_top = 16.0
+offset_right = 1141.0
+offset_bottom = 55.0
+text = "Help"
+
+[node name="WindowDialog" type="Window" parent="."]
+title = "Level Manual"
+position = Vector2i(400, 36)
+size = Vector2i(400, 500)
+theme = SubResource("Theme_bgney")
+
+[node name="Panel" type="Panel" parent="WindowDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="close_requested" from="WindowDialog" to="." method="_on_window_dialog_close_requested"]

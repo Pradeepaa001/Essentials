@@ -5,67 +5,103 @@
 [node name="LevelSelector" type="Node2D"]
 script = ExtResource("1_1cwqf")
 
-[node name="Button" type="Button" parent="."]
+[node name="LevelButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 81.0
 offset_top = 46.0
 offset_right = 1111.0
 offset_bottom = 124.0
 text = "The Journey Begins"
 
-[node name="Button2" type="Button" parent="."]
+[node name="Button2" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 84.0
 offset_top = 125.0
 offset_right = 1109.0
 offset_bottom = 193.0
 text = "Master of Files"
 
-[node name="Button3" type="Button" parent="."]
+[node name="Button3" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 86.0
 offset_top = 196.0
 offset_right = 1110.0
 offset_bottom = 267.0
 text = "Data Detective"
 
-[node name="Button4" type="Button" parent="."]
+[node name="Button4" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 85.0
 offset_top = 269.0
 offset_right = 1109.0
 offset_bottom = 339.0
 text = "The Scripting Wizard"
 
-[node name="Button5" type="Button" parent="."]
+[node name="Button5" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 87.0
 offset_top = 341.0
 offset_right = 1108.0
 offset_bottom = 421.0
 text = "The Time Traveler"
 
-[node name="Button6" type="Button" parent="."]
+[node name="Button6" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 87.0
 offset_top = 424.0
 offset_right = 1110.0
 offset_bottom = 490.0
 text = "The Archivist"
 
-[node name="Button7" type="Button" parent="."]
+[node name="Button7" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 88.0
 offset_top = 493.0
 offset_right = 1110.0
 offset_bottom = 564.0
 text = "The Network Navigator"
 
-[node name="Button8" type="Button" parent="."]
+[node name="Button8" type="Button" parent="LevelButtons"]
+layout_mode = 0
 offset_left = 86.0
 offset_top = 566.0
 offset_right = 1109.0
 offset_bottom = 633.0
 text = "The Guardian of Permissions"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
-[connection signal="pressed" from="Button6" to="." method="_on_button_6_pressed"]
-[connection signal="pressed" from="Button7" to="." method="_on_button_7_pressed"]
-[connection signal="pressed" from="Button8" to="." method="_on_button_8_pressed"]
+[node name="Popup" type="Popup" parent="."]
+editor_description = "You don't have permission to access this level. Complete prior!
+"
+title = "Locked Level"
+position = Vector2i(0, 36)
+size = Vector2i(400, 100)
+borderless = false
+
+[node name="Label" type="Label" parent="Popup"]
+offset_right = 400.0
+offset_bottom = 100.0
+text = "This level is currently locked! To unlock complete prior levels!"
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Popup"]
+offset_left = 175.0
+offset_top = 50.0
+offset_right = 226.0
+offset_bottom = 81.0
+text = "OKAY"
+
+[connection signal="pressed" from="LevelButtons/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="LevelButtons/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="LevelButtons/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="LevelButtons/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="LevelButtons/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="LevelButtons/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="LevelButtons/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="LevelButtons/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="Popup/Button" to="." method="_on_okay_pressed"]
