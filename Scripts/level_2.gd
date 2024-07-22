@@ -1,7 +1,6 @@
 extends Node2D
 
-var level_title = "The Master of files"
-var level_description = """
+var level_description = """\t\tThe Master of files
 Learn to list the contents of a directory with ls commands.
 
 Instructions:
@@ -47,24 +46,32 @@ use rm - rf to delete the files after task completion
 to keep your directory clean"
 
 
-
-var level_setup_commands = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
+var task_count = 5
+var instructions = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
 var level_congrats_message = "Well done, Explorer! You've completed the first level"
 @onready var termi = $Terminal
 var all_inputs = []
 
+var task_scene = load("res://Scenes/task.tscn")
+var SaveSystem = preload("res://SaveSystem.gd")
+var Save = SaveSystem.new()
 
 func _ready():
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
-	print("started")
-	output.text += level_title + "\n"
-	var commands = ""
-	for element in level_setup_commands:
-		commands += str(element) + "\n"
-	output.text += level_description + "\nSetup commands:\n" + commands
-
+	output.text += level_description
+	add_tasks()
+	
+func add_tasks():
+	var task
+	var task_manager = $Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer
+	for idx in task_count:
+		task = task_scene.instantiate().duplicate()
+		var instruction = task.get_node("HBoxContainer/Panel/RichTextLabel")
+		instruction.text = instructions[idx]
+		task_manager.add_child(task)
+		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
 	all_inputs = termi.get_input_list()
@@ -90,57 +97,27 @@ func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
 	return "pwd" in all_inputs
 	
-func update_icons():
-	if task1_status():
-		$ColorRect1.color  = Color(0,1,0)
-		print("task1:", task1_status())
-
-	else:
-
-		$ColorRect1.color  = Color(1,0,0)
-		print("task1:", task1_status())
-
-		
-
-	if task2_status():
-		print("task2:", task2_status())
-		$ColorRect2.color  = Color(0,1,0)
-
-	else:
-
-		$ColorRect2.color  = Color(1,0,0)
-		print("task2:", task2_status())
-
-	
-	if task3_status():
-		print("task3:", task3_status())
-		$ColorRect3.color  = Color(0,1,0)
-
-	else:
-		print("task3:", task3_status())
-		$ColorRect3.color  = Color(1,0,0)
-	
-	if task4_status():
-		print("task3:", task4_status())
-		$ColorRect4.color  = Color(0,1,0)
-
-	else:
-		print("task3:", task4_status())
-		$ColorRect4.color  = Color(1,0,0)
-	
-	if task5_status():
-		print("task3:", task5_status())
-		$ColorRect.color  = Color(0,1,0)
-
-	else:
-		print("task3:", task5_status())
-		$ColorRect.color  = Color(1,0,0)
+func update_status():
+	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
+	for idx in task_count:
+		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+		var task = task_manager.get_child(idx)
+		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
 
 func _on_check_pressed():
-	var output = $RichTextLabel
-	print("check is pressed")
-	update_icons()
-	if task1_status() and task2_status() and task3_status():
-		output.text += "\ntasks completed\n"
-	else:
-		output.text += "\ntasks are not completed\n"
+	update_status()
+	level_completed()
+
+func is_level_completed() -> bool:
+	return task1_status() and task2_status() and task3_status() and task3_status() and task4_status() and task5_status()
+
+func level_completed():
+	if is_level_completed():
+		var current_level = get_current_level()
+		Save.save_progress(current_level)
+
+func get_current_level() -> int:
+	var scene_name = get_tree().current_scene.name
+	return int(scene_name.replace("level_", "").replace(".tscn", ""))
+	

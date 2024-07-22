@@ -10,7 +10,7 @@ position = Vector2(299, 213)
 script = ExtResource("1_hne80")
 
 [node name="Toolbar" parent="." instance=ExtResource("2_k6wcv")]
-position = Vector2(-301, -220)
+position = Vector2(-299, -216)
 
 [node name="Terminal" parent="." instance=ExtResource("2_7plwy")]
 position = Vector2(-176, -45)
@@ -26,10 +26,35 @@ offset_bottom = 85.0
 
 [node name="check" type="Button" parent="."]
 offset_left = 607.0
-offset_top = 372.0
+offset_top = 349.0
 offset_right = 729.0
-offset_bottom = 403.0
+offset_bottom = 380.0
 text = "CHECK STATUS"
+
+[node name="Next" type="Button" parent="."]
+visible = false
+offset_left = 596.0
+offset_top = 387.0
+offset_right = 729.0
+offset_bottom = 418.0
+text = "NEXT LEVEL"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Task's Completed"
+position = Vector2i(0, 36)
+size = Vector2i(398, 236)
+ok_button_text = "Go to next level"
+dialog_text = "                            
+                         CONGRATULATIONS!!
+           YOU'VE COMPLETED TODAY'S WORK
+
+      Tip -Remember to delete files and folders
+ created in this session to keep your system clean
+
+"
+cancel_button_text = "Stay in the level"
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="check" to="." method="_on_check_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://diwyvys233dmf"]
+[gd_scene load_steps=2 format=3 uid="uid://diwyvys233dmf"]
 
-[ext_resource type="Script" path="res://Scripts/level3.gd" id="1_o5301"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_uu2ww"]
 
 [node name="level3" type="Node2D"]
-script = ExtResource("1_o5301")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 650.0
