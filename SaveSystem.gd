@@ -17,4 +17,5 @@ func load_progress() -> Dictionary:
 	if file:
 		save_data = file.get_var()
 		file.close()
+	print(save_data)
 	return save_data

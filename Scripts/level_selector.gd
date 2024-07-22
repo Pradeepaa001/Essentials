@@ -85,7 +85,7 @@ func update_level_buttons():
 	var Save = SaveSystem.new()
 	var progress = Save.load_progress()
 	for button in $LevelButtons.get_children():
-		var level = int(button.name.replace("Button", "")) + 1
+		var level = int(button.name.replace("Button", ""))
 		if level in progress["levels_completed"]:
 			button.modulate = Color(0, 1, 0)
 

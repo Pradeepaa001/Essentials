@@ -38,7 +38,7 @@ use rm - rf to delete the files after task completion
 to keep your directory clean"
 
 var task_count = 3
-var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1.txt, file2.txt, and file3.txt for practice."]
+var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
@@ -74,7 +74,7 @@ func task2_status():
 	
 func task3_status() -> bool:
 	var commandline = $Terminal
-	var required_files = ["file1.txt", "file2.txt", "file3.txt"]
+	var required_files = ["file1", "file2", "file3"]
 	var files_in_planet = commandline.execute("ls").split("\n")
 	print(files_in_planet)
 	for file in required_files:
@@ -83,9 +83,7 @@ func task3_status() -> bool:
 	return true
 	
 func update_status():
-	var task_count = 3
 	var check_functions = [task1_status, task2_status, task3_status]
-	
 	for idx in task_count:
 		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
 		var task = task_manager.get_child(idx)

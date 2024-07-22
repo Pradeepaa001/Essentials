@@ -11,7 +11,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="LevelButtons"]
+[node name="Button1" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 81.0
 offset_top = 46.0
@@ -96,7 +96,7 @@ offset_right = 226.0
 offset_bottom = 81.0
 text = "OKAY"
 
-[connection signal="pressed" from="LevelButtons/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="LevelButtons/Button1" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="LevelButtons/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="LevelButtons/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="LevelButtons/Button4" to="." method="_on_button_4_pressed"]
