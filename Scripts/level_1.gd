@@ -103,6 +103,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
+		var congrats = $ConfirmationDialog
+		congrats.popup_centered()
+		var next = $Next
+		next.visible = true
 		var current_level = get_current_level()
 		Save.save_progress(current_level)
 
@@ -110,3 +114,9 @@ func get_current_level() -> int:
 	var scene_name = get_tree().current_scene.name
 	return int(scene_name.replace("level_", "").replace(".tscn", ""))
 	
+func _on_next_pressed():
+	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
+
+
+func _on_confirmation_dialog_confirmed():
+	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
