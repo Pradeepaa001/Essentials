@@ -1,62 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkcg5ars62hr2"]
+[gd_scene load_steps=5 format=3 uid="uid://bkcg5ars62hr2"]
 
 [ext_resource type="Script" path="res://Scripts/level_3.gd" id="1_ran7x"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_ku6ee"]
+[ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_mrikc"]
+[ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_wjvmw"]
 
 [node name="level_3" type="Node2D"]
 script = ExtResource("1_ran7x")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 768.0
-offset_top = 26.0
-offset_right = 1110.0
-offset_bottom = 374.0
-
-[node name="checkButton" type="Button" parent="."]
-offset_left = 807.0
-offset_top = 489.0
-offset_right = 1004.0
-offset_bottom = 568.0
-text = "CHECK STATUS"
+[node name="Toolbar" parent="." instance=ExtResource("2_mrikc")]
+position = Vector2(0, -5)
 
 [node name="Terminal" parent="." instance=ExtResource("2_ku6ee")]
-position = Vector2(129, 117)
+position = Vector2(120, 169)
 
-[node name="ColorRect1" type="ColorRect" parent="."]
-offset_left = 750.0
-offset_top = 400.0
-offset_right = 800.0
-offset_bottom = 450.0
+[node name="Task_manager" parent="." instance=ExtResource("4_wjvmw")]
+position = Vector2(418, 150)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 810.0
-offset_top = 400.0
-offset_right = 860.0
-offset_bottom = 450.0
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 835.0
+offset_top = 90.0
+offset_right = 1113.0
+offset_bottom = 310.0
 
-[node name="ColorRect3" type="ColorRect" parent="."]
-offset_left = 870.0
-offset_top = 400.0
-offset_right = 920.0
-offset_bottom = 450.0
-
-[node name="ColorRect4" type="ColorRect" parent="."]
-offset_left = 930.0
-offset_top = 400.0
-offset_right = 980.0
-offset_bottom = 450.0
-
-[node name="ColorRect5" type="ColorRect" parent="."]
-offset_left = 990.0
-offset_top = 400.0
-offset_right = 1040.0
-offset_bottom = 450.0
-
-[node name="ColorRect6" type="ColorRect" parent="."]
-offset_left = 1057.0
-offset_top = 396.0
-offset_right = 1109.0
-offset_bottom = 447.0
+[node name="checkButton" type="Button" parent="."]
+offset_left = 900.0
+offset_top = 575.0
+offset_right = 1022.0
+offset_bottom = 606.0
+text = "CHECK STATUS"
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="checkButton" to="." method="_on_check_button_pressed"]
