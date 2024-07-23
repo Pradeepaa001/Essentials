@@ -12,22 +12,42 @@ Instructions:
 5. Use `rmdir` to remove an empty directory. Example: `rmdir data`
 """
 
-var level_setup_commands = [
-	"mkdir data",
+#var level_setup_commands = [
+	#"mkdir data",
+	#"cd data",
+	#"touch file1 file2 file3",
+	#"echo 'This is file1' > file1",
+	#"echo 'This is file2' > file2",
+	#"echo 'This is file3' > file3",
+	#"cd ..",
+	#"mkdir backup"
+#]
+var level_congrats_message = "Great job! You've mastered basic file and directory management."
+var task_count = 5
+var task_scene = load("res://Scenes/task.tscn")
+var instructions = ["mkdir data",
 	"cd data",
 	"touch file1 file2 file3",
 	"echo 'This is file1' > file1",
 	"echo 'This is file2' > file2",
 	"echo 'This is file3' > file3",
 	"cd ..",
-	"mkdir backup"
-]
-var level_congrats_message = "Great job! You've mastered basic file and directory management."
-
+	"mkdir backup"]
 func _ready():
 	user_reset()
 	var output = $RichTextLabel
 	output.text = level_title + "\n" + level_description + "\n" 
+	add_tasks()
+
+func add_tasks():
+	var task
+	var task_manager = $Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer
+	for idx in task_count:
+		task = task_scene.instantiate().duplicate()
+		var instruction = task.get_node("HBoxContainer/Panel/RichTextLabel")
+		instruction.text = instructions[idx]
+		task_manager.add_child(task)
+		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
 	var dir = DirAccess.open("res://user")
@@ -35,6 +55,7 @@ func task1_status() -> bool:
 		print('yes')
 		return true
 	else:
+		print("false")
 		return false
 
 func task2_status():

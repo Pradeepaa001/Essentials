@@ -45,7 +45,7 @@ Press 'q' to exit the manual!
 use rm - rf to delete the files after task completion
 to keep your directory clean"
 
-var dialogue_lines = ["Welcome to the level!", "Use arrow keys to move.", "Good luck!"]
+var dialogue_lines = ["Welcome to the level2!", "Use arrow keys to move.", "Good luck!"]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
@@ -72,7 +72,6 @@ func _ready():
 	output.text += level_description
 	add_tasks()
 	
-
 func _on_dialogue_finished():
 	pass
 

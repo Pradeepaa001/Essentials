@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_7plwy"]
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_k6wcv"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_j5b4k"]
-[ext_resource type="PackedScene" uid="uid://dk61bpb3plx76" path="res://Scenes/NPCDialogue.tscn" id="5_teuxl"]
+[ext_resource type="PackedScene" path="res://Scenes/NPCDialogue.tscn" id="5_teuxl"]
 
 [node name="level_1" type="Node2D"]
 position = Vector2(299, 213)
