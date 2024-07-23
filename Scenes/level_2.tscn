@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://vca4n4xych04"]
+[gd_scene load_steps=6 format=3 uid="uid://vca4n4xych04"]
 
 [ext_resource type="Script" path="res://Scripts/level_2.gd" id="1_rryu7"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_rbk36"]
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="3_m8bnb"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_sfoni"]
+[ext_resource type="PackedScene" path="res://Scenes/NPCDialogue.tscn" id="5_08wr6"]
 
 [node name="level_2" type="Node2D"]
 position = Vector2(299, 213)
@@ -30,5 +31,7 @@ offset_top = 357.0
 offset_right = 725.0
 offset_bottom = 388.0
 text = "CHECK STATUS"
+
+[node name="Control" parent="." instance=ExtResource("5_08wr6")]
 
 [connection signal="pressed" from="check" to="." method="_on_check_pressed"]
