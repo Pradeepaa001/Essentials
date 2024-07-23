@@ -16,7 +16,7 @@ func process_command(cmd: String) -> String:
 	"ln", "dd", "mkfs", "mount", 
 	"umount", "find", "scp", "sftp", "ncftp", "ftp", "wget", "curl", "shutdown", 
 	"reboot", "halt", "poweroff", "init", "telinit", "service", "systemctl", "kill", 
-	"pkill", "killall", "crontab", "at", "batch", "ifconfig", "ip", "iptables", 
+	"pkill", "killall", "crontab", "batch", "ifconfig", "ip", "iptables", 
 	"ip6tables", "route", "traceroute", "tracert", "netstat", "ping", "nmap", "telnet", 
 	"ssh", "nc", "arp", "useradd", "userdel", "usermod", "groupadd", "groupdel", 
 	"groupmod", "passwd", "su", "sudo", "sh", "csh", "zsh", "ksh", "env", 
