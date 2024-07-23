@@ -20,7 +20,7 @@ func _on_button_2_pressed():
 
 func _on_button_3_pressed():
 	if access_level(3):
-		get_tree().change_scene_to_file("res://Scenes/level3.tscn")
+		get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
 	else:
 		popup_msg.popup_centered()
 	print("done")

@@ -27,7 +27,7 @@ var level_congrats_message = "Great job! You've mastered basic file and director
 func _ready():
 	user_reset()
 	var output = $RichTextLabel
-	output.text = level_title + "\n" + level_description + "\n"
+	output.text = level_title + "\n" + level_description + "\n" 
 
 func task1_status() -> bool:
 	var dir = DirAccess.open("res://user")
@@ -107,6 +107,7 @@ func _on_check_button_pressed():
 	else:
 		output.text += "\nTasks are not completed\n"
 		output.text += "Check Status"
+		
 func user_reset():
 	var output = []
 	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
