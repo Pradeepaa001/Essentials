@@ -45,6 +45,10 @@ Press 'q' to exit the manual!
 use rm - rf to delete the files after task completion
 to keep your directory clean"
 
+var dialogue_lines = ["Welcome to the level!", "Use arrow keys to move.", "Good luck!"]
+
+var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
+var npc_dialogue
 
 var task_count = 5
 var instructions = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
@@ -58,12 +62,20 @@ var Save = SaveSystem.new()
 
 func _ready():
 	user_reset()
+	npc_dialogue = npc_dialogue_scene.instantiate()
+	add_child(npc_dialogue)
+	
+	npc_dialogue.start_dialogue(dialogue_lines)
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
 	output.text += level_description
 	add_tasks()
 	
+
+func _on_dialogue_finished():
+	pass
+
 func add_tasks():
 	var task
 	var task_manager = $Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer

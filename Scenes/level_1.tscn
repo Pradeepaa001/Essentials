@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwf57mmusyske"]
+[gd_scene load_steps=6 format=3 uid="uid://bwf57mmusyske"]
 
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_hne80"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_7plwy"]
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_k6wcv"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_j5b4k"]
+[ext_resource type="PackedScene" path="res://Scenes/NPCDialogue.tscn" id="5_teuxl"]
 
 [node name="level_1" type="Node2D"]
 position = Vector2(299, 213)
@@ -53,6 +54,8 @@ dialog_text = "
 
 "
 cancel_button_text = "Stay in the level"
+
+[node name="Control" parent="." instance=ExtResource("5_teuxl")]
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="check" to="." method="_on_check_pressed"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk61bpb3plx76"]
+
+[ext_resource type="Script" path="res://Scenes/NPCDialogue.gd" id="1_d444j"]
+[ext_resource type="Texture2D" uid="uid://c8a73i32guijo" path="res://images/shell_single.png" id="2_hdq4e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtknd"]
+bg_color = Color(0.207843, 0.278431, 0.380392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wdhg8"]
+font_size = 28
+outline_size = 3
+outline_color = Color(0.87, 0.78068, 0.2001, 1)
+shadow_size = 2
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_d444j")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -288.0
+offset_top = 301.0
+offset_right = 833.0
+offset_bottom = 420.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gtknd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -286.0
+offset_top = 296.0
+offset_right = -127.0
+offset_bottom = 436.0
+texture = ExtResource("2_hdq4e")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -114.0
+offset_top = 335.0
+offset_right = 833.0
+offset_bottom = 416.0
+theme_override_colors/font_selected_color = Color(0.980257, 0.892828, 0.898834, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -114.0
+offset_top = 299.0
+offset_right = 18.0
+offset_bottom = 338.0
+text = "Shelldon: "
+label_settings = SubResource("LabelSettings_wdhg8")
