@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgdv5o1ke6liu"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_lhlfh"]
+[ext_resource type="Texture2D" uid="uid://dlu35jk5uxy04" path="res://images/grid_sys.jpg" id="2_i2obk"]
 [ext_resource type="StyleBox" uid="uid://bnqmvk2g2y7xk" path="res://Scenes/main.tres" id="2_jenx2"]
-[ext_resource type="Texture2D" uid="uid://da0o1jimwjniq" path="res://images/space.jpg" id="2_vbwsi"]
 [ext_resource type="FontFile" uid="uid://6bjhwd0ys5rc" path="res://LoveDays-2v7Oe.ttf" id="5_rjiiq"]
 
 [sub_resource type="Theme" id="Theme_6qsgc"]
@@ -16,7 +16,7 @@ metadata/_edit_vertical_guides_ = [-1058.0]
 custom_minimum_size = Vector2(800, 700)
 offset_right = 1280.0
 offset_bottom = 700.0
-texture = ExtResource("2_vbwsi")
+texture = ExtResource("2_i2obk")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -47,7 +47,10 @@ offset_left = 400.0
 offset_top = 220.0
 offset_right = 877.0
 offset_bottom = 399.0
-theme_override_colors/font_color = Color(0.506766, 0.616105, 0.253294, 1)
+theme_override_colors/font_color = Color(0.570782, 0.600905, 0, 1)
+theme_override_constants/shadow_offset_x = 13
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 9
 theme_override_fonts/font = ExtResource("5_rjiiq")
 theme_override_font_sizes/font_size = 120
 text = "Essentials
