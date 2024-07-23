@@ -26,7 +26,7 @@ var level_congrats_message = "Great job! You've mastered advanced file commands.
 
 func _ready():
 	var output = $RichTextLabel
-	output.text = level_title + "\n" + level_description + "\n"
+	output.text = level_title + "\n" + level_description + "\n" 
 
 func task1_status() -> bool:
 	var commandline = $Terminal
