@@ -57,6 +57,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	user_reset()
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -121,3 +122,14 @@ func get_current_level() -> int:
 	var scene_name = get_tree().current_scene.name
 	return int(scene_name.replace("level_", "").replace(".tscn", ""))
 	
+
+func user_reset():
+	var output = []
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
+	if output[-1]:
+		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
+		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
+		print("reset done")
+	else:
+		print("no")
+	return String(output[-1])

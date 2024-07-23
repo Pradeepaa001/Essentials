@@ -25,6 +25,7 @@ var level_setup_commands = [
 var level_congrats_message = "Great job! You've mastered advanced file commands."
 
 func _ready():
+	user_reset()
 	var output = $RichTextLabel
 	output.text = level_title + "\n" + level_description + "\n"
 
@@ -85,3 +86,14 @@ func _on_check_button_pressed():
 		output.text += "\nAll tasks completed\n" + level_congrats_message
 	else:
 		output.text += "\nTasks are not completed\n"
+
+func user_reset():
+	var output = []
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
+	if output[-1]:
+		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
+		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
+		print("reset done")
+	else:
+		print("no")
+	return String(output[-1])

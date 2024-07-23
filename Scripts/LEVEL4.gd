@@ -137,9 +137,20 @@ func get_current_level() -> int:
 	return int(scene_name.replace("level_", "").replace(".tscn", ""))
 
 func _ready():
+	user_reset()
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
 	output.text += level_intro
 	add_tasks()
 	add_content_to_file()
+func user_reset():
+	var output = []
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
+	if output[-1]:
+		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
+		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
+		print("reset done")
+	else:
+		print("no")
+	return String(output[-1])
