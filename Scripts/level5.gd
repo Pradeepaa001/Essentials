@@ -59,7 +59,7 @@ var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'echo "Hello, World!"']
+var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'echo "Hello World!"']
 var level_congrats_message = "Well done, Explorer! You've completed level 5"
 @onready var termi = $Terminal
 var all_inputs = []
@@ -114,7 +114,7 @@ func task4_status() -> bool:
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return 'echo "Hello, World!"' in all_inputs
+	return 'echo "Hello World!"' in all_inputs
 	
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
