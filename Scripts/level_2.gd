@@ -1,5 +1,11 @@
 extends Node2D
+<<<<<<< HEAD
 var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk"
+=======
+
+var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
+
+>>>>>>> 0a71229f04b042f8829635b575c704d2afe70d69
 
 var level_description = """\t\tThe Master of files
 Learn to list the contents of a directory with ls commands.
