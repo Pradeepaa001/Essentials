@@ -1,5 +1,5 @@
 extends Node2D
-var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes it's books by genre' > genre && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk"
 
 var level_description = """\t\tThe Master of files
 Learn to list the contents of a directory with ls commands.
@@ -8,7 +8,7 @@ Instructions:
 1. Use `ls` to view the contents of a directory. Example: `ls`
 2. Use `ls --help` to know how to use ls. Example: `ls --help`
 3. Use `ls -a` to view hidden files. Example: `ls -a`
-4. Use `ls *<char>` to view files and sub-directories that start with specified character. Example: `ls r*`
+4. Use `ls <char>*` to view files and sub-directories that start with specified character. Example: `ls r*`
 	note: This lists nothings if there are no contents starting with the character 
 5. Use `pwd` to see the path of current working directory. Example: `rmdir data`
 """
@@ -69,7 +69,9 @@ var Save = SaveSystem.new()
 func _ready():
 	user_reset()
 	
-	termi.execute(level_setup_commands)
+	var op = termi.execute(level_setup_commands)
+	print(op)
+	print("yes")
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)

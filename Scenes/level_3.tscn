@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkcg5ars62hr2"]
+[gd_scene load_steps=6 format=3 uid="uid://bvg14ke5ev8ln"]
 
 [ext_resource type="Script" path="res://Scripts/level3.gd" id="1_g4paq"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_ku6ee"]
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_mrikc"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_wjvmw"]
-[ext_resource type="PackedScene" path="res://Scenes/NPCDialogue.tscn" id="5_u2j1l"]
+[ext_resource type="PackedScene" uid="uid://dk61bpb3plx76" path="res://Scenes/NPCDialogue.tscn" id="5_u2j1l"]
 
 [node name="level_3" type="Node2D"]
 position = Vector2(299, 213)
