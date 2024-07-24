@@ -54,7 +54,7 @@ layout_mode = 0
 offset_left = -114.0
 offset_top = 335.0
 offset_right = 833.0
-offset_bottom = 394.0
+offset_bottom = 408.0
 theme_override_colors/font_selected_color = Color(0.980257, 0.892828, 0.898834, 1)
 
 [node name="Label" type="Label" parent="."]
