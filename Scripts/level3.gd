@@ -1,42 +1,41 @@
 extends Node2D
 
-var level_setup_commands = "mkdir data && cd data && echo 'This is file1' > file1 && echo 'This is file2' > file2 && echo 'This is file3' > file3 && mkdir test_dir"
+var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
 
-var level_description = """\t\tMaster of File Viewing and Disk Usage
-Learn to use various shell commands like tail, head, more, du, and echo.
+var level_description = """\t\tMaster of Shell Commands
+Learn to use various shell commands like cat, mv, cp, rm, and rmdir.
 
 Instructions:
-1. Use `tail` to display the last part of a file. Example: `tail file1`
-2. Use `head` to display the first part of a file. Example: `head file2`
-3. Use `more` to view the contents of a file page by page. Example: `more file3`
-4. Use `du` to check the disk usage of a directory. Example: `du -sh data`
-5. Use `echo` to print text to the terminal. Example: `echo "Hello, World!"`
+1. Use `cat` to view the contents of a file. Example: `cat tasks`
+2. Use `mv` to move or rename a file. Example: `mv tasks new_tasks`
+3. Use `cp` to copy a file. Example: `cp new_tasks backup_tasks`
+4. Use `rm` to remove a file. Example: `rm backup_tasks`
+5. Use `rmdir` to remove a directory. Example: `rmdir dont_open`
 
-Note: `tail` and `head` can be used with options to customize the output.
+Note: Be careful with `rm` and `rmdir` as they permanently delete files and directories.
 """
 
 var level_manual = """
-tail - output the last part of files
-Display the last part of a file. Useful for viewing the end of large files.
-Usage: tail <FILE_NAME>
+cat - concatenate and display files
+View the contents of a file.
+Usage: cat <FILE_NAME>
 
-head - output the first part of files
-Display the first part of a file. Useful for viewing the beginning of files.
-Usage: head <FILE_NAME>
+mv - move (rename) files
+Move or rename a file or directory.
+Usage: mv <SOURCE> <DESTINATION>
 
-more - view file contents interactively
-View the contents of a file one page at a time.
-Usage: more <FILE_NAME>
+cp - copy files and directories
+Copy files or directories.
+Usage: cp <SOURCE> <DESTINATION>
 
-du - disk usage
-Estimate file space usage. Show the size of files and directories.
-Usage: du <OPTION> <DIRECTORY>
-Options:
-	-sh: Display the total size in a human-readable format.
+rm - remove files or directories
+Remove files or directories.
+Usage: rm <FILE_NAME>
+	   rm -r <DIRECTORY_NAME>
 
-echo - display a line of text
-Print text or variables to the terminal.
-Usage: echo <TEXT>
+rmdir - remove empty directories
+Remove empty directories.
+Usage: rmdir <DIRECTORY_NAME>
 
 man - Manual
 An interface to the system reference manuals
@@ -45,14 +44,14 @@ Usage: man <COMMAND>
 Press 'q' to exit the manual!
 """
 
-var dialogue_lines = ["Welcome to level 5!", "Learn to use more advanced shell commands.", "Good luck!"]
+var dialogue_lines = ["Welcome to level 3!", "Learn to use more shell commands.", "Good luck!"]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'echo "Hello, World!"']
-var level_congrats_message = "Well done, Explorer! You've completed level 5"
+var instructions = ["cat tasks", "mv tasks new_tasks", "cp new_tasks backup_tasks", "rm backup_tasks", "rmdir dont_open"]
+var level_congrats_message = "Well done, Explorer! You've completed level 3"
 @onready var termi = $Terminal
 var all_inputs = []
 
@@ -90,23 +89,24 @@ func add_tasks():
 
 func task1_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "tail file1" in all_inputs
+	return "cat tasks" in all_inputs
 
-func task2_status() -> bool:
+func task2_status():
 	all_inputs = termi.get_input_list()
-	return "head file2" in all_inputs
+	return "mv tasks new_tasks" in all_inputs
+
 	
 func task3_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "more file3" in all_inputs
+	return "cp new_tasks backup_tasks" in all_inputs
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "du -sh data" in all_inputs
+	return "rm backup_tasks" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return 'echo "Hello, World!"' in all_inputs
+	return "rmdir dont_open" in all_inputs
 	
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
@@ -138,11 +138,11 @@ func get_current_level() -> int:
 	
 
 func _on_next_pressed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 
 
 func _on_confirmation_dialog_confirmed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 
 func user_reset():
 	var output = []
