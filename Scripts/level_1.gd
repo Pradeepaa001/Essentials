@@ -39,9 +39,12 @@ to keep your directory clean"
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
-var dialogue_lines = ["Welcome to the first level!", 
-"Let's start by learning how to move around and get comfortable with the command line", 
-"Good luck!"]
+var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The Grid, let us start from scratch.  Think of it like setting up your own base camp in this vast GRID.", 
+"First things first, we must establish a base camp. That's where the mkdir command comes in. Imagine it like building your own digital cabin. You can use mkdir to create new directories (folders) to organize your stuff.",
+"Now, with your base camp set up, we need to navigate around. That's where cd comes in. Think of it like a compass. You can use cd to change directories, moving from one location to another within The Grid.",
+"But a base camp needs some basic resources, right? That's where touch comes in handy. You can use touch to create new empty files, like a digital notepad or a place to store your findings.",
+"Alright, recruit! Use these commands to build your base camp and start getting familiar with the surroundings. Remember, a well-organized camp is a happy camp!"
+ ]
 
 var task_count = 3
 var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
