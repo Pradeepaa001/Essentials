@@ -23,10 +23,31 @@ var level_setup_commands = [
 	"updatedb" 
 ]
 var level_congrats_message = "Great job! You've mastered advanced file commands."
-
+var task_count = 5
+var task_scene = load("res://Scenes/task.tscn")
+var instructions = ["mkdir data",
+	"cd data",
+	"touch file1 file2 file3",
+	"echo 'This is file1' > file1",
+	"echo 'This is file2' > file2",
+	"echo 'This is file3' > file3",
+	"cd ..",
+	"mkdir backup"]
 func _ready():
+	user_reset()
 	var output = $RichTextLabel
-	output.text = level_title + "\n" + level_description + "\n"
+	output.text = level_title + "\n" + level_description + "\n" 
+	add_tasks()
+
+func add_tasks():
+	var task
+	var task_manager = $Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer
+	for idx in task_count:
+		task = task_scene.instantiate().duplicate()
+		var instruction = task.get_node("HBoxContainer/Panel/RichTextLabel")
+		instruction.text = instructions[idx]
+		task_manager.add_child(task)
+		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
 	var commandline = $Terminal
@@ -85,3 +106,14 @@ func _on_check_button_pressed():
 		output.text += "\nAll tasks completed\n" + level_congrats_message
 	else:
 		output.text += "\nTasks are not completed\n"
+
+func user_reset():
+	var output = []
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
+	if output[-1]:
+		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
+		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
+		print("reset done")
+	else:
+		print("no")
+	return String(output[-1])

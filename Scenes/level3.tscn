@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://diwyvys233dmf"]
+[gd_scene load_steps=2 format=3 uid="uid://ccwryssmbyst3"]
 
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_uu2ww"]
 
-[node name="level3" type="Node2D"]
+[node name="level4" type="Node2D"]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 650.0

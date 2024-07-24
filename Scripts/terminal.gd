@@ -7,10 +7,40 @@ signal man_level
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
-	var grey_list_commands = ["cd", "pwd", "clear", "man level"]
-	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel]
 	
+	var grey_list_commands = ["cd", "pwd", "clear", "man level", " .."]
+	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel, self.process_back]
+	
+
+	var black_list_commands = [
+	"ln", "dd", "mkfs", "mount", 
+	"umount", "find", "scp", "sftp", "ncftp", "ftp", "wget", "curl", "shutdown", 
+	"reboot", "halt", "poweroff", "init", "telinit", "service", "systemctl", "kill", 
+	"pkill", "killall", "crontab", "batch", "ifconfig", "ip", "iptables", 
+	"ip6tables", "route", "traceroute", "tracert", "netstat", "ping", "nmap", "telnet", 
+	"ssh", "nc", "arp", "useradd", "userdel", "usermod", "groupadd", "groupdel", 
+	"groupmod", "passwd", "su", "sudo", "sh", "csh", "zsh", "ksh", "env", 
+	"set", "unset", "export", "source", "alias", "unalias", "exec", "make", "gcc", 
+	"g++", "perl", "python", "ruby", "java", "javac", "pip", "npm", "apt-get", "yum", 
+	"dnf", "brew", "git", "svn", "hg",
+	"vi", "vim", "nano", "emacs", "ed", "df", "du", "free", "ps", "top", "htop", "jobs", 
+	"bg", "fg", "locate", "updatedb", "whereis", "which", "whatis", "id", 
+	"last", "users", "uptime", "uname", "dmesg", "stat", "bc", "factor", "units", "expr", 
+	"yes", "watch", "more", "less", "comm", "diff", "patch",
+	"xz", "unxz", "lzma", "unlzma", "zcat", "zless", "zdiff", "znew", "zcmp", "bc", 
+	"dc", "test", "[", "read", "true", "false", "wait", "time", "umask", "ulimit", 
+	"alias", "unalias", "fg", "bg", "jobs", "exec", "exit", "logout", "return", 
+	"shift", "getopts", "dirs", "pushd", "popd", "declare", "typeset", "export", 
+	"readonly", "local", "hash", "type", "command", "builtin", "caller", "eval", 
+	"trap", "compgen", "complete", "compopt", "select", "bind", "disown", "coproc", 
+	"sudoedit"
+	]
+
 	for idx in range(grey_list_commands.size()):
+		for command in black_list_commands:
+			#print(command)
+			if command in cmd:
+				return response + "Command not supported" + "\n"
 		if grey_list_commands[idx] in cmd:
 			return response + grey_list_processing[idx].call(cmd) + "\n"
 	
@@ -33,7 +63,9 @@ func _on_line_edit_text_submitted(cmd: String):
 	var output = $RichTextLabel
 	output.text += response
 
-
+func process_back(command):
+	return "No Access" if pwd == "user" else execute(command)
+	
 func process_cd(command):
 	var path = execute(command + "&& echo break && pwd ").split("break")
 	print(path)
