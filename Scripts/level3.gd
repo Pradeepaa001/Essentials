@@ -93,26 +93,38 @@ func add_tasks():
 		task_manager.add_child(task)
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
+func check_contents() -> String:
+	var op =[]
+	var command_exec = OS.execute("wsl.exe", ["bash", "-c", "cd " + termi.pwd + "&& " + "ls"], op, true)
+	print(String(op[-1]))
+	return String(op[-1])
+
 func task1_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "cat tasks" in all_inputs
+	var op = check_contents()
+	return "tasks" in op and "cat tasks" in all_inputs
 
-func task2_status():
+func task2_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "mv tasks new_tasks" in all_inputs
+	var op = check_contents()
+	#print(op)
+	return "tasks" in op and "mv tasks new_tasks" in all_inputs
 
 	
 func task3_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "cp new_tasks backup_tasks" in all_inputs
+	var op = check_contents()
+	return "new_tasks" in op and "cp new_tasks backup_tasks" in all_inputs
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "rm backup_tasks" in all_inputs
+	var op =check_contents()
+	return "backup_tasks" in op and "rm backup_tasks" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "rmdir dont_open" in all_inputs
+	var op =check_contents()
+	return "dont_open" in op and "rmdir dont_open" in all_inputs
 	
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
