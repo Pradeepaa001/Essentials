@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnw0o5c0kmgk6"]
+
+[ext_resource type="Script" path="res://Scripts/LEVEL4.gd" id="1_m3ijl"]
+[ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_6owxv"]
+[ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_76w6y"]
+[ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_u3r1p"]
+[ext_resource type="PackedScene" uid="uid://dp7rcdcl1dulj" path="res://Scenes/NPCDialogue_new.tscn" id="5_fvlnj"]
+
+[node name="LEVEL4" type="Node2D"]
+script = ExtResource("1_m3ijl")
+
+[node name="Toolbar" parent="." instance=ExtResource("2_6owxv")]
+
+[node name="Terminal" parent="." instance=ExtResource("3_76w6y")]
+
+[node name="Task_manager" parent="." instance=ExtResource("4_u3r1p")]
+position = Vector2(422, 140)
+
+[node name="CHECK" type="Button" parent="."]
+offset_left = 830.0
+offset_top = 572.0
+offset_right = 1112.0
+offset_bottom = 633.0
+text = "CHECK STATUS"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 826.0
+offset_top = 63.0
+offset_right = 1135.0
+offset_bottom = 314.0
+
+[node name="Control" parent="." instance=ExtResource("5_fvlnj")]
+
+[connection signal="pressed" from="CHECK" to="." method="_on_check_pressed"]
+[connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]

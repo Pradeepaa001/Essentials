@@ -1,31 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjrhpn8w0cmqc"]
+[gd_scene load_steps=6 format=3 uid="uid://bfudt10fm21ht"]
 
 [ext_resource type="Script" path="res://Scripts/level5.gd" id="1_j5051"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="2_2pj54"]
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="3_kdkha"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_kemot"]
+[ext_resource type="PackedScene" uid="uid://dk61bpb3plx76" path="res://Scenes/NPCDialogue.tscn" id="5_mmxia"]
 
-[node name="level5" type="Node2D"]
+[node name="level_5" type="Node2D"]
+position = Vector2(299, 213)
 script = ExtResource("1_j5051")
 
-[node name="Terminal" parent="." instance=ExtResource("2_2pj54")]
-position = Vector2(122, 170)
-
 [node name="Toolbar" parent="." instance=ExtResource("3_kdkha")]
-position = Vector2(0, -5)
+position = Vector2(-303, -218)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 835.0
-offset_top = 90.0
-offset_right = 1113.0
-offset_bottom = 310.0
-
-[node name="checkButton" type="Button" parent="."]
-offset_left = 1735.0
-offset_top = 665.0
-offset_right = 1857.0
-offset_bottom = 696.0
-text = "CHECK STATUS"
+[node name="Terminal" parent="." instance=ExtResource("2_2pj54")]
+position = Vector2(-175, -47)
 
 [node name="Task_manager" parent="." instance=ExtResource("4_kemot")]
-position = Vector2(418, 150)
+position = Vector2(117, -72)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 527.0
+offset_top = -122.0
+offset_right = 805.0
+offset_bottom = 98.0
+
+[node name="check" type="Button" parent="."]
+offset_left = 603.0
+offset_top = 357.0
+offset_right = 725.0
+offset_bottom = 388.0
+text = "CHECK STATUS"
+
+[node name="next" type="Button" parent="."]
+visible = false
+offset_left = 618.0
+offset_top = 389.0
+offset_right = 716.0
+offset_bottom = 420.0
+text = "NEXT LEVEL"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Task's Completed"
+position = Vector2i(0, 36)
+size = Vector2i(398, 236)
+ok_button_text = "Go to next level"
+dialog_text = "                            
+                         CONGRATULATIONS!!
+           YOU'VE COMPLETED TODAY'S WORK
+
+      Tip -Remember to delete files and folders
+ created in this session to keep your system clean
+
+"
+cancel_button_text = "Stay in the level"
+
+[node name="Control" parent="." instance=ExtResource("5_mmxia")]
+visible = false
+
+[connection signal="pressed" from="check" to="." method="_on_check_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

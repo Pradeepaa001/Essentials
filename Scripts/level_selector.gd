@@ -6,10 +6,8 @@ var SaveSystem = preload("res://SaveSystem.gd")
 func _ready():
 	update_level_buttons()
 
-func _on_button_pressed():
-	
+func _on_button_1_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_1.tscn")
-
 
 func _on_button_2_pressed():
 	if access_level(2):
@@ -27,22 +25,17 @@ func _on_button_3_pressed():
 
 func _on_button_4_pressed():
 	if access_level(4):
-		get_tree().change_scene_to_file("res://LEVEL_4.tscn")
+		get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 	else:
 		popup_msg.popup_centered()
 	print("done")
-	#get_tree().change_scene_to_file("res://LEVEL_4.tscn")
 
 func _on_button_5_pressed():
-
-	get_tree().change_scene_to_file("res://Scenes/level5.tscn")
-
 	if access_level(5):
-		get_tree().change_scene_to_file("res://terminal.gd")
+		get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
 	else:
 		popup_msg.popup_centered()
 	print("done")
-
 
 func _on_button_6_pressed():
 	if access_level(6):
@@ -51,14 +44,12 @@ func _on_button_6_pressed():
 		popup_msg.popup_centered()
 	print("done")
 
-
 func _on_button_7_pressed():
 	if access_level(7):
 		get_tree().change_scene_to_file("res://terminal.gd")
 	else:
 		popup_msg.popup_centered()
 	print("done")
-
 
 func _on_button_8_pressed():
 	if access_level(8):
@@ -80,8 +71,6 @@ func access_level(level: int) -> bool:
 
 
 #TO MAKE LEVEL BUTTON TURN GREEN IF COMPLETED
-
-	
 func update_level_buttons():
 	var Save = SaveSystem.new()
 	var progress = Save.load_progress()
@@ -93,3 +82,6 @@ func update_level_buttons():
 
 func _on_okay_pressed():
 	popup_msg.hide()
+
+
+

@@ -1,6 +1,6 @@
 extends Node2D
 
-var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes it's books by genre' > genre && mkdir dont_open && touch risk"
 
 var level_description = """\t\tMaster of Shell Commands
 Learn to use various shell commands like cat, mv, cp, rm, and rmdir.
@@ -44,7 +44,15 @@ Usage: man <COMMAND>
 Press 'q' to exit the manual!
 """
 
-var dialogue_lines = ["Welcome to level 3!", "Learn to use more shell commands.", "Good luck!"]
+var dialogue_lines = ["Howdy, partner! Welcome to Level 3.", 
+"Today's your first day on the organization department, and things are a bit of a mess. Files are scattered everywhere like tumbleweeds in a dust storm!", 
+"But fear not, rookie! Let us learn how to work around the mess with some essential commands.", 
+"First up, we got the 'cat' command. Think of it like a brand new pair of spectacles. You can use cat to peek inside files and see what they hold",
+"Now, sometimes files are in the wrong directory. That's where mv comes in. Think of it like your lasso. You can use mv to move files from one directory to another, putting them in their right place.",
+"But what if you need a copy of a file in two locations at once?  No problem! We got cp for that. Just like a xerox, cp makes a duplicate of a file, leaving the original one untouched",
+"Now, some files might be… well… beyond saving. Like something that is rotten. That's where rm comes in. Think of it as a shovel. You can use rm to get rid of unwanted files, but be careful! Once they're gone, they're gone for good.",
+"Finally, sometimes we gotta clean up a whole empty directory. That's where rmdir comes in handy. You can use rmdir to remove empty directories, keeping things nice and tidy.",
+"Alright, partner! Time to put on your skills to test. Use the commands wisely to organize your directory!"]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
@@ -127,7 +135,7 @@ func level_completed():
 	if is_level_completed():
 		var congrats = $ConfirmationDialog
 		congrats.popup_centered()
-		var next = $next
+		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()
 		Save.save_progress(current_level)

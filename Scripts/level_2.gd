@@ -1,6 +1,5 @@
 extends Node2D
-
-var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semister is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes it's books by genre' > genre && mkdir dont_open && touch risk"
 
 var level_description = """\t\tThe Master of files
 Learn to list the contents of a directory with ls commands.
@@ -47,7 +46,12 @@ Press 'q' to exit the manual!
 use rm - rf to delete the files after task completion
 to keep your directory clean"
 
-var dialogue_lines = ["Welcome to the level2!", "Use arrow keys to move.", "Good luck!"]
+var dialogue_lines = ["Welcome back, recruit! You have successfully reached Level 2.",
+"Your first tool for this level is the ls command. Imagine it like a pair of binoculars. Use ls to take a peek at what's inside your current directory – all the files and folders within it.",
+"But sometimes, even binoculars need a little adjustment. That's where options come in. Remember, there's always a ls --help command available. Think of it like the instruction manual for your binoculars. You can use ls --help to learn about all the different ways you can use ls to see things differently.",
+"However, you might miss some hidden files lurking in the shadows. That's where ls -a comes in. Think of it like switching your binoculars to night vision mode. You can use ls -a to reveal even hidden files, making sure you have a complete picture of your camp.",
+"But wait, there's more! The Grid can be a vast place. What if you need to know your exact location? That's where pwd comes in handy. Think of it like a built-in GPS. You can use pwd to display your current directory path, pinpointing your exact location within The Grid.",
+"Alright, recruit! Grab your binoculars and get exploring! Use these commands to survey your camp, identify all the files and folders around you."]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
