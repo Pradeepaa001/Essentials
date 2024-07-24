@@ -55,11 +55,13 @@ Use `rm -rf` to delete files after task completion to keep your directory clean.
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue_new.tscn")
 var npc_dialogue
-var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The Grid, let us start from scratch.  Think of it like setting up your own base camp in this vast GRID.", 
-"First things first, we must establish a base camp. That's where the mkdir command comes in. Imagine it like building your own digital cabin. You can use mkdir to create new directories (folders) to organize your stuff.",
-"Now, with your base camp set up, we need to navigate around. That's where cd comes in. Think of it like a compass. You can use cd to change directories, moving from one location to another within The Grid.",
-"But a base camp needs some basic resources, right? That's where touch comes in handy. You can use touch to create new empty files, like a digital notepad or a place to store your findings.",
-"Alright, recruit! Use these commands to build your base camp and start getting familiar with the surroundings. Remember, a well-organized camp is a happy camp!"
+var dialogue_lines = [ 
+"Welcome back, recruit! Let us begin with Level 4. The Grid holds mountains of data, but sometimes you need that specific needle in a haystack. Today, we'll learn powerful tools to navigate this information overload.", 
+"Feeling lost in a sea of text? We have grep, your digital metal detector! Use grep to search through files for lines containing a specific pattern. grep has some more options, check them out in the help option.",
+"Alright, found your data! Now, to organize it, let’s use sort. sort arranges lines of text in a specific order, alphabetical or numerical. sort has more options, check them out in the help option.",
+"Now, let's get a headcount! Use wc to get a quick count of lines, words, and characters within a file. wc has some more options which can be used for more precise result, check them out in the help option.",
+"Finally, to extract specific information! Use cut like a digital pair of scissors for your data! cut allows you to extract specific sections from a line of text. cut has more options, choose the right option for clean and accurate results. Find them in the help option.",
+"Alright, recruit! Use these commands to navigate The Grid's data, organize it effectively, and extract the specific information you need!"
  ]
 
 

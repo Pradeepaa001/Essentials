@@ -45,7 +45,7 @@ Press 'q' to exit the manual!
 """
 
 var dialogue_lines = ["Howdy, partner! Welcome to Level 3.", 
-"Today's your first day on the digital ranch, and things are a bit of a mess. Files are scattered everywhere like tumbleweeds in a dust storm!", 
+"Today's your first day on the organization department, and things are a bit of a mess. Files are scattered everywhere like tumbleweeds in a dust storm!", 
 "But fear not, rookie! Let us learn how to work around the mess with some essential commands.", 
 "First up, we got the 'cat' command. Think of it like a brand new pair of spectacles. You can use cat to peek inside files and see what they hold",
 "Now, sometimes files are in the wrong directory. That's where mv comes in. Think of it like your lasso. You can use mv to move files from one directory to another, putting them in their right place.",

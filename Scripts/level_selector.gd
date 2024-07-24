@@ -24,7 +24,6 @@ func _on_button_3_pressed():
 	print("done")
 
 func _on_button_4_pressed():
-	#get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 	if access_level(4):
 		get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 	else:
@@ -32,7 +31,6 @@ func _on_button_4_pressed():
 	print("done")
 
 func _on_button_5_pressed():
-	#get_tree().change_scene_to_file("res://Scenes/level5.tscn")
 	if access_level(5):
 		get_tree().change_scene_to_file("res://terminal.gd")
 	else:
