@@ -45,7 +45,15 @@ Usage: man <COMMAND>
 Press 'q' to exit the manual!
 """
 
-var dialogue_lines = ["Welcome to level 5!", "Learn to use more advanced shell commands.", "Good luck!"]
+var dialogue_lines = [
+"Great to see you, intern! Welcome to Level 5! Today, let us learn how to analyze and understand the vast amount of information stored within The Grid.",
+"First up, the tail command. Think of it like reading the last page of a old book. You can use tail to peek at the final lines of a file, to check what is happening at the end.",
+"However, sometimes, the beginning holds the key. That's where 'head' comes in. Imagine it like flipping to the first page of a old book. You can use head to view the initial lines of a file, uncovering the first bits of information.",
+"Now, some files can be really big, like a never-ending scroll. That's where 'more' comes in handy. Think of it like a handy scroll reader. You can use more to navigate through a long file one screen at a time.",
+"But sometimes, information overload can be a real problem. That's where du steps in. Imagine it like a digital weigh machine. You can use du to see how much disk space each file or directory is using.",
+"And for an extra bit of clarity, we have du -sh. Think of it like the same machine with a conversion chart. You can use du -sh to display disk usage in a human-readable format, like megabytes or gigabytes.",
+"Last but not least, we have the echo command. Think of it like a digital megaphone. You can use echo to display messages on the screen, create custom banners, or even send text to other programs.",
+"Alright, partner! Use these commands to explore files, manage information overload, and create your own messages within The Grid!"]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
