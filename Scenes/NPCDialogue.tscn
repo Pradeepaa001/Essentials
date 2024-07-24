@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk61bpb3plx76"]
+[gd_scene load_steps=6 format=3 uid="uid://dk61bpb3plx76"]
 
 [ext_resource type="Script" path="res://Scenes/NPCDialogue.gd" id="1_d444j"]
 [ext_resource type="Texture2D" uid="uid://c8a73i32guijo" path="res://images/shell_single.png" id="2_hdq4e"]
@@ -11,6 +11,22 @@ font_size = 28
 outline_size = 3
 outline_color = Color(0.87, 0.78068, 0.2001, 1)
 shadow_size = 2
+
+[sub_resource type="FontFile" id="FontFile_yumbc"]
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/28/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -38,7 +54,7 @@ layout_mode = 0
 offset_left = -114.0
 offset_top = 335.0
 offset_right = 833.0
-offset_bottom = 416.0
+offset_bottom = 394.0
 theme_override_colors/font_selected_color = Color(0.980257, 0.892828, 0.898834, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -48,4 +64,15 @@ offset_top = 299.0
 offset_right = 18.0
 offset_bottom = 338.0
 text = "Shelldon: "
+label_settings = SubResource("LabelSettings_wdhg8")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 386.0
+offset_right = 864.0
+offset_bottom = 425.0
+theme_override_fonts/font = SubResource("FontFile_yumbc")
+theme_override_font_sizes/font_size = 1
+text = "Press space to continue..."
 label_settings = SubResource("LabelSettings_wdhg8")

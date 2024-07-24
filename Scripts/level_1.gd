@@ -39,6 +39,9 @@ to keep your directory clean"
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
+var dialogue_lines = ["Welcome to the first level!", 
+"Let's start by learning how to move around and get comfortable with the command line", 
+"Good luck!"]
 
 var task_count = 3
 var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
@@ -52,7 +55,6 @@ func _ready():
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	
-	var dialogue_lines = ["Welcome to the level!", "Use arrow keys to move.", "Good luck!"]
 	npc_dialogue.start_dialogue(dialogue_lines)
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual

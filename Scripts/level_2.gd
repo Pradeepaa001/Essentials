@@ -47,7 +47,10 @@ Press 'q' to exit the manual!
 use rm - rf to delete the files after task completion
 to keep your directory clean"
 
-var dialogue_lines = ["Welcome to the level2!", "Use arrow keys to move.", "Good luck!"]
+var dialogue_lines = ["Alright recruit, level 2!", 
+"This level is about viewing the contents of a directory",
+"By the end of this level, you will understand how to know the contents of your directories and also the path you are working in", 
+"Good luck!"]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
