@@ -55,10 +55,11 @@ var Save = SaveSystem.new()
 
 func _ready():
 	user_reset()
+	
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	
 	npc_dialogue.start_dialogue(dialogue_lines)
+	
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	

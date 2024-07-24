@@ -24,9 +24,9 @@ func _on_button_3_pressed():
 	print("done")
 
 func _on_button_4_pressed():
-	#get_tree().change_scene_to_file("res://LEVEL_4.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 	if access_level(4):
-		get_tree().change_scene_to_file("res://LEVEL_4.tscn")
+		get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 	else:
 		popup_msg.popup_centered()
 	print("done")

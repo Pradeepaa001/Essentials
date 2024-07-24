@@ -17,6 +17,7 @@ Options:
 - `-n`: Show line numbers.
 - `-c`: Count matching lines.
 
+
 **sort - sort lines of text files**
 Sort lines in a text file.
 					   sort <FILE_NAME>
@@ -50,6 +51,17 @@ Press 'q' to exit the manual!
 
 Use `rm -rf` to delete files after task completion to keep your directory clean.
 "
+
+
+var npc_dialogue_scene = preload("res://Scenes/NPCDialogue_new.tscn")
+var npc_dialogue
+var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The Grid, let us start from scratch.  Think of it like setting up your own base camp in this vast GRID.", 
+"First things first, we must establish a base camp. That's where the mkdir command comes in. Imagine it like building your own digital cabin. You can use mkdir to create new directories (folders) to organize your stuff.",
+"Now, with your base camp set up, we need to navigate around. That's where cd comes in. Think of it like a compass. You can use cd to change directories, moving from one location to another within The Grid.",
+"But a base camp needs some basic resources, right? That's where touch comes in handy. You can use touch to create new empty files, like a digital notepad or a place to store your findings.",
+"Alright, recruit! Use these commands to build your base camp and start getting familiar with the surroundings. Remember, a well-organized camp is a happy camp!"
+ ]
+
 
 var task_count = 4
 var instructions = ["Search for a pattern in the file created", "Sort the lines of text in the file for good organization", "Count the lines, words, characters in your file", "Remove specific columns from your file"]
@@ -138,12 +150,18 @@ func get_current_level() -> int:
 
 func _ready():
 	user_reset()
+	
+	npc_dialogue = npc_dialogue_scene.instantiate()
+	add_child(npc_dialogue)
+	npc_dialogue.start_dialogue(dialogue_lines)
+	
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
 	output.text += level_intro
 	add_tasks()
 	add_content_to_file()
+
 func user_reset():
 	var output = []
 	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)

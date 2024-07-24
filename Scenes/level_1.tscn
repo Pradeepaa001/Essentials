@@ -56,6 +56,8 @@ dialog_text = "
 cancel_button_text = "Stay in the level"
 
 [node name="Control" parent="." instance=ExtResource("5_teuxl")]
+offset_left = -1.0
+offset_right = -1.0
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="check" to="." method="_on_check_pressed"]
