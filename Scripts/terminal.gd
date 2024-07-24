@@ -19,14 +19,14 @@ func process_command(cmd: String) -> String:
 	"pkill", "killall", "crontab", "batch", "ifconfig", "ip", "iptables", 
 	"ip6tables", "route", "traceroute", "tracert", "netstat", "ping", "nmap", "telnet", 
 	"ssh", "nc", "arp", "useradd", "userdel", "usermod", "groupadd", "groupdel", 
-	"groupmod", "passwd", "su", "sudo", "sh", "csh", "zsh", "ksh", "env", 
+	"groupmod", "passwd", "su", "sudo", "csh", "zsh", "ksh", "env", 
 	"set", "unset", "export", "source", "alias", "unalias", "exec", "make", "gcc", 
 	"g++", "perl", "python", "ruby", "java", "javac", "pip", "npm", "apt-get", "yum", 
 	"dnf", "brew", "git", "svn", "hg",
-	"vi", "vim", "nano", "emacs", "ed", "df", "du", "free", "ps", "top", "htop", "jobs", 
+	"vi", "vim", "nano", "emacs", "ed", "df", "free", "ps", "top", "htop", "jobs", 
 	"bg", "fg", "locate", "updatedb", "whereis", "which", "whatis", "id", 
 	"last", "users", "uptime", "uname", "dmesg", "stat", "bc", "factor", "units", "expr", 
-	"yes", "watch", "more", "less", "comm", "diff", "patch",
+	"yes", "watch", "less", "comm", "diff", "patch",
 	"xz", "unxz", "lzma", "unlzma", "zcat", "zless", "zdiff", "znew", "zcmp", "bc", 
 	"dc", "test", "[", "read", "true", "false", "wait", "time", "umask", "ulimit", 
 	"alias", "unalias", "fg", "bg", "jobs", "exec", "exit", "logout", "return", 
@@ -38,7 +38,7 @@ func process_command(cmd: String) -> String:
 
 	for idx in range(grey_list_commands.size()):
 		for command in black_list_commands:
-			#print(command)
+			print(command)
 			if command in cmd:
 				return response + "Command not supported" + "\n"
 		if grey_list_commands[idx] in cmd:

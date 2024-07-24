@@ -1,6 +1,6 @@
 extends Node2D
 
-var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes it's books by genre' > genre && mkdir dont_open && touch risk"
 
 var level_description = """\t\tMaster of Shell Commands
 Learn to use various shell commands like cat, mv, cp, rm, and rmdir.
@@ -135,7 +135,7 @@ func level_completed():
 	if is_level_completed():
 		var congrats = $ConfirmationDialog
 		congrats.popup_centered()
-		var next = $next
+		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()
 		Save.save_progress(current_level)
