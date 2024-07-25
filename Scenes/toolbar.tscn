@@ -43,7 +43,7 @@ position = Vector2i(0, 36)
 size = Vector2i(255, 100)
 ok_button_text = "EXIT GAME"
 dialog_text = "Do you want to exit the game ?
-Tip: Remember to delete files and folders created in this session to save space!"
+Don't let the learning fire die!"
 cancel_button_text = "CANCEL"
 
 [node name="HelpButton" type="Button" parent="."]
@@ -54,7 +54,7 @@ offset_bottom = 55.0
 text = "Help"
 
 [node name="WindowDialog" type="Window" parent="."]
-title = "Level Manual"
+title = "Manual"
 position = Vector2i(400, 36)
 size = Vector2i(400, 500)
 theme = SubResource("Theme_bgney")
@@ -72,6 +72,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Hello Agent 101!
+Welcome to the Grid system! This  is level selection page. You can select levels by clicking on the respective  button.
+
+Note you can only play levels in order, that is, you need to complete prior tasks to unlock new tasks
+
+Green button: Level completed
+
+
+Note: The files and folders created are automatically deleted once you exit a level. So the tasks may show incomplete eventhough the level has been completed. In that case feel free to move on to next level or give the same level a try to imrove your efficiency!"
 
 [connection signal="pressed" from="HBoxContainer/Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

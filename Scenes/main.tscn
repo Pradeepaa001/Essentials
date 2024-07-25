@@ -58,5 +58,16 @@ text = "Essentials
 justification_flags = 131
 metadata/_edit_use_anchors_ = true
 
+[node name="Panel" type="Panel" parent="."]
+offset_top = 615.0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 50.0
+text = "This game is inspired from MIT's Missing Semester coursework. It includes gamified version of the lessons and more. Licensed under CC BY-NC-SA."
+
 [connection signal="pressed" from="QUIT" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="LEVELS" to="." method="_on_levels_pressed"]
