@@ -1,6 +1,7 @@
 extends Node2D
 
-var level_setup_commands = "echo 'PLS ADD MORE CONTENT' > linux1 && mkdir data_folder"
+var level_setup_commands = "printf 'ADD SUBTRACT MULTIPLY DIVIDE\nThe basic arithmetic operations are essential for everyday calculations. Addition combines two or more numbers to get a sum.\nSubtraction finds the difference between two numbers by taking one away from the other.\nMultiplication involves repeated addition of a number as many times as specified by another number.\nDivision splits a number into equal parts, determining how many times one number is contained within another.\nThese operations form the foundation for more complex mathematical concepts.\nThey are used in various fields, from simple budgeting to advanced engineering.\nUnderstanding these operations is crucial for solving real-world problems efficiently.
+ ' > maths1 && mkdir data_folder"
 var all_inputs = []
 var level_intro = "STORY
 Refer to the task manager to find your tasks.
@@ -43,6 +44,7 @@ Remove sections from each line of files.
 Options:
 - `-f`: Select fields (columns).
 - `-d`: Specify a delimiter (default is tab).
+Ex. cut -f 5 -d ',' file.txt
 
 **man - manual**
 An interface to the system reference manuals.
@@ -68,7 +70,7 @@ var dialogue_lines = [
 
 
 var task_count = 4
-var instructions = ["Search for a pattern in the file 'linux1'", "Sort the lines of text in the file 'linux1'", "Count the lines, words, characters in file 'linux1'", "Remove specific columns from your file 'linux1'"]
+var instructions = ["Search for a 'ADD' in the file 'maths1'", "Sort the lines of text in the file 'maths1'", "Count the lines, words, characters in file 'maths1'", "Extract 2nd field from your file 'maths1' with delimiter as space"]
 @onready var termi = $Terminal
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
@@ -97,71 +99,29 @@ func _ready():
 	output.text += level_intro
 	add_tasks()
 
-#func refresh_file_system():
-	#var fs = DirAccess.open("res://user/")
-	#if fs:
-		#fs.list_dir_begin()
-		#while true:
-			#var file_name = fs.get_next()
-			#if file_name == "":
-				#break
-		#fs.list_dir_end()
-		#print("File system refreshed.")
-#func add_content_to_file():
-	#var file = FileAccess.open("res://user/linux1", FileAccess.READ_WRITE)
-	#var content = [
-#"Open Source: Freely accessible and modifiable code.",
-#"Linux Kernel: Core component, created by Linus Torvalds in 1991.",
-#"Distributions: Variants like Ubuntu, Fedora, Debian.",
-#"Command Line: Powerful CLI for task management.",
-#"Security: Less prone to viruses and malware.",
-#"Usage: Found in servers, supercomputers, Android, and embedded systems.",
-#"Community: Developed by a global community of contributors.",
-#"File Systems: Supports ext4, XFS, Btrfs, etc.",
-#"Package Management: Uses APT, RPM, Pacman for software.",
-#"Licensing: Under GNU GPL, requiring open-source derivatives.",
-	#]
-	#if file:
-		#print("yes")
-	#for line in content:
-		#file.store_string(line + "\n")
-	##file.flush()
-	#file.close()
-	##refresh_file_system()
-	#var file1 = FileAccess.open("res://user/linux1", FileAccess.READ)
-	#if file1:
-		#var cont = file1.get_as_text()
-		#print(cont)
-	#file1.close()
-	#
 @onready var commandline = $Terminal	
 func task1_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "grep " in commands and "'pattern' " in commands and "linux1" in commands:
+		if "grep " in commands and "'ADD' " in commands and "maths1" in commands:
 			return true
 	return false
 
 func task2_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "sort " in commands and "linux1" in commands:
+		if "sort " in commands and "maths1" in commands:
 			return true
 	return false
 
 func task3_status() -> bool:
 	all_inputs = commandline.get_input_list()
-	for commands in all_inputs:
-		if "wc " in commands and "linux1" in commands:
-			return true
-	return false
+	return "wc maths1" in all_inputs
+
 
 func task4_status() -> bool:
 	all_inputs = commandline.get_input_list()
-	for commands in all_inputs:
-		if "cut " in commands and "-f " in commands and "linux1" in commands:
-			return true
-	return false
+	return "cut -f 2 -d ' ' maths1" in all_inputs
 
 func update_status():
 	var task_count = 4
@@ -188,7 +148,7 @@ func is_level_completed() -> bool:
 func level_completed():
 	if is_level_completed():
 		var congrats = $ConfirmationDialog
-#		congrats.popup_centered()
+		congrats.popup_centered()
 		var next = $next
 		next.visible = true
 		var current_level = get_current_level()
@@ -213,8 +173,11 @@ func user_reset():
 
 
 func _on_confirmation_dialog_confirmed():
-	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
+	get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
 
 
 func _on_next_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
+
+
+

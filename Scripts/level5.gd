@@ -109,7 +109,7 @@ func task3_status() -> bool:
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "du -sh data" in all_inputs
+	return "du -sh test_dir" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()

@@ -15,7 +15,6 @@ func process_command(cmd: String) -> String:
 	
 	var grey_list_commands = ["cd", "pwd", "clear", "man level", " .."]
 	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel, self.process_back]
-	
 
 	var black_list_commands = [
 	"ln", "dd", "mkfs", "mount", 
