@@ -16,12 +16,13 @@ script = ExtResource("1_m3ijl")
 [node name="Task_manager" parent="." instance=ExtResource("4_u3r1p")]
 position = Vector2(422, 140)
 
-[node name="CHECK" type="Button" parent="."]
-offset_left = 830.0
-offset_top = 572.0
-offset_right = 1112.0
-offset_bottom = 633.0
-text = "CHECK STATUS"
+[node name="next" type="Button" parent="."]
+visible = false
+offset_left = 919.0
+offset_top = 581.0
+offset_right = 1017.0
+offset_bottom = 612.0
+text = "NEXT LEVEL"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 826.0
@@ -31,5 +32,4 @@ offset_bottom = 314.0
 
 [node name="Control" parent="." instance=ExtResource("5_fvlnj")]
 
-[connection signal="pressed" from="CHECK" to="." method="_on_check_pressed"]
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]

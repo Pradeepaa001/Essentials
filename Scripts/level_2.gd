@@ -159,13 +159,3 @@ func _on_next_pressed():
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
 
-func user_reset():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
-	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])

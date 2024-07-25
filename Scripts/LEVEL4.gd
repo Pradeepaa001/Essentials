@@ -1,6 +1,6 @@
 extends Node2D
 
-var level_setup_commands = "touch linux1 && mkdir data_folder"
+var level_setup_commands = "echo 'PLS ADD MORE CONTENT' > linux1 && mkdir data_folder"
 var all_inputs = []
 var level_intro = "STORY
 Refer to the task manager to find your tasks.
@@ -86,6 +86,7 @@ func add_tasks():
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func _ready():
+	termi.connect("check",_on_check_pressed)
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	npc_dialogue.start_dialogue(dialogue_lines)
@@ -106,59 +107,59 @@ func _ready():
 				#break
 		#fs.list_dir_end()
 		#print("File system refreshed.")
-func add_content_to_file():
-	var file = FileAccess.open("res://user/linux1", FileAccess.READ_WRITE)
-	var content = [
-"Open Source: Freely accessible and modifiable code.",
-"Linux Kernel: Core component, created by Linus Torvalds in 1991.",
-"Distributions: Variants like Ubuntu, Fedora, Debian.",
-"Command Line: Powerful CLI for task management.",
-"Security: Less prone to viruses and malware.",
-"Usage: Found in servers, supercomputers, Android, and embedded systems.",
-"Community: Developed by a global community of contributors.",
-"File Systems: Supports ext4, XFS, Btrfs, etc.",
-"Package Management: Uses APT, RPM, Pacman for software.",
-"Licensing: Under GNU GPL, requiring open-source derivatives.",
-	]
-	if file:
-		print("yes")
-	for line in content:
-		file.store_string(line + "\n")
-	#file.flush()
-	file.close()
-	#refresh_file_system()
-	var file1 = FileAccess.open("res://user/linux1", FileAccess.READ)
-	if file1:
-		var cont = file1.get_as_text()
-		print(cont)
-	file1.close()
-	
+#func add_content_to_file():
+	#var file = FileAccess.open("res://user/linux1", FileAccess.READ_WRITE)
+	#var content = [
+#"Open Source: Freely accessible and modifiable code.",
+#"Linux Kernel: Core component, created by Linus Torvalds in 1991.",
+#"Distributions: Variants like Ubuntu, Fedora, Debian.",
+#"Command Line: Powerful CLI for task management.",
+#"Security: Less prone to viruses and malware.",
+#"Usage: Found in servers, supercomputers, Android, and embedded systems.",
+#"Community: Developed by a global community of contributors.",
+#"File Systems: Supports ext4, XFS, Btrfs, etc.",
+#"Package Management: Uses APT, RPM, Pacman for software.",
+#"Licensing: Under GNU GPL, requiring open-source derivatives.",
+	#]
+	#if file:
+		#print("yes")
+	#for line in content:
+		#file.store_string(line + "\n")
+	##file.flush()
+	#file.close()
+	##refresh_file_system()
+	#var file1 = FileAccess.open("res://user/linux1", FileAccess.READ)
+	#if file1:
+		#var cont = file1.get_as_text()
+		#print(cont)
+	#file1.close()
+	#
 @onready var commandline = $Terminal	
 func task1_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "grep " in commands and "'pattern' " in commands and "linux1.txt" in commands:
+		if "grep " in commands and "'pattern' " in commands and "linux1" in commands:
 			return true
 	return false
 
 func task2_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "sort " in commands and "linux1.txt" in commands:
+		if "sort " in commands and "linux1" in commands:
 			return true
 	return false
 
 func task3_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "wc " in commands and "linux1.txt" in commands:
+		if "wc " in commands and "linux1" in commands:
 			return true
 	return false
 
 func task4_status() -> bool:
 	all_inputs = commandline.get_input_list()
 	for commands in all_inputs:
-		if "cut " in commands and "-f " in commands and "linux1.txt" in commands:
+		if "cut " in commands and "-f " in commands and "linux1" in commands:
 			return true
 	return false
 
@@ -167,11 +168,13 @@ func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status]
 	
 	for idx in range(task_count):
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-		print("done")
+		if idx + 1 not in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
 		
 func _on_check_pressed():
 	update_status()
@@ -187,7 +190,7 @@ func level_completed():
 		var congrats = $ConfirmationDialog
 #		congrats.popup_centered()
 		var next = $next
-#		next.visible = true
+		next.visible = true
 		var current_level = get_current_level()
 		Save.save_progress(current_level)
 

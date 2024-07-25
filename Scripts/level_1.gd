@@ -83,11 +83,9 @@ func add_tasks():
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
-	var dir = DirAccess.open("res://user")
-	if dir.dir_exists("Day1"):
-		return true
-	else:
-		return false
+	var output = []
+	OS.execute("wsl.exe", ["bash", "-c", "ls"], output, true)
+	return "Day1" in output[0]
 
 func task2_status():
 	var commandline = $Terminal
@@ -143,14 +141,3 @@ func _on_next_pressed():
 
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
-
-func user_reset():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
-	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])

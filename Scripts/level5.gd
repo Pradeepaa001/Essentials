@@ -63,12 +63,13 @@ var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'ec
 var level_congrats_message = "Well done, Explorer! You've completed level 5"
 @onready var termi = $Terminal
 var all_inputs = []
-
+var completed_tasks = [] 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	termi.connect("check",_on_check_pressed)
 	termi.execute(level_setup_commands)
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
@@ -117,11 +118,14 @@ func task5_status() -> bool:
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-
+		if idx + 1 in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
+				
 func _on_check_pressed():
 	update_status()
 	level_completed()
