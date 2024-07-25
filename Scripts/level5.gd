@@ -1,6 +1,7 @@
 extends Node2D
 
-var level_setup_commands = "mkdir data && cd data && echo 'This is file1' > file1 && echo 'This is file2' > file2 && echo 'This is file3' > file3 && mkdir test_dir"
+
+var level_setup_commands = "mkdir data && cd data && echo 'Internships in cybersecurity are highly valuable.\nThey provide hands-on experience.\nInterns learn about network security.\nThey understand threat detection.\nThey work with security tools.\nThey monitor for vulnerabilities.\nInterns participate in incident response.\nThey gain knowledge of compliance.\nThey help develop security policies.\nThey understand risk management.\nThey collaborate with IT teams.\nThey learn about encryption methods.\nInterns often assist in audits.\nThey attend cybersecurity training.\nAn internship builds a solid foundation.\n'> file1 && echo 'This is file2' > file2 && mkdir intern_dir"
 
 var level_description = """\t\tMaster of File Viewing and Disk Usage
 Learn to use various shell commands like tail, head, more, du, and echo.
@@ -59,7 +60,7 @@ var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'echo "Hello World!"']
+var instructions = ["tail file1", "head file1", "more file1", "du -sh intern_dir", 'echo "Hello World!"']
 var level_congrats_message = "Well done, Explorer! You've completed level 5"
 @onready var termi = $Terminal
 var all_inputs = []
@@ -101,19 +102,19 @@ func task1_status() -> bool:
 
 func task2_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "head file2" in all_inputs
+	return "head file1" in all_inputs
 	
 func task3_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "more file3" in all_inputs
+	return "more file1" in all_inputs
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "du -sh test_dir" in all_inputs
+	return "du -sh intern_dir" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return 'echo "Hello World!"' in all_inputs
+	return 'echo Hello World!' in all_inputs or 'echo "Hello World!"' in all_inputs or "echo 'Hello World!'" in all_inputs
 	
 func update_status():
 	print("done")
