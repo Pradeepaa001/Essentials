@@ -85,7 +85,8 @@ func add_tasks():
 func task1_status() -> bool:
 	var output = []
 	OS.execute("wsl.exe", ["bash", "-c", "ls"], output, true)
-	return "Day1" in output[0]
+	print(output)
+	return "Day1" in output
 
 func task2_status():
 	var commandline = $Terminal

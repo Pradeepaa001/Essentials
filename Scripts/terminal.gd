@@ -7,7 +7,8 @@ signal man_level
 signal check
 
 func _ready():
-	OS.execute("wsl.exe", ["bash", "-c", "rmdir user"])
+	
+	OS.execute("wsl.exe", ["bash", "-c", "rm -rf user"])
 	OS.execute("wsl.exe", ["bash", "-c", "mkdir user"])
 
 func process_command(cmd: String) -> String:
