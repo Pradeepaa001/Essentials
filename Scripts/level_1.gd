@@ -49,11 +49,14 @@ var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The G
 var task_count = 3
 var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
 
+var completed_tasks = []
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	var terminal = $Terminal
+	terminal.connect("check",self._on_check_pressed)
 	user_reset()
 	
 	npc_dialogue = npc_dialogue_scene.instantiate()
@@ -104,13 +107,15 @@ func task3_status() -> bool:
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status]
 	for idx in task_count:
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-		print("done")
+		print(completed_tasks)
+		if idx + 1 not in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
 		
-
 func _on_check_pressed():
 	update_status()
 	level_completed()

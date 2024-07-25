@@ -55,6 +55,7 @@ var dialogue_lines = ["Howdy, partner! Welcome to Level 3.",
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
+var completed_tasks = [] 
 var task_count = 5
 var instructions = ["cat tasks", "mv tasks new_tasks", "cp new_tasks backup_tasks", "rm backup_tasks", "rmdir dont_open"]
 var level_congrats_message = "Well done, Explorer! You've completed level 3"
@@ -66,6 +67,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	termi.connect("check",_on_check_pressed)
 	user_reset()
 	
 	termi.execute(level_setup_commands)
@@ -106,40 +108,44 @@ func task1_status() -> bool:
 
 func task2_status() -> bool:
 	all_inputs = termi.get_input_list()
-	var op = check_contents()
-	#print(op)
-	return "tasks" in op and "mv tasks new_tasks" in all_inputs
-
+	var op = termi.execute("ls")
+	return ("new_tasks" in op) and ("\ntasks\n" not in op) and ("mv tasks new_tasks" in all_inputs)
+	
 	
 func task3_status() -> bool:
 	all_inputs = termi.get_input_list()
 	var op = check_contents()
-	return "new_tasks" in op and "cp new_tasks backup_tasks" in all_inputs
+	return ("new_tasks" in op) and ("backup_tasks" in op) and ("cp new_tasks backup_tasks" in all_inputs)
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
 	var op =check_contents()
-	return "backup_tasks" in op and "rm backup_tasks" in all_inputs
+	return "backup_tasks" not in op and "rm backup_tasks" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
 	var op =check_contents()
-	return "dont_open" in op and "rmdir dont_open" in all_inputs
+	return "dont_open" not in op and "rmdir dont_open" in all_inputs
 	
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-
+		if idx + 1 not in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
+				
 func _on_check_pressed():
 	update_status()
 	level_completed()
 
 func is_level_completed() -> bool:
-	return task1_status() and task2_status() and task3_status() and task4_status() and task5_status()
+	#return task1_status() and task2_status() and task3_status() and task4_status() and task5_status()
+	return completed_tasks.size() == task_count
+	
 
 func level_completed():
 	if is_level_completed():

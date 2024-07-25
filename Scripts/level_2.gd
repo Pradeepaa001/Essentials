@@ -61,14 +61,14 @@ var instructions = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
 var level_congrats_message = "Well done, Explorer! You've completed the first level"
 @onready var termi = $Terminal
 var all_inputs = []
-
+var completed_tasks = []
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	termi.connect("check",self._on_check_pressed)
 	user_reset()
-	
 	var op = termi.execute(level_setup_commands)
 	print(op)
 	print("yes")
@@ -123,11 +123,15 @@ func task5_status() -> bool:
 func update_status():
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-
+		print(completed_tasks)
+		if idx + 1 not in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
+				
 func _on_check_pressed():
 	update_status()
 	level_completed()

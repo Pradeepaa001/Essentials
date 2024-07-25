@@ -4,6 +4,7 @@ var pwd = "user"
 var input_list = []
 var curr = -1
 signal man_level
+signal check
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
@@ -62,6 +63,7 @@ func _on_line_edit_text_submitted(cmd: String):
 	input.text = ""
 	var output = $RichTextLabel
 	output.text += response
+	emit_signal("check")
 
 func process_back(command):
 	return "No Access" if pwd == "user" else execute(command)
