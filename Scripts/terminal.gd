@@ -38,7 +38,7 @@ func process_command(cmd: String) -> String:
 
 	for idx in range(grey_list_commands.size()):
 		for command in black_list_commands:
-			print(command)
+			#print(command)
 			if command in cmd:
 				return response + "Command not supported" + "\n"
 		if grey_list_commands[idx] in cmd:

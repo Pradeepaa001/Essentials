@@ -1,5 +1,7 @@
 extends Node2D
 
+var level_setup_commands = "touch linux1 && mkdir data_folder"
+
 var level_intro = "STORY
 Refer to the task manager to find your tasks.
 Find your level manual in the help section of your toolbar.
@@ -66,8 +68,8 @@ var dialogue_lines = [
 
 
 var task_count = 4
-var instructions = ["Search for a pattern in the file created", "Sort the lines of text in the file for good organization", "Count the lines, words, characters in your file", "Remove specific columns from your file"]
-
+var instructions = ["Search for a pattern in the file 'linux1'", "Sort the lines of text in the file 'linux1'", "Count the lines, words, characters in file 'linux1'", "Remove specific columns from your file 'linux1'"]
+@onready var termi = $Terminal
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
@@ -82,8 +84,31 @@ func add_tasks():
 		task_manager.add_child(task)
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
+func _ready():
+	user_reset()
+	npc_dialogue = npc_dialogue_scene.instantiate()
+	add_child(npc_dialogue)
+	npc_dialogue.start_dialogue(dialogue_lines)
+	termi.execute(level_setup_commands)
+	add_content_to_file()
+	var man_level = $Toolbar/WindowDialog/RichTextLabel
+	man_level.text = level_manual
+	var output = $RichTextLabel
+	output.text += level_intro
+	add_tasks()
+
+#func refresh_file_system():
+	#var fs = DirAccess.open("res://user/")
+	#if fs:
+		#fs.list_dir_begin()
+		#while true:
+			#var file_name = fs.get_next()
+			#if file_name == "":
+				#break
+		#fs.list_dir_end()
+		#print("File system refreshed.")
 func add_content_to_file():
-	var file = FileAccess.open("user://file1.txt", FileAccess.WRITE)
+	var file = FileAccess.open("res://user/linux1", FileAccess.READ_WRITE)
 	var content = [
 "Open Source: Freely accessible and modifiable code.",
 "Linux Kernel: Core component, created by Linus Torvalds in 1991.",
@@ -96,12 +121,23 @@ func add_content_to_file():
 "Package Management: Uses APT, RPM, Pacman for software.",
 "Licensing: Under GNU GPL, requiring open-source derivatives.",
 	]
+	if file:
+		print("yes")
 	for line in content:
-		file.store_line(line)
+		file.store_string(line + "\n")
+	#file.flush()
 	file.close()
+	#refresh_file_system()
+	var file1 = FileAccess.open("res://user/linux1", FileAccess.READ)
+	if file1:
+		var cont = file1.get_as_text()
+		print(cont)
+	file1.close()
+ 
+	
 func task1_status() -> bool:
 	var commandline = $Terminal
-	var search_result = commandline.execute("grep 'pattern' file.txt")
+	var search_result = commandline.execute("grep 'pattern' linux1.txt")
 	return search_result != ""
 
 func task2_status() -> bool:
@@ -150,19 +186,7 @@ func get_current_level() -> int:
 	var scene_name = get_tree().current_scene.name
 	return int(scene_name.replace("level_", "").replace(".tscn", ""))
 
-func _ready():
-	user_reset()
-	
-	npc_dialogue = npc_dialogue_scene.instantiate()
-	add_child(npc_dialogue)
-	npc_dialogue.start_dialogue(dialogue_lines)
-	
-	var man_level = $Toolbar/WindowDialog/RichTextLabel
-	man_level.text = level_manual
-	var output = $RichTextLabel
-	output.text += level_intro
-	add_tasks()
-	add_content_to_file()
+
 
 func user_reset():
 	var output = []
