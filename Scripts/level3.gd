@@ -68,8 +68,6 @@ var Save = SaveSystem.new()
 
 func _ready():
 	termi.connect("check",_on_check_pressed)
-	user_reset()
-	
 	termi.execute(level_setup_commands)
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()

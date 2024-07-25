@@ -6,6 +6,10 @@ var curr = -1
 signal man_level
 signal check
 
+func _ready():
+	OS.execute("wsl.exe", ["bash", "-c", "rmdir user"])
+	OS.execute("wsl.exe", ["bash", "-c", "mkdir user"])
+
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
 	
@@ -39,7 +43,6 @@ func process_command(cmd: String) -> String:
 
 	for idx in range(grey_list_commands.size()):
 		for command in black_list_commands:
-			#print(command)
 			if command in cmd:
 				return response + "Command not supported" + "\n"
 		if grey_list_commands[idx] in cmd:
@@ -66,6 +69,7 @@ func _on_line_edit_text_submitted(cmd: String):
 	emit_signal("check")
 
 func process_back(command):
+	print("here")
 	return "No Access" if pwd == "user" else execute(command)
 	
 func process_cd(command):

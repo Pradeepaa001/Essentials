@@ -86,7 +86,6 @@ func add_tasks():
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func _ready():
-	user_reset()
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	npc_dialogue.start_dialogue(dialogue_lines)

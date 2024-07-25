@@ -57,7 +57,6 @@ var Save = SaveSystem.new()
 func _ready():
 	var terminal = $Terminal
 	terminal.connect("check",self._on_check_pressed)
-	user_reset()
 	
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)

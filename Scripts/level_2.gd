@@ -68,7 +68,6 @@ var Save = SaveSystem.new()
 
 func _ready():
 	termi.connect("check",self._on_check_pressed)
-	user_reset()
 	var op = termi.execute(level_setup_commands)
 	print(op)
 	print("yes")
