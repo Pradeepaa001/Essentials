@@ -1,17 +1,13 @@
 extends Node2D
 var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
-var level_description = """\t\tMaster of Shell Commands
-Learn to use various shell commands like cat, mv, cp, rm, and rmdir.
+var level_description = """\t\tData Detective
+Agent 101 you are assigned with organising with files today. 
+Shelldon asks you to use cat, cp, mv, rm, rmdir.
+Refer to the task manager to find your tasks.
+Find your level manual in the help section of your toolbar and finish the tasks.
 
-Instructions:
-1. Use `cat` to view the contents of a file. Example: `cat tasks`
-2. Use `mv` to move or rename a file. Example: `mv tasks new_tasks`
-3. Use `cp` to copy a file. Example: `cp new_tasks backup_tasks`
-4. Use `rm` to remove a file. Example: `rm backup_tasks`
-5. Use `rmdir` to remove a directory. Example: `rmdir dont_open`
+Note: Be careful with `rm` and `rmdir` as they permanently delete files and directories."""
 
-Note: Be careful with `rm` and `rmdir` as they permanently delete files and directories.
-"""
 
 var level_manual = """
 cat - concatenate and display files
@@ -57,7 +53,7 @@ var npc_dialogue
 
 var completed_tasks = [] 
 var task_count = 5
-var instructions = ["cat tasks", "mv tasks new_tasks", "cp new_tasks backup_tasks", "rm backup_tasks", "rmdir dont_open"]
+var instructions = ["View the file 'tasks' in shell", "Move file 'tasks' to 'new_tasks'", "Copy file 'new_tasks' to 'backup_tasks'", "Remove file 'backup_tasks'", "Remove empty directory 'dont_open'"]
 var level_congrats_message = "Well done, Explorer! You've completed level 3"
 @onready var termi = $Terminal
 var all_inputs = []

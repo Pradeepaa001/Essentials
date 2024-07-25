@@ -1,17 +1,11 @@
 extends Node2D
 var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk"
 
-var level_description = """\t\tThe Master of files
-Learn to list the contents of a directory with ls commands.
-
-Instructions:
-1. Use `ls` to view the contents of a directory. Example: `ls`
-2. Use `ls --help` to know how to use ls. Example: `ls --help`
-3. Use `ls -a` to view hidden files. Example: `ls -a`
-4. Use `ls <char>*` to view files and sub-directories that start with specified character. Example: `ls r*`
-	note: This lists nothings if there are no contents starting with the character 
-5. Use `pwd` to see the path of current working directory. Example: `rmdir data`
-"""
+var level_description = "\t\tThe Master of files
+Agent 101 it's time for you to scout our base. 
+Remember Shelldon's advice of using ls commands.
+Refer to the task manager to find your tasks.
+Find your level manual in the help section of your toolbar and finish the tasks."
 
 var level_manual = "\nls - list directory contents
 Lists all the files and directories under a specified directory. 
@@ -20,7 +14,7 @@ By default, ls uses the current directory and lists files and directories in alp
 
 OPTIONS:
 	
-	--help: display this help and exit
+	--help: display command's help and exit
 	
 	-a:  do not ignore entries starting with .
 	Hidden Files are prefixed with a period . and are called dot files.
@@ -29,6 +23,7 @@ OPTIONS:
 ls *<char> - Lists files and sub-directories that start with specified character.
 Note - Lists nothing if there are no contents starting with the character
 
+pwd - to view path to working directory
 
 rm - remove
 Remove files or directories
@@ -57,7 +52,7 @@ var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
+var instructions = ["View the contents of this directory", "Display the help of ls", "View the hidden files of this directory", "View contents starting with 'r'", "View the path to working directory"]
 var level_congrats_message = "Well done, Explorer! You've completed the first level"
 @onready var termi = $Terminal
 var all_inputs = []

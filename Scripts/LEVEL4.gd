@@ -3,10 +3,11 @@ extends Node2D
 var level_setup_commands = "printf 'ADD SUBTRACT MULTIPLY DIVIDE\nThe basic arithmetic operations are essential for everyday calculations. Addition combines two or more numbers to get a sum.\nSubtraction finds the difference between two numbers by taking one away from the other.\nMultiplication involves repeated addition of a number as many times as specified by another number.\nDivision splits a number into equal parts, determining how many times one number is contained within another.\nThese operations form the foundation for more complex mathematical concepts.\nThey are used in various fields, from simple budgeting to advanced engineering.\nUnderstanding these operations is crucial for solving real-world problems efficiently.
  ' > maths1 && mkdir data_folder"
 var all_inputs = []
-var level_intro = "STORY
-Refer to the task manager to find your tasks.
-Find your level manual in the help section of your toolbar.
-You can use the Level Manual to finish your tasks"
+var level_intro = """\t\tThe Scripting Wizard
+Agent 101 you are assigned with searching and sorting in files today. 
+According to Shelldon, using grep, sort, wc, cut will help you.
+For further help find level manual under Help.
+Refer to the task manager to complete your tasks. """
 
 var level_congrats_message = "Well done, Explorer!"
 
@@ -70,7 +71,7 @@ var dialogue_lines = [
 
 
 var task_count = 4
-var instructions = ["Search for a 'ADD' in the file 'maths1'", "Sort the lines of text in the file 'maths1'", "Count the lines, words, characters in file 'maths1'", "Extract 2nd field from your file 'maths1' with delimiter as space"]
+var instructions = ["Search for 'ADD' in the file 'maths1'", "Sort the lines of text in the file 'maths1'", "Count the lines, words, characters in file 'maths1'", "Extract 2nd field from your file 'maths1' with delimiter as space"]
 @onready var termi = $Terminal
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")

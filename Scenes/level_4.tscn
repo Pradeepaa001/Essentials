@@ -10,6 +10,7 @@
 script = ExtResource("1_m3ijl")
 
 [node name="Toolbar" parent="." instance=ExtResource("2_6owxv")]
+position = Vector2(0, -6)
 
 [node name="Terminal" parent="." instance=ExtResource("3_76w6y")]
 
