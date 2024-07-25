@@ -32,4 +32,5 @@ offset_bottom = 314.0
 
 [node name="Control" parent="." instance=ExtResource("5_fvlnj")]
 
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]

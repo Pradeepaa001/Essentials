@@ -55,6 +55,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+
 	var terminal = $Terminal
 	terminal.connect("check",self._on_check_pressed)
 	
@@ -83,9 +84,8 @@ func add_tasks():
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
-	var output = []
-	OS.execute("wsl.exe", ["bash", "-c", "ls"], output, true)
-	return "Day1" in output[0]
+	var terminal = $Terminal
+	return "Day1" in terminal.execute("ls")
 
 func task2_status():
 	var commandline = $Terminal
@@ -115,12 +115,13 @@ func update_status():
 		
 func _on_check_pressed():
 	update_status()
+	print(level_completed)
 	level_completed()
 	
 #CHECKING COMPLETION AND SAVING IN DICTIONARY
 	
 func is_level_completed() -> bool:
-	return task1_status() and task2_status() and task3_status()
+	return completed_tasks.size() == 3
 
 func level_completed():
 	if is_level_completed():
@@ -141,3 +142,4 @@ func _on_next_pressed():
 
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
+

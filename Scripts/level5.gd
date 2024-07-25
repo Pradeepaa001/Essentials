@@ -69,7 +69,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
-	termi.connect("check",_on_check_pressed)
+	termi.connect("check",self._on_check_pressed)
 	termi.execute(level_setup_commands)
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
@@ -116,12 +116,15 @@ func task5_status() -> bool:
 	return 'echo "Hello World!"' in all_inputs
 	
 func update_status():
+	print("done")
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
-		if idx + 1 in completed_tasks:
+		print(idx)
+		if idx + 1 not in completed_tasks:
 			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
 			var task = task_manager.get_child(idx)
 			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			print(check_functions[idx].call())
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)

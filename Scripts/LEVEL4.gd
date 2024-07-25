@@ -212,10 +212,9 @@ func user_reset():
 	return String(output[-1])
 
 
+func _on_confirmation_dialog_confirmed():
+	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
+
 
 func _on_next_pressed():
 	get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
-
-
-func _on_confirmation_dialog_confirmed():
-	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
