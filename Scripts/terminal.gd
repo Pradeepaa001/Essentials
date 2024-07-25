@@ -7,15 +7,8 @@ signal man_level
 signal check
 
 func _ready():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'"], output, true)
-	if output[-1]:
-		OS.execute("wsl.exe", ["bash", "-c", "rm -rf user"], output, true)
-		OS.execute("wsl.exe", ["bash", "-c", "mkdir user"], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])
+	OS.execute("wsl.exe", ["bash", "-c", "rm -rf user"])
+	OS.execute("wsl.exe", ["bash", "-c", "mkdir user"])
 
 func process_command(cmd: String) -> String:
 	var response: String = "$" + cmd + "\n"
