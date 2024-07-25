@@ -1,7 +1,7 @@
 extends Node2D
 
 var level_setup_commands = "touch linux1 && mkdir data_folder"
-
+var all_inputs = []
 var level_intro = "STORY
 Refer to the task manager to find your tasks.
 Find your level manual in the help section of your toolbar.
@@ -73,6 +73,7 @@ var instructions = ["Search for a pattern in the file 'linux1'", "Sort the lines
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
+var completed_tasks = []
 
 func add_tasks():
 	var task
@@ -90,7 +91,6 @@ func _ready():
 	add_child(npc_dialogue)
 	npc_dialogue.start_dialogue(dialogue_lines)
 	termi.execute(level_setup_commands)
-	add_content_to_file()
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -133,28 +133,35 @@ func add_content_to_file():
 		var cont = file1.get_as_text()
 		print(cont)
 	file1.close()
- 
 	
+@onready var commandline = $Terminal	
 func task1_status() -> bool:
-	var commandline = $Terminal
-	var search_result = commandline.execute("grep 'pattern' linux1.txt")
-	return search_result != ""
+	all_inputs = commandline.get_input_list()
+	for commands in all_inputs:
+		if "grep " in commands and "'pattern' " in commands and "linux1.txt" in commands:
+			return true
+	return false
 
 func task2_status() -> bool:
-	var commandline = $Terminal
-	var sort_result = commandline.execute("sort file.txt")
-	return sort_result != ""
+	all_inputs = commandline.get_input_list()
+	for commands in all_inputs:
+		if "sort " in commands and "linux1.txt" in commands:
+			return true
+	return false
 
 func task3_status() -> bool:
-	var commandline = $Terminal
-	var wc_result = commandline.execute("wc file.txt")
-	return wc_result != ""
+	all_inputs = commandline.get_input_list()
+	for commands in all_inputs:
+		if "wc " in commands and "linux1.txt" in commands:
+			return true
+	return false
 
 func task4_status() -> bool:
-	var commandline = $Terminal
-	var cut_result = commandline.execute("cut -f1 file.txt")
-	return cut_result != ""
-
+	all_inputs = commandline.get_input_list()
+	for commands in all_inputs:
+		if "cut " in commands and "-f " in commands and "linux1.txt" in commands:
+			return true
+	return false
 
 func update_status():
 	var task_count = 4
@@ -167,7 +174,6 @@ func update_status():
 		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
 		print("done")
 		
-
 func _on_check_pressed():
 	update_status()
 	level_completed()
@@ -179,6 +185,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
+		var congrats = $ConfirmationDialog
+#		congrats.popup_centered()
+		var next = $next
+#		next.visible = true
 		var current_level = get_current_level()
 		Save.save_progress(current_level)
 
@@ -190,11 +200,20 @@ func get_current_level() -> int:
 
 func user_reset():
 	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
+	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'"], output, true)
 	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
+		OS.execute("wsl.exe", ["bash", "-c", "rm -rf user"], output, true)
+		OS.execute("wsl.exe", ["bash", "-c", "mkdir user"], output, true)
 		print("reset done")
 	else:
 		print("no")
 	return String(output[-1])
+
+
+
+func _on_next_pressed():
+	get_tree().change_scene_to_file("res://Scenes/level_5.tscn")
+
+
+func _on_confirmation_dialog_confirmed():
+	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")

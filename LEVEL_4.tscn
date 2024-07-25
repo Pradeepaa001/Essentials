@@ -28,5 +28,19 @@ offset_top = 63.0
 offset_right = 1135.0
 offset_bottom = 314.0
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+
+[node name="next" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="CHECK" to="." method="_on_check_pressed"]
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]
