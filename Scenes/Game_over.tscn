@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cspw6t4icehnj"]
+
+[ext_resource type="Script" path="res://Scripts/Game_over.gd" id="1_2i3ax"]
+[ext_resource type="Texture2D" uid="uid://b064v663le8rl" path="res://images/game_over.jpg" id="2_x6y6a"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_2i3ax")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1150.0
+offset_bottom = 650.0
+texture = ExtResource("2_x6y6a")
+expand_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+size = Vector2i(500, 200)
+
+[node name="TextEdit" type="TextEdit" parent="AcceptDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 492.0
+offset_bottom = 151.0
+text = "Congratulation for completeing the beginner levels!
+You are promoted as a full time employee!
+But wait you will have even more harder tasks coming up!
+Advanced levels are in making!"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]
