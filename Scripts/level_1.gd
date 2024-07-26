@@ -1,5 +1,5 @@
 extends Node2D
-var level_intro = "\t\t\tThe Journey Begins\n\nWelcome to GRID, Agent 101!\nWe are exited to have you with us.
+var level_intro = "\t\t\tThe Journey Begins\n\nWelcome Agent 101,
 Your first set of tasks will help you get familiar with the system.
 Refer to the task manager to find your tasks.
 Find your level manual in the help section of your toolbar.
@@ -55,7 +55,7 @@ var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
-
+	#Save.reset_progress()
 	var terminal = $Terminal
 	terminal.connect("check",self._on_check_pressed)
 	

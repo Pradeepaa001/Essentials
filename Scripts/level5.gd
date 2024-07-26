@@ -9,13 +9,6 @@ Shelldon recommends, using head, tail, more, du -sh, echo will help you.
 For further help find level manual under Help.
 Refer to the task manager to complete your tasks.
 
-Instructions:
-1. Use `tail` to display the last part of a file. Example: `tail file1`
-2. Use `head` to display the first part of a file. Example: `head file2`
-3. Use `more` to view the contents of a file page by page. Example: `more file3`
-4. Use `du` to check the disk usage of a directory. Example: `du -sh data`
-5. Use `echo` to print text to the terminal. Example: `echo "Hello, World!"`
-
 Note: `tail` and `head` can be used with options to customize the output.
 """
 
