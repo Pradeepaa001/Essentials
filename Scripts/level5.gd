@@ -155,11 +155,11 @@ func get_current_level() -> int:
 	
 
 func _on_next_pressed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game_over.tscn")
 
 
 func _on_confirmation_dialog_confirmed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game_over.tscn")
 
 func user_reset():
 	var output = []
