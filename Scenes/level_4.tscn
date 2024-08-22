@@ -4,34 +4,34 @@
 [ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="2_6owxv"]
 [ext_resource type="PackedScene" uid="uid://dwsqlli5p3aga" path="res://Scenes/terminal.tscn" id="3_76w6y"]
 [ext_resource type="PackedScene" uid="uid://b00uf1r61kl64" path="res://Scenes/task_manager.tscn" id="4_u3r1p"]
-[ext_resource type="PackedScene" uid="uid://dp7rcdcl1dulj" path="res://Scenes/NPCDialogue_new.tscn" id="5_fvlnj"]
+[ext_resource type="PackedScene" uid="uid://dk61bpb3plx76" path="res://Scenes/NPCDialogue.tscn" id="5_nsvoq"]
 
 [node name="LEVEL4" type="Node2D"]
+position = Vector2(299, 213)
 script = ExtResource("1_m3ijl")
 
 [node name="Toolbar" parent="." instance=ExtResource("2_6owxv")]
-position = Vector2(0, -6)
+position = Vector2(-298, -216)
 
 [node name="Terminal" parent="." instance=ExtResource("3_76w6y")]
+position = Vector2(-179, -44)
 
 [node name="Task_manager" parent="." instance=ExtResource("4_u3r1p")]
-position = Vector2(422, 140)
+position = Vector2(118, -66)
 
 [node name="next" type="Button" parent="."]
 visible = false
-offset_left = 919.0
-offset_top = 581.0
-offset_right = 1017.0
-offset_bottom = 612.0
+offset_left = 613.0
+offset_top = 371.0
+offset_right = 711.0
+offset_bottom = 402.0
 text = "NEXT LEVEL"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 826.0
-offset_top = 63.0
-offset_right = 1135.0
-offset_bottom = 314.0
-
-[node name="Control" parent="." instance=ExtResource("5_fvlnj")]
+offset_left = 522.0
+offset_top = -119.0
+offset_right = 831.0
+offset_bottom = 132.0
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 title = "Task's Completed"
@@ -47,6 +47,14 @@ dialog_text = "
 
 "
 cancel_button_text = "Stay in the level"
+
+[node name="Control" parent="." instance=ExtResource("5_nsvoq")]
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 296.0
+offset_bottom = 202.0
+size_flags_horizontal = 0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]

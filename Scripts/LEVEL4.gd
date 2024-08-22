@@ -58,7 +58,7 @@ Use `rm -rf` to delete files after task completion to keep your directory clean.
 "
 
 
-var npc_dialogue_scene = preload("res://Scenes/NPCDialogue_new.tscn")
+var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 var dialogue_lines = [ 
 "Welcome back, recruit! Let us begin with Level 4. The Grid holds mountains of data, but sometimes you need that specific needle in a haystack. Today, we'll learn powerful tools to navigate this information overload.", 
@@ -91,9 +91,11 @@ func add_tasks():
 
 func _ready():
 	termi.connect("check",_on_check_pressed)
+	
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	npc_dialogue.start_dialogue(dialogue_lines)
+	
 	termi.execute(level_setup_commands)
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual

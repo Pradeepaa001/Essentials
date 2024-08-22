@@ -35,43 +35,43 @@ script = ExtResource("1_ejp5m")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 518.0
-offset_right = 1135.0
-offset_bottom = 637.0
+offset_left = 6.0
+offset_top = 446.0
+offset_right = 1175.0
+offset_bottom = 653.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gtknd")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 513.0
-offset_right = 175.0
-offset_bottom = 653.0
+offset_left = 34.0
+offset_top = 463.0
+offset_right = 199.0
+offset_bottom = 609.0
 texture = ExtResource("2_u0nly")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 188.0
-offset_top = 552.0
-offset_right = 1135.0
-offset_bottom = 625.0
+offset_left = 234.0
+offset_top = 500.0
+offset_right = 1083.0
+offset_bottom = 593.0
 theme_override_colors/font_selected_color = Color(0.980257, 0.892828, 0.898834, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 188.0
-offset_top = 516.0
-offset_right = 320.0
-offset_bottom = 555.0
+offset_left = 234.0
+offset_top = 456.0
+offset_right = 366.0
+offset_bottom = 495.0
 text = "Shelldon: "
 label_settings = SubResource("LabelSettings_wdhg8")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 823.0
-offset_top = 603.0
+offset_top = 595.0
 offset_right = 1166.0
-offset_bottom = 642.0
+offset_bottom = 634.0
 theme_override_fonts/font = SubResource("FontFile_yumbc")
 theme_override_font_sizes/font_size = 1
 text = "Press space to continue..."

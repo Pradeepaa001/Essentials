@@ -61,7 +61,7 @@ func _ready():
 	
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue([dialogue_lines[0], dialogue_lines[1]])
 	
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
@@ -102,8 +102,11 @@ func task3_status() -> bool:
 	return true
 	
 func update_status():
+
 	var check_functions = [task1_status, task2_status, task3_status]
 	for idx in task_count:
+		npc_dialogue = npc_dialogue_scene.instantiate()
+		add_child(npc_dialogue)
 		print(completed_tasks)
 		if idx + 1 not in completed_tasks:
 			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
@@ -112,6 +115,9 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
+				
 		
 func _on_check_pressed():
 	update_status()
