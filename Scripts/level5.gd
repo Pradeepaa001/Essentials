@@ -56,6 +56,7 @@ var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
+var finished = false 
 var instructions = ["Display last part in 'file1'", "Display first part in 'file1'", "Display the whole 'file1' (using more)", "Find the disk space of 'intern_dir' directory", 'Write "Hello World!" using echo']
 var level_congrats_message = "Well done, Explorer! You've completed level 5"
 @onready var termi = $Terminal
@@ -135,8 +136,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $next
 		next.visible = true
 		var current_level = get_current_level()

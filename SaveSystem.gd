@@ -4,7 +4,7 @@ var save_path = "user://savegame.save"
 
 func reset_progress():
 	var save_data = load_progress()
-	save_data["levels_completed"] = {}
+	save_data["levels_completed"] = []
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	if file:
 		file.store_var(save_data)

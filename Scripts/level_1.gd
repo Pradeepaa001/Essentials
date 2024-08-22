@@ -48,7 +48,7 @@ var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The G
 
 var task_count = 3
 var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
-
+var finished = false 
 var completed_tasks = []
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
@@ -125,8 +125,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()

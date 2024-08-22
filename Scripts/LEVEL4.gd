@@ -71,6 +71,7 @@ var dialogue_lines = [
 
 
 var task_count = 4
+var finished = false 
 var instructions = ["Search for 'ADD' in the file 'maths1'", "Sort the lines of text in the file 'maths1'", "Count the lines, words, characters in file 'maths1'", "Extract 2nd field from your file 'maths1' with delimiter as space"]
 @onready var termi = $Terminal
 var task_scene = load("res://Scenes/task.tscn")
@@ -148,8 +149,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $next
 		next.visible = true
 		var current_level = get_current_level()

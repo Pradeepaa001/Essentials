@@ -57,7 +57,7 @@ var instructions = ["View the file 'tasks' in shell", "Move file 'tasks' to 'new
 var level_congrats_message = "Well done, Explorer! You've completed level 3"
 @onready var termi = $Terminal
 var all_inputs = []
-
+var finished = false 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
@@ -143,8 +143,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()
