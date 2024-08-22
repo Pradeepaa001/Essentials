@@ -11,10 +11,13 @@ func _ready():
 	OS.execute("wsl.exe", ["bash", "-c", "mkdir user"])
 
 func process_command(cmd: String) -> String:
-	var response: String = "$" + cmd + "\n"
+	var response: String = "$" + cmd
 	
-	var grey_list_commands = ["cd", "pwd", "clear", "man level", " .."]
-	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel, self.process_back]
+	if(self.process_back(cmd)):
+		return response + "\nNo access\n"
+	
+	var grey_list_commands = ["cd", "pwd", "clear", "man level",]
+	var grey_list_processing = [self.process_cd, self.process_pwd, self.process_clear, self.process_manlevel]
 
 	var black_list_commands = [
 	"ln", "dd", "mkfs", "mount", 
@@ -47,13 +50,13 @@ func process_command(cmd: String) -> String:
 		if grey_list_commands[idx] in cmd:
 			return response + grey_list_processing[idx].call(cmd) + "\n"
 	
-	return response + execute(cmd) + "\n"
+	return response + execute(cmd)
 
 func execute(cmd):
 	var output = []
 	print(cmd)
 	var error_code = OS.execute("wsl.exe", ["bash", "-c", "cd " + pwd + "&& " +cmd], output, true)
-	return String(output[-1])
+	return "\n" + String(output[-1]) if String(output[-1]) != "" else "\n"
 	
 func _on_line_edit_text_submitted(cmd: String):
 	var input = $input
@@ -68,8 +71,22 @@ func _on_line_edit_text_submitted(cmd: String):
 	emit_signal("check")
 
 func process_back(command):
-	print("here")
-	return "No Access" if pwd == "user" else execute(command)
+	if("~" in command):
+		return true
+	if(" .." in command && pwd == "user"):
+		return true 
+	if("../" in command):
+		print("../ is found")
+		var commands = command.split(" ")
+		print(commands)
+		for word in commands:
+			print(word)
+			if "../" in word:
+				var output = []
+				OS.execute("wsl.exe",["bash", "-c", "cd " + pwd + "&& " + "cd " + word + " && pwd"], output, true)
+				print(output[-1])
+				return true if "user" not in output[-1] else false
+	return false
 	
 func process_cd(command):
 	var path = execute(command + "&& echo break && pwd ").split("break")
@@ -78,10 +95,12 @@ func process_cd(command):
 		pwd = path[1].substr(path[1].find("user") ,-1) if "user" in path[1] else pwd
 		pwd = pwd.strip_edges()
 		print(path, pwd)
-	return path[0]
+	print("This is being returned in cd")
+	print(path[0])
+	return path[0] if path[0] != "\n" else ""
 	
 func process_pwd(_cmd):
-	return "/" + pwd
+	return "\n/" + pwd 
 	
 func process_clear(_cmd):
 	var output = $RichTextLabel
@@ -91,7 +110,7 @@ func process_clear(_cmd):
 func process_manlevel(cmd):
 	if cmd == "man level":
 		emit_signal("man_level")
-		return ""
+		return "\n"
 	else:
 		return execute(cmd) + "\n"
 
