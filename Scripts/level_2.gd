@@ -1,5 +1,5 @@
 extends Node2D
-var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk road"
 
 var level_description = "\t\tThe Master of files
 Agent 101 it's time for you to scout our base. 
@@ -45,7 +45,7 @@ var dialogue_lines = ["Welcome back, recruit! You have successfully reached Leve
 "Your first tool for this level is the ls command. Imagine it like a pair of binoculars. Use ls to take a peek at what's inside your current directory – all the files and folders within it.",
 "But sometimes, even binoculars need a little adjustment. That's where options come in. Remember, there's always a ls --help command available. Think of it like the instruction manual for your binoculars. You can use ls --help to learn about all the different ways you can use ls to see things differently.",
 "However, you might miss some hidden files lurking in the shadows. That's where ls -a comes in. Think of it like switching your binoculars to night vision mode. You can use ls -a to reveal even hidden files, making sure you have a complete picture of your camp.",
-"But wait, there's more! The Grid can be a vast place. What if you need to know your exact location? That's where pwd comes in handy. Think of it like a built-in GPS. You can use pwd to display your current directory path, pinpointing your exact location within The Grid.",
+"To find files starting with a particular letter you can use *, find out more about it using 'man level'","But wait, there's more! The Grid can be a vast place. What if you need to know your exact location? That's where pwd comes in handy. Think of it like a built-in GPS. You can use pwd to display your current directory path, pinpointing your exact location within The Grid.",
 "Alright, recruit! Grab your binoculars and get exploring! Use these commands to survey your camp, identify all the files and folders around you."]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
@@ -70,8 +70,7 @@ func _ready():
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue([dialogue_lines[0], dialogue_lines[1]])
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -116,6 +115,7 @@ func task5_status() -> bool:
 	return "pwd" in all_inputs
 	
 func update_status():
+
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
 		print(completed_tasks)
@@ -126,6 +126,8 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
 				
 func _on_check_pressed():
 	update_status()

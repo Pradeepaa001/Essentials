@@ -105,8 +105,6 @@ func update_status():
 
 	var check_functions = [task1_status, task2_status, task3_status]
 	for idx in task_count:
-		npc_dialogue = npc_dialogue_scene.instantiate()
-		add_child(npc_dialogue)
 		print(completed_tasks)
 		if idx + 1 not in completed_tasks:
 			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")

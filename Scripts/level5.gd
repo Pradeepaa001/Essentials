@@ -73,7 +73,7 @@ func _ready():
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue(dialogue_lines.slice(0,2))
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -126,6 +126,8 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
 				
 func _on_check_pressed():
 	update_status()
