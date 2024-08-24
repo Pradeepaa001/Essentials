@@ -51,12 +51,6 @@ func _on_button_7_pressed():
 		popup_msg.popup_centered()
 	print("done")
 
-func _on_button_8_pressed():
-	if access_level(8):
-		get_tree().change_scene_to_file("res://terminal.gd")
-	else:
-		popup_msg.popup_centered()
-	print("done")
 
 
 func access_level(level: int) -> bool:

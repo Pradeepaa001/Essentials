@@ -14,7 +14,7 @@ script = ExtResource("1_rryu7")
 position = Vector2(-303, -218)
 
 [node name="Terminal" parent="." instance=ExtResource("2_rbk36")]
-position = Vector2(-175, -47)
+position = Vector2(-177, -47)
 
 [node name="Task_manager" parent="." instance=ExtResource("4_sfoni")]
 position = Vector2(117, -72)
@@ -42,9 +42,7 @@ dialog_text = "
                          CONGRATULATIONS!!
            YOU'VE COMPLETED TODAY'S WORK
 
-      Tip -Remember to delete files and folders
- created in this session to keep your system clean
-
+   If you are excited to learn more click on next level!
 "
 cancel_button_text = "Stay in the level"
 

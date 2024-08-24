@@ -1,16 +1,13 @@
 extends Node2D
 
-var level_setup_commands = "mkdir data && cd data && echo 'This is file1' > file1 && echo 'This is file2' > file2 && echo 'This is file3' > file3 && mkdir test_dir"
+
+var level_setup_commands = "mkdir data && cd data && echo 'Internships in cybersecurity are highly valuable.\nThey provide hands-on experience.\nInterns learn about network security.\nThey understand threat detection.\nThey work with security tools.\nThey monitor for vulnerabilities.\nInterns participate in incident response.\nThey gain knowledge of compliance.\nThey help develop security policies.\nThey understand risk management.\nThey collaborate with IT teams.\nThey learn about encryption methods.\nInterns often assist in audits.\nThey attend cybersecurity training.\nAn internship builds a solid foundation.\n'> file1 && echo 'This is file2' > file2 && mkdir intern_dir"
 
 var level_description = """\t\tMaster of File Viewing and Disk Usage
-Learn to use various shell commands like tail, head, more, du, and echo.
-
-Instructions:
-1. Use `tail` to display the last part of a file. Example: `tail file1`
-2. Use `head` to display the first part of a file. Example: `head file2`
-3. Use `more` to view the contents of a file page by page. Example: `more file3`
-4. Use `du` to check the disk usage of a directory. Example: `du -sh data`
-5. Use `echo` to print text to the terminal. Example: `echo "Hello, World!"`
+Agent 101 time travel and explore the files. View, inspect and find storage of files. 
+Shelldon recommends, using head, tail, more, du -sh, echo will help you.
+For further help find level manual under Help.
+Refer to the task manager to complete your tasks.
 
 Note: `tail` and `head` can be used with options to customize the output.
 """
@@ -59,24 +56,24 @@ var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["tail file1", "head file2", "more file3", "du -sh data", 'echo "Hello World!"']
+var finished = false 
+var instructions = ["Display last part in 'file1'", "Display first part in 'file1'", "Display the whole 'file1' (using more)", "Find the disk space of 'intern_dir' directory", 'Write "Hello World!" using echo']
 var level_congrats_message = "Well done, Explorer! You've completed level 5"
 @onready var termi = $Terminal
 var all_inputs = []
-
+var completed_tasks = [] 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
-	user_reset()
-	
+	termi.connect("check",self._on_check_pressed)
 	termi.execute(level_setup_commands)
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
 	
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue(dialogue_lines.slice(0,2))
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -102,28 +99,36 @@ func task1_status() -> bool:
 
 func task2_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "head file2" in all_inputs
+	return "head file1" in all_inputs
 	
 func task3_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "more file3" in all_inputs
+	return "more file1" in all_inputs
 	
 func task4_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return "du -sh data" in all_inputs
+	return "du -sh intern_dir" in all_inputs
 	
 func task5_status() -> bool:
 	all_inputs = termi.get_input_list()
-	return 'echo "Hello World!"' in all_inputs
+	return 'echo Hello World!' in all_inputs or 'echo "Hello World!"' in all_inputs or "echo 'Hello World!'" in all_inputs
 	
 func update_status():
+	print("done")
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
-		var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
-		var task = task_manager.get_child(idx)
-		var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
-		task_color.color = Color(0,1,0) if check_functions[idx].call() else Color(1,0,0)
-
+		print(idx)
+		if idx + 1 not in completed_tasks:
+			var task_manager = get_node("Task_manager/BoxContainer/Panel/ScrollContainer/VBoxContainer")
+			var task = task_manager.get_child(idx)
+			var task_color = task.get_node("HBoxContainer/Panel/ColorRect")
+			print(check_functions[idx].call())
+			if check_functions[idx].call():
+				task_color.color = Color(0,1,0)
+				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
+				
 func _on_check_pressed():
 	update_status()
 	level_completed()
@@ -133,8 +138,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $next
 		next.visible = true
 		var current_level = get_current_level()
@@ -146,11 +153,11 @@ func get_current_level() -> int:
 	
 
 func _on_next_pressed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game_over.tscn")
 
 
 func _on_confirmation_dialog_confirmed():
-	get_tree().change_scene_to_file("res://Scenes/level_6.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game_over.tscn")
 
 func user_reset():
 	var output = []

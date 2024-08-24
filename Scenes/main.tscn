@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgdv5o1ke6liu"]
+[gd_scene load_steps=5 format=3 uid="uid://bgdv5o1ke6liu"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_lhlfh"]
 [ext_resource type="Texture2D" uid="uid://dlu35jk5uxy04" path="res://images/grid_sys.jpg" id="2_i2obk"]
 [ext_resource type="StyleBox" uid="uid://bnqmvk2g2y7xk" path="res://Scenes/main.tres" id="2_jenx2"]
-[ext_resource type="FontFile" uid="uid://6bjhwd0ys5rc" path="res://LoveDays-2v7Oe.ttf" id="5_rjiiq"]
 
 [sub_resource type="Theme" id="Theme_6qsgc"]
 Button/styles/normal = ExtResource("2_jenx2")
@@ -51,12 +50,22 @@ theme_override_colors/font_color = Color(0.570782, 0.600905, 0, 1)
 theme_override_constants/shadow_offset_x = 13
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 9
-theme_override_fonts/font = ExtResource("5_rjiiq")
 theme_override_font_sizes/font_size = 120
 text = "Essentials
 "
 justification_flags = 131
 metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+offset_top = 615.0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 50.0
+text = "This game is inspired from MIT's Missing Semester coursework. It includes gamified version of the lessons and more. Licensed under CC BY-NC-SA."
 
 [connection signal="pressed" from="QUIT" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="LEVELS" to="." method="_on_levels_pressed"]

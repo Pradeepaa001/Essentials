@@ -1,17 +1,11 @@
 extends Node2D
-var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk"
+var level_setup_commands = "mkdir data && cd data && touch tasks info genre && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'This library organizes its books by genre' > genre && mkdir dont_open && touch risk road"
 
-var level_description = """\t\tThe Master of files
-Learn to list the contents of a directory with ls commands.
-
-Instructions:
-1. Use `ls` to view the contents of a directory. Example: `ls`
-2. Use `ls --help` to know how to use ls. Example: `ls --help`
-3. Use `ls -a` to view hidden files. Example: `ls -a`
-4. Use `ls <char>*` to view files and sub-directories that start with specified character. Example: `ls r*`
-	note: This lists nothings if there are no contents starting with the character 
-5. Use `pwd` to see the path of current working directory. Example: `rmdir data`
-"""
+var level_description = "\t\tThe Master of files
+Agent 101 it's time for you to scout our base. 
+Remember Shelldon's advice of using ls commands.
+Refer to the task manager to find your tasks.
+Find your level manual in the help section of your toolbar and finish the tasks."
 
 var level_manual = "\nls - list directory contents
 Lists all the files and directories under a specified directory. 
@@ -20,7 +14,7 @@ By default, ls uses the current directory and lists files and directories in alp
 
 OPTIONS:
 	
-	--help: display this help and exit
+	--help: display command's help and exit
 	
 	-a:  do not ignore entries starting with .
 	Hidden Files are prefixed with a period . and are called dot files.
@@ -29,6 +23,7 @@ OPTIONS:
 ls *<char> - Lists files and sub-directories that start with specified character.
 Note - Lists nothing if there are no contents starting with the character
 
+pwd - to view path to working directory
 
 rm - remove
 Remove files or directories
@@ -50,14 +45,15 @@ var dialogue_lines = ["Welcome back, recruit! You have successfully reached Leve
 "Your first tool for this level is the ls command. Imagine it like a pair of binoculars. Use ls to take a peek at what's inside your current directory – all the files and folders within it.",
 "But sometimes, even binoculars need a little adjustment. That's where options come in. Remember, there's always a ls --help command available. Think of it like the instruction manual for your binoculars. You can use ls --help to learn about all the different ways you can use ls to see things differently.",
 "However, you might miss some hidden files lurking in the shadows. That's where ls -a comes in. Think of it like switching your binoculars to night vision mode. You can use ls -a to reveal even hidden files, making sure you have a complete picture of your camp.",
-"But wait, there's more! The Grid can be a vast place. What if you need to know your exact location? That's where pwd comes in handy. Think of it like a built-in GPS. You can use pwd to display your current directory path, pinpointing your exact location within The Grid.",
+"To find files starting with a particular letter you can use *, find out more about it using 'man level'","But wait, there's more! The Grid can be a vast place. What if you need to know your exact location? That's where pwd comes in handy. Think of it like a built-in GPS. You can use pwd to display your current directory path, pinpointing your exact location within The Grid.",
 "Alright, recruit! Grab your binoculars and get exploring! Use these commands to survey your camp, identify all the files and folders around you."]
 
 var npc_dialogue_scene = preload("res://Scenes/NPCDialogue.tscn")
 var npc_dialogue
 
 var task_count = 5
-var instructions = ["ls", "ls --help", "ls -a", "ls r*", "pwd"]
+var finished = false 
+var instructions = ["View the contents of this directory", "Display the help of ls", "View the hidden files of this directory", "View contents starting with 'r'", "View the path to working directory"]
 var level_congrats_message = "Well done, Explorer! You've completed the first level"
 @onready var termi = $Terminal
 var all_inputs = []
@@ -68,15 +64,13 @@ var Save = SaveSystem.new()
 
 func _ready():
 	termi.connect("check",self._on_check_pressed)
-	user_reset()
 	var op = termi.execute(level_setup_commands)
 	print(op)
 	print("yes")
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue([dialogue_lines[0], dialogue_lines[1]])
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -121,6 +115,7 @@ func task5_status() -> bool:
 	return "pwd" in all_inputs
 	
 func update_status():
+
 	var check_functions = [task1_status, task2_status, task3_status, task4_status, task5_status]
 	for idx in task_count:
 		print(completed_tasks)
@@ -131,6 +126,8 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
 				
 func _on_check_pressed():
 	update_status()
@@ -141,8 +138,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $next
 		next.visible = true
 		var current_level = get_current_level()
@@ -160,13 +159,3 @@ func _on_next_pressed():
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_3.tscn")
 
-func user_reset():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
-	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])

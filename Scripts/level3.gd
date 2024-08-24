@@ -1,17 +1,13 @@
 extends Node2D
 var level_setup_commands = "mkdir data && cd data && touch tasks info agents && echo 'learn shell' > tasks && echo 'Missing semester is a good idea' > info && echo 'You are Agent 101' > agents && mkdir dont_open && touch risk"
-var level_description = """\t\tMaster of Shell Commands
-Learn to use various shell commands like cat, mv, cp, rm, and rmdir.
+var level_description = """\t\tData Detective
+Agent 101 you are assigned with organising with files today. 
+Shelldon asks you to use cat, cp, mv, rm, rmdir.
+Refer to the task manager to find your tasks.
+Find your level manual in the help section of your toolbar and finish the tasks.
 
-Instructions:
-1. Use `cat` to view the contents of a file. Example: `cat tasks`
-2. Use `mv` to move or rename a file. Example: `mv tasks new_tasks`
-3. Use `cp` to copy a file. Example: `cp new_tasks backup_tasks`
-4. Use `rm` to remove a file. Example: `rm backup_tasks`
-5. Use `rmdir` to remove a directory. Example: `rmdir dont_open`
+Note: Be careful with `rm` and `rmdir` as they permanently delete files and directories."""
 
-Note: Be careful with `rm` and `rmdir` as they permanently delete files and directories.
-"""
 
 var level_manual = """
 cat - concatenate and display files
@@ -57,25 +53,22 @@ var npc_dialogue
 
 var completed_tasks = [] 
 var task_count = 5
-var instructions = ["cat tasks", "mv tasks new_tasks", "cp new_tasks backup_tasks", "rm backup_tasks", "rmdir dont_open"]
+var instructions = ["View the file 'tasks' in shell", "Move file 'tasks' to 'new_tasks'", "Copy file 'new_tasks' to 'backup_tasks'", "Remove file 'backup_tasks'", "Remove empty directory 'dont_open'"]
 var level_congrats_message = "Well done, Explorer! You've completed level 3"
 @onready var termi = $Terminal
 var all_inputs = []
-
+var finished = false 
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
 	termi.connect("check",_on_check_pressed)
-	user_reset()
-	
 	termi.execute(level_setup_commands)
 	termi.pwd = "user/data"
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue(dialogue_lines.slice(0,4))
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
 	var output = $RichTextLabel
@@ -137,6 +130,8 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 4 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 4]])
 				
 func _on_check_pressed():
 	update_status()
@@ -149,8 +144,10 @@ func is_level_completed() -> bool:
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()
@@ -168,13 +165,3 @@ func _on_next_pressed():
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_4.tscn")
 
-func user_reset():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
-	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])

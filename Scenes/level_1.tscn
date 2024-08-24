@@ -36,21 +36,24 @@ text = "NEXT LEVEL"
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 title = "Task's Completed"
 position = Vector2i(0, 36)
-size = Vector2i(398, 236)
+size = Vector2i(425, 236)
 ok_button_text = "Go to next level"
 dialog_text = "                            
                          CONGRATULATIONS!!
            YOU'VE COMPLETED TODAY'S WORK
 
-      Tip -Remember to delete files and folders
- created in this session to keep your system clean
-
+   If you are excited to learn more click on next level!
 "
 cancel_button_text = "Stay in the level"
 
 [node name="Control" parent="." instance=ExtResource("5_teuxl")]
-offset_left = -1.0
-offset_right = -1.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
 
 [connection signal="finished" from="RichTextLabel" to="." method="_on_rich_text_label_finished"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

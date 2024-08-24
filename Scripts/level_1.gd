@@ -1,5 +1,5 @@
 extends Node2D
-var level_intro = "\t\t\tThe Journey Begins\n\nWelcome to GRID, Agent 101!\nWe are exited to have you with us.
+var level_intro = "\t\t\tThe Journey Begins\n\nWelcome Agent 101,
 Your first set of tasks will help you get familiar with the system.
 Refer to the task manager to find your tasks.
 Find your level manual in the help section of your toolbar.
@@ -48,20 +48,20 @@ var dialogue_lines = [ "Welcome aboard, recruit! Today's your first day in The G
 
 var task_count = 3
 var instructions = ["Create Day1 directory to organize files for Day1.", "Change into Day1 directory to work within it.", "Create file1, file2, and file3 for practice."]
-
+var finished = false 
 var completed_tasks = []
 var task_scene = load("res://Scenes/task.tscn")
 var SaveSystem = preload("res://SaveSystem.gd")
 var Save = SaveSystem.new()
 
 func _ready():
+	#Save.reset_progress()
 	var terminal = $Terminal
 	terminal.connect("check",self._on_check_pressed)
-	user_reset()
 	
 	npc_dialogue = npc_dialogue_scene.instantiate()
 	add_child(npc_dialogue)
-	npc_dialogue.start_dialogue(dialogue_lines)
+	npc_dialogue.start_dialogue([dialogue_lines[0], dialogue_lines[1]])
 	
 	var man_level = $Toolbar/WindowDialog/RichTextLabel
 	man_level.text = level_manual
@@ -84,11 +84,8 @@ func add_tasks():
 		task.position = Vector2(0, (task_manager.get_child_count() - 1) * 95)
 
 func task1_status() -> bool:
-	var dir = DirAccess.open("res://user")
-	if dir.dir_exists("Day1"):
-		return true
-	else:
-		return false
+	var terminal = $Terminal
+	return "Day1" in terminal.execute("ls")
 
 func task2_status():
 	var commandline = $Terminal
@@ -105,6 +102,7 @@ func task3_status() -> bool:
 	return true
 	
 func update_status():
+
 	var check_functions = [task1_status, task2_status, task3_status]
 	for idx in task_count:
 		print(completed_tasks)
@@ -115,20 +113,26 @@ func update_status():
 			if check_functions[idx].call():
 				task_color.color = Color(0,1,0)
 				completed_tasks.append(idx + 1)
+				if(idx + 2 < dialogue_lines.size()):
+					npc_dialogue.start_dialogue([dialogue_lines[idx + 2]])
+				
 		
 func _on_check_pressed():
 	update_status()
+	print(level_completed)
 	level_completed()
 	
 #CHECKING COMPLETION AND SAVING IN DICTIONARY
 	
 func is_level_completed() -> bool:
-	return task1_status() and task2_status() and task3_status()
+	return completed_tasks.size() == 3
 
 func level_completed():
 	if is_level_completed():
-		var congrats = $ConfirmationDialog
-		congrats.popup_centered()
+		if !finished:
+			var congrats = $ConfirmationDialog
+			congrats.popup_centered()
+			finished = true
 		var next = $Next
 		next.visible = true
 		var current_level = get_current_level()
@@ -145,13 +149,3 @@ func _on_next_pressed():
 func _on_confirmation_dialog_confirmed():
 	get_tree().change_scene_to_file("res://Scenes/level_2.tscn")
 
-func user_reset():
-	var output = []
-	var error_code = OS.execute("wsl.exe", ["bash", "-c", "find -type d -name 'user'" ], output, true)
-	if output[-1]:
-		var deleting = OS.execute("wsl.exe", ["bash", "-c", "rm -rf user" ], output, true)
-		var creating = OS.execute("wsl.exe", ["bash", "-c", "mkdir user" ], output, true)
-		print("reset done")
-	else:
-		print("no")
-	return String(output[-1])

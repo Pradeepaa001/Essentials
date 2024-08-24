@@ -25,19 +25,12 @@ offset_top = -122.0
 offset_right = 805.0
 offset_bottom = 98.0
 
-[node name="check" type="Button" parent="."]
-offset_left = 603.0
-offset_top = 357.0
-offset_right = 725.0
-offset_bottom = 388.0
-text = "CHECK STATUS"
-
 [node name="next" type="Button" parent="."]
 visible = false
-offset_left = 618.0
-offset_top = 389.0
-offset_right = 716.0
-offset_bottom = 420.0
+offset_left = 605.0
+offset_top = 363.0
+offset_right = 703.0
+offset_bottom = 394.0
 text = "NEXT LEVEL"
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
@@ -56,8 +49,6 @@ dialog_text = "
 cancel_button_text = "Stay in the level"
 
 [node name="Control" parent="." instance=ExtResource("5_mmxia")]
-visible = false
 
-[connection signal="pressed" from="check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="next" to="." method="_on_next_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

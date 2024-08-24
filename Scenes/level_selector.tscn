@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://yik24aibilht"]
+[gd_scene load_steps=5 format=3 uid="uid://yik24aibilht"]
 
 [ext_resource type="Script" path="res://Scripts/level_selector.gd" id="1_1cwqf"]
+[ext_resource type="Texture2D" uid="uid://bpij4u0mk0htl" path="res://images/cyber-security-3374252_1280.jpg" id="2_ng5n1"]
+[ext_resource type="PackedScene" uid="uid://j78w24dwo5e7" path="res://Scenes/toolbar.tscn" id="3_1bcbg"]
+[ext_resource type="Script" path="res://Scenes/toolbar_selection.gd" id="4_wqa8i"]
 
 [node name="LevelSelector" type="Node2D"]
 script = ExtResource("1_1cwqf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.411765)
+show_behind_parent = true
+offset_right = 1200.0
+offset_bottom = 650.0
+texture = ExtResource("2_ng5n1")
+expand_mode = 1
 
 [node name="LevelButtons" type="Control" parent="."]
 layout_mode = 3
@@ -12,68 +23,61 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button1" type="Button" parent="LevelButtons"]
+process_priority = 1
 layout_mode = 0
 offset_left = 81.0
-offset_top = 46.0
+offset_top = 90.0
 offset_right = 1111.0
-offset_bottom = 124.0
+offset_bottom = 168.0
 text = "The Journey Begins"
 
 [node name="Button2" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 84.0
-offset_top = 125.0
+offset_top = 172.0
 offset_right = 1109.0
-offset_bottom = 193.0
+offset_bottom = 240.0
 text = "Master of Files"
 
 [node name="Button3" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 86.0
-offset_top = 196.0
+offset_top = 245.0
 offset_right = 1110.0
-offset_bottom = 267.0
+offset_bottom = 316.0
 text = "Data Detective"
 
 [node name="Button4" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 85.0
-offset_top = 269.0
+offset_top = 322.0
 offset_right = 1109.0
-offset_bottom = 339.0
+offset_bottom = 392.0
 text = "The Scripting Wizard"
 
 [node name="Button5" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 87.0
-offset_top = 341.0
+offset_top = 395.0
 offset_right = 1108.0
-offset_bottom = 421.0
+offset_bottom = 475.0
 text = "The Time Traveler"
 
 [node name="Button6" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 87.0
-offset_top = 424.0
+offset_top = 480.0
 offset_right = 1110.0
-offset_bottom = 490.0
-text = "The Archivist"
+offset_bottom = 546.0
+text = "Coming Soon!"
 
 [node name="Button7" type="Button" parent="LevelButtons"]
 layout_mode = 0
 offset_left = 88.0
-offset_top = 493.0
+offset_top = 550.0
 offset_right = 1110.0
-offset_bottom = 564.0
-text = "The Network Navigator"
-
-[node name="Button8" type="Button" parent="LevelButtons"]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 566.0
-offset_right = 1109.0
-offset_bottom = 633.0
-text = "The Guardian of Permissions"
+offset_bottom = 621.0
+text = "Coming Soon!"
 
 [node name="Popup" type="Popup" parent="."]
 editor_description = "You don't have permission to access this level. Complete prior!
@@ -96,6 +100,10 @@ offset_right = 226.0
 offset_bottom = 81.0
 text = "OKAY"
 
+[node name="Toolbar" parent="." instance=ExtResource("3_1bcbg")]
+position = Vector2(0, -5)
+script = ExtResource("4_wqa8i")
+
 [connection signal="pressed" from="LevelButtons/Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="LevelButtons/Button1" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="LevelButtons/Button2" to="." method="_on_button_2_pressed"]
@@ -104,5 +112,4 @@ text = "OKAY"
 [connection signal="pressed" from="LevelButtons/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="pressed" from="LevelButtons/Button6" to="." method="_on_button_6_pressed"]
 [connection signal="pressed" from="LevelButtons/Button7" to="." method="_on_button_7_pressed"]
-[connection signal="pressed" from="LevelButtons/Button8" to="." method="_on_button_8_pressed"]
 [connection signal="pressed" from="Popup/Button" to="." method="_on_okay_pressed"]
