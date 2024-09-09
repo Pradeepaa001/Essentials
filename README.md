@@ -20,16 +20,13 @@ Currently we are focusing on Shell and Shell Scripting.
 This game is our project that we were tasked with as part of the WE Program.
 
 ## Installation
-Not yet deployed. Still in developing phase. Will update Installation later.
+Successfully deployed into a gaming app. You can download it from our repo
 
 ## Game Engine
 We are using Godot 4.0 with GDScript to develop this game.
 
-## Roadmap
-Update Later.
-
 ## Project status
-Currently, We have developed the main screen scene, a list of levels scene and a operational Level 1.
+Currently, We have developed 5 Levels of the first game in this package.
 
 ## Areas for Exploration
 - How to change the starting saving point for os.execute so that the user created and deletion files happens in the designated folder
@@ -38,15 +35,15 @@ Currently, We have developed the main screen scene, a list of levels scene and a
 
 ##Immediate To-Do
 Build on the rest of the storyline.
-Finish Level 2 and work on hardcoding the commands required for it
+Finish Level 6 and work on strengthening the sandbox.
 
 ## Team Members
 This project is done by a team of 5.
-Hitha Ankam
-Pradeepaa M
-Sudha J
-Vidushi Bahuguna
-Yaswitha Boppana
+/nHitha Ankam
+/nPradeepaa M
+/nSudha J
+/nVidushi Bahuguna
+\nYaswitha Boppana
 
 ## License
 Licensed under CC BY-NC-SA.
