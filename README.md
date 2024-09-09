@@ -39,11 +39,11 @@ Finish Level 6 and work on strengthening the sandbox.
 
 ## Team Members
 This project is done by a team of 5.
-/nHitha Ankam
-/nPradeepaa M
-/nSudha J
-/nVidushi Bahuguna
-\nYaswitha Boppana
+Hitha Ankam
+Pradeepaa M
+Sudha J
+Vidushi Bahuguna
+Yaswitha Boppana
 
 ## License
 Licensed under CC BY-NC-SA.
